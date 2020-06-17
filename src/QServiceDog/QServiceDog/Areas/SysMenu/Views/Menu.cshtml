@@ -1,0 +1,31 @@
+﻿@using Microsoft.AspNetCore.Http.Extensions
+@using Microsoft.Extensions.Caching.Memory
+@using Microsoft.Extensions.DependencyInjection
+
+@inject MenuMeta meta
+
+@{
+    var routeValues = ViewContext.RouteData.Values;
+    var nodes = meta.ToHierarchicalDataSource(Url, (string)routeValues["controller"], (string)routeValues["action"]);
+}
+
+<div class="demo-menu" id="demo-menu">
+    <div id="demo-menu-tree"></div>
+    <script>
+        $(function() {
+            $("#demo-menu-tree").dxTreeView({
+                dataSource: @Json.Serialize(nodes),
+                dataStructure: "tree",
+                itemTemplate: function(data) {
+                    return $(document.createElement("a")).attr("href", data.Url).text(data.Text);
+                },
+                itemsExpr: "@nameof(TreeNode.Items)",
+                expandedExpr: "@nameof(TreeNode.Active)",
+                selectedExpr: "@nameof(TreeNode.Active)",
+                animationEnabled: false,
+                focusStateEnabled: false,
+                selectNodesRecursive: false,
+            });
+        });
+    </script>
+</div>

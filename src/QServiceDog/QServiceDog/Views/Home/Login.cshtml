@@ -1,0 +1,71 @@
+﻿@{
+    Layout = "~/Areas/SysMenu/Views/_Layout.cshtml";
+}
+@model User
+<style>
+    #form-container {
+        margin: 0 auto;
+        width: 80%;
+        max-width: 400px;
+    }
+
+    .body {
+        min-width: 300px;
+    }
+
+    #button {
+        float: right;
+        margin-top: 20px;
+    }
+
+    .long-title h3 {
+        font-family: 'Segoe UI Light', 'Helvetica Neue Light', 'Segoe UI', 'Helvetica Neue', 'Trebuchet MS', Verdana;
+        font-weight: 200;
+        font-size: 28px;
+        text-align: center;
+        margin-top: 15%;
+        padding-bottom: 2%;
+    }
+</style>
+<div class="long-title"><h3>BandCloud</h3></div>
+<div id="form-container">
+    @using (Html.BeginForm())
+    {
+        using (Html.DevExtreme().ValidationGroup())
+        {
+            @Html.AntiForgeryToken()
+            @(Html.DevExtreme().Form<User>()
+                            .ID("form")
+                            .ColCount(1)
+                             .ShowColonAfterLabel(true)
+                            //.ShowValidationSummary(true)
+                            .Items(items =>
+                            {
+                                items.AddSimpleFor(m => m.UserNo).Editor(e => e.TextBox()).Label(r =>
+                                {
+                                    r.Alignment(HorizontalAlignment.Left);
+                                    r.ShowColon(true);
+                                });
+                                items.AddSimpleFor(m => m.Password).Editor(e => e.TextBox().Mode(TextBoxMode.Password));
+                                items.AddSimpleFor(m => m.RememberMe).Editor(e => e.CheckBox());
+                                items.AddSimpleFor(m => m.CookieExpires).Editor(e => e.NumberBox().Min(1).Max(30).Value(7));
+                                items.AddButton().Name("Login").VerticalAlignment(VerticalAlignment.Bottom).ButtonOptions(o =>
+                                {
+                                    o.Icon("user");
+                                    o.Text("Login");
+                                    o.Type(ButtonType.Success);
+                                    // o.OnClick("login");
+                                    o.UseSubmitBehavior(true);
+                                });
+                            })
+
+                .FormData(Model)
+            )
+        }
+    }
+</div>
+<script>
+    function login() {
+
+    }
+</script>

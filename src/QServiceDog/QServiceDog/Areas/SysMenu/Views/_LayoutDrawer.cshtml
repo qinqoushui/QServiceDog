@@ -1,0 +1,249 @@
+﻿@using Microsoft.Extensions.DependencyInjection
+@using DevExtreme.AspNet.Mvc
+
+@inject MenuMeta meta
+
+@{
+    var routeValues = ViewContext.RouteData.Values;
+    var nodes = meta.ToHierarchicalDataSource(Url, (string)routeValues["controller"], (string)routeValues["action"]);
+    //Console.WriteLine(Newtonsoft.Json.JsonConvert.SerializeObject(nodes));
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Q_Wigend_Web_B</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <link rel="stylesheet" href="~/css/bundle.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/devextreme/devextreme.min.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/css/site.css" />
+    <script src="~/bundle.min.js" asp-append-version="true"></script>
+    <script src="~/site.js" asp-append-version="true"></script>
+    <script src="~/socket.js" asp-append-version="true"></script>
+</head>
+
+<body>
+    <div id="app-side-nav-outer-toolbar">
+        <div class="layout-header">
+            @(Html.DevExtreme().Toolbar()
+                .Items(items =>
+                        {
+                    items.Add()
+                        .Widget(w => w
+                            .Button()
+                            .Icon("menu")
+                            .OnClick("Q_Wigend_Web_B.onMenuButtonClick")
+                        )
+                        .Location(ToolbarItemLocation.Before)
+                        .CssClass("menu-button");
+                    items.Add()
+                        .Html("<div>Q_Wigend_Web_B</div>")
+                        .Location(ToolbarItemLocation.Before)
+                        .CssClass("header-title");
+                })
+            )
+        </div>
+        <div class="layout-body">
+            @(Html.DevExtreme().Drawer()
+                .ID("layout-drawer")
+                .Position(DrawerPosition.Left)
+                .Opened(new JS("Q_Wigend_Web_B.restoreDrawerOpened()"))
+                .Content(@<text>
+                            <div id="layout-drawer-scrollview" class="with-footer">
+
+                                <div class="content">
+                                    <div>
+                                        <h2>@ViewBag.Title</h2>
+                                    </div>
+                                    <div>
+                                        @RenderBody()
+                                    </div>
+                                </div>
+                                <div class="content-block">
+                                    <div class="content-footer">
+                                        <div id="footer">
+                                            Copyright © 2016-@DateTime.Now.Year <a href="@Utils.Web" target="_blank"> @Utils.Copyright</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                </text>)
+.Template(new TemplateName("navigation-menu"))
+            )
+        </div>
+    </div>
+
+    @using (Html.DevExtreme().NamedTemplate("navigation-menu"))
+    {
+        <div class="menu-container dx-swatch-additional">
+
+            @(Html.DevExtreme().TreeView().DataSource(nodes)
+                //.Items(items =>
+                //{
+                //    //items.Add()
+                //    //    .Text("Home")
+                //    //    .Icon("home")
+                //    //    .Option("path", Url.ActionLink("Index", "Home"))
+                //    //    //.Selected(IsCurrentPage("Index"))
+                //    //    ;
+
+                //})
+                .DisplayExpr("Text").ItemsExpr("Items").ItemTemplate(new JS("createItemLink"))
+                .ExpandEvent(TreeViewExpandEvent.Click)
+                .SelectionMode(NavSelectionMode.Single)
+                .SelectedExpr("selected")
+                                       //.ExpandedExpr("Active")
+                                       //.FocusStateEnabled(true)
+                .Width(250)
+                .OnItemClick("Q_Wigend_Web_B.onTreeViewItemClick")
+            )
+        </div>
+    }
+
+    <script>
+        function createItemLink(data) {
+            if (data.Items && data.Items.length > 0)
+                return data.Text;
+            else
+                return $(document.createElement("a")).attr("href", data.Url).text(data.Text);
+        }
+        var locale = getLocale();
+        //Globalize.locale(locale);
+        DevExpress.localization.locale(locale);
+        function changeLocale(data) {
+            setLocale(data.value);
+            document.location.reload();
+        }
+
+        function getLocale() {
+            var locale = sessionStorage.getItem("locale");
+            return locale != null ? locale : "en";
+        }
+
+        function setLocale(locale) {
+            sessionStorage.setItem("locale", locale);
+        }
+        function hideMenu() {
+            //var x = $('#demo-menu').attr('class');
+            if ($('#demo-menu').css('width').replace('px', '') * 1 < 3) {
+                $('#demo-menu').width(200);
+                $('#demo-wrapper').css('margin-left', '200px');
+            } else {
+                $('#demo-menu').width(0);
+                $('#demo-wrapper').css('margin-left', '0px');
+            }
+            //alert(x);
+        }
+
+        var Q_Wigend_Web_B = (function () {
+
+            var DRAWER_OPENED_KEY = "Q_Wigend_Web_B-drawer-opened";
+
+            var breakpoints = {
+                xSmallMedia: window.matchMedia("(max-width: 599.99px)"),
+                smallMedia: window.matchMedia("(min-width: 600px) and (max-width: 959.99px)"),
+                mediumMedia: window.matchMedia("(min-width: 960px) and (max-width: 1279.99px)"),
+                largeMedia: window.matchMedia("(min-width: 1280px)")
+            };
+
+            function getDrawer() {
+                return $("#layout-drawer").dxDrawer("instance");
+            }
+
+            function restoreDrawerOpened() {
+                var isLarge = breakpoints.largeMedia.matches;
+                if (!isLarge)
+                    return false;
+
+                var state = sessionStorage.getItem(DRAWER_OPENED_KEY);
+                if (state === null)
+                    return isLarge;
+
+                return state === "true";
+            }
+
+            function saveDrawerOpened() {
+                sessionStorage.setItem(DRAWER_OPENED_KEY, getDrawer().option("opened"));
+            }
+
+            function updateDrawer() {
+                var isXSmall = breakpoints.xSmallMedia.matches,
+                    isLarge = breakpoints.largeMedia.matches;
+
+                getDrawer().option({
+                    openedStateMode: isLarge ? "shrink" : "overlap",
+                    revealMode: isXSmall ? "slide" : "expand",
+                    minSize: isXSmall ? 0 : 60,
+                    shading: !isLarge,
+                });
+            }
+
+            function init() {
+                if (getLocale() != "zh") {
+                    setLocale("zh");
+                    document.location.reload();
+                }
+                $("#layout-drawer-scrollview").dxScrollView({ direction: "vertical" });
+
+                $.each(breakpoints, function (_, size) {
+                    size.addListener(function (e) {
+                        if (e.matches)
+                            updateDrawer();
+                    });
+                });
+
+                updateDrawer();
+            }
+
+            function navigate(url, delay) {
+                if (url)
+                    setTimeout(function () { location.href = url }, delay);
+            }
+
+            function onMenuButtonClick() {
+                getDrawer().toggle();
+                saveDrawerOpened();
+            }
+
+            function onTreeViewItemClick(e) {
+                var drawer = getDrawer();
+                var savedOpened = restoreDrawerOpened();
+                var actualOpened = drawer.option("opened");
+
+                if (!actualOpened) {
+                    drawer.show();
+                } else {
+                    var willHide = !savedOpened || !breakpoints.largeMedia.matches;
+                    var willNavigate = !e.itemData.selected;
+
+                    if (willHide)
+                        drawer.hide();
+
+                    if (willNavigate)
+                        navigate(e.itemData.path, willHide ? 400 : 0);
+                }
+            }
+
+            return {
+                init: init,
+                restoreDrawerOpened: restoreDrawerOpened,
+                onMenuButtonClick: onMenuButtonClick,
+                onTreeViewItemClick: onTreeViewItemClick
+            };
+        })();
+
+        document.addEventListener("DOMContentLoaded", function documentReady() {
+            this.removeEventListener("DOMContentLoaded", documentReady);
+            Q_Wigend_Web_B.init();
+        });
+    </script>
+</body>
+
+</html>

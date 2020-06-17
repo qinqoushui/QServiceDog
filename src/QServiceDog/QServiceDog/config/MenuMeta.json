@@ -1,0 +1,35 @@
+﻿[
+  {
+    "Name": "测试",
+    "Equivalents": "dxDataGrid, dx-data-grid",
+    "Groups": [
+      {
+        "Name": "主页",
+        "Equivalents": "",
+        "Menus": [
+          {
+            "Title": "主页",
+            "Name": "Index",
+            "DocUrl": "",
+            "Widget": "Home",
+            "DemoType": "Web"
+          }
+        ]
+      },
+      {
+        "Name": "关于",
+        "Equivalents": "",
+        "Menus": [
+
+          {
+            "Title": "关于",
+            "Name": "About",
+            "DocUrl": "",
+            "Widget": "Home",
+            "DemoType": "Web"
+          }
+        ]
+      }
+    ]
+  }
+]

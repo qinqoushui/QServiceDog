@@ -1,0 +1,67 @@
+﻿@using Microsoft.AspNetCore.Hosting
+@using System.IO
+@inject MenuMeta meta
+@inject IWebHostEnvironment hosting
+@functions {
+
+    bool ContentExists(string url)
+    {
+        return File.Exists(url.Replace("~", hosting.ContentRootPath + "/wwwroot"));
+    }
+    bool IsDebug()
+    {
+#if DEBUG
+    return true;
+#else
+        return false;
+#endif
+    }
+}
+<link rel="stylesheet" href="~/css/bundle.min.css" asp-append-version="true">
+@if (IsDebug())
+{
+    <link rel="stylesheet" href="~/css/devextreme/devextreme.min.css" asp-append-version="true">
+}
+else
+{
+    <link rel="stylesheet" href="https://w.ixiaobai.net:26389/cdn/card/css/devextreme/devextreme.min.css" asp-append-version="true">
+}
+
+@*<link rel="stylesheet" href="~/css/devextreme/dx.@(Utils.GetCurrentTheme(Context)).css" asp-append-version="true">*@
+
+@if (!String.IsNullOrEmpty(Utils.PRODUCT_CSS_BUNDLE_NAME))
+{
+    <link rel="stylesheet" href="~/css/bundle-@(Utils.PRODUCT_CSS_BUNDLE_NAME).min.css" asp-append-version="true">
+}
+
+@*@if(!String.IsNullOrEmpty(Utils.PRODUCT_THEME_CSS_TEMPLATE)) {
+    <link rel="stylesheet" href="@String.Format(Utils.PRODUCT_THEME_CSS_TEMPLATE, Utils.GetCurrentTheme(Context))" asp-append-version="true">
+    }*@
+
+
+
+@*@if(Utils.IsNavigationEnabled(Context)) {
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true">
+    }*@
+
+@*@if(ContentExists(meta.CurrentDemo.AdditionalCssUrl)) {
+    <link rel="stylesheet" href="@Url.Content(meta.CurrentDemo.AdditionalCssUrl)" asp-append-version="true">
+    }*@
+
+   
+
+@if (!String.IsNullOrEmpty(Utils.PRODUCT_CSS_BUNDLE_NAME))
+{
+    <link rel="stylesheet" href="~/css/bundle-@(Utils.PRODUCT_CSS_BUNDLE_NAME).min.css" asp-append-version="true">
+}
+
+@if (IsDebug())
+{
+    <script src="~/bundle.min.js" asp-append-version="true"></script>
+}
+else
+{
+    <script src="http://qoushui.oicp.net:26380/web/static/js/bundle.min.js" asp-append-version="true"></script>
+}
+
+

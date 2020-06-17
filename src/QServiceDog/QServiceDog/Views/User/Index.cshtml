@@ -1,0 +1,13 @@
+@(Html.DevExtreme()
+       .DataGrid<User>().Columns(columns =>
+       {
+           columns.AddFor(m => m.UserNo).Width(140);
+           columns.AddFor(m => m.UserName).Width(140);
+           columns.AddFor(m => m.Password).Width(140);
+           columns.AddFor(m => m.Role);
+
+       }).StartDataGrid(nameof(User), true, GridEditMode.Row)
+)
+<script>
+
+</script>

@@ -1,0 +1,21 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="robots" content="noindex">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    @await Html.PartialAsync("~/Areas/SysMenu/Views/_Resources.cshtml")
+
+
+    <script>
+        DevExpress.devices.current("@Utils.GetCurrentDevice(Context)");
+    </script>
+
+    @RenderSection("HeadExtras", false)
+</head>
+<body class="dx-viewport">
+    <div class="demo-container">
+        @RenderBody()
+    </div>
+</body>
+</html>
