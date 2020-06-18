@@ -13,28 +13,28 @@ namespace AspNetCore
     using Microsoft.AspNetCore.Mvc.Rendering;
     using Microsoft.AspNetCore.Mvc.ViewFeatures;
 #nullable restore
-#line 2 "D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\Views\_ViewImports.cshtml"
+#line 1 "D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\Views\_ViewImports.cshtml"
 using DevExtreme.AspNet.Mvc;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 3 "D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\Views\_ViewImports.cshtml"
+#line 2 "D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\Views\_ViewImports.cshtml"
 using Q.DevExtreme.Tpl;
 
 #line default
 #line hidden
 #nullable disable
 #nullable restore
-#line 4 "D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\Views\_ViewImports.cshtml"
+#line 3 "D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\Views\_ViewImports.cshtml"
 using Q.DevExtreme.Tpl.Models;
 
 #line default
 #line hidden
 #nullable disable
     [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"7906448039511d22812674ec3b30d7b030bbf3cc", @"/Views/User/Index.cshtml")]
-    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"670a3eddfbb079baecb4911fe619be29fd1988cf", @"/Views/_ViewImports.cshtml")]
+    [global::Microsoft.AspNetCore.Razor.Hosting.RazorSourceChecksumAttribute(@"SHA1", @"49e99d6c60f75661080ba84f132bc025c6f59c72", @"/Views/_ViewImports.cshtml")]
     public class Views_User_Index : global::Microsoft.AspNetCore.Mvc.Razor.RazorPage<dynamic>
     {
         #pragma warning disable 1998

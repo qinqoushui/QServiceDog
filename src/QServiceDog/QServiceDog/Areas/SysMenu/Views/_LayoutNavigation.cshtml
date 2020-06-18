@@ -1,4 +1,4 @@
-﻿@inject MenuMeta meta
+@inject MenuMeta meta
 @functions {
     string GetSimulatorCssClass()
     {
@@ -78,7 +78,7 @@
         @await Html.PartialAsync("~/Areas/SysMenu/Views/Menu.cshtml")
 
         <div class="demo-wrapper" id="demo-wrapper">
-            <h4>@meta.GetBreadcrumb(meta.CurrentDemo, "{0} ▸ {1}")</h4>
+            <h4>@ViewData["Title"]</h4>
 
             @*<div class="description">
                     @if (!String.IsNullOrEmpty(meta.CurrentDemo.DescriptionHtml))

@@ -1,35 +1,34 @@
 ﻿[
   {
-    "Name": "测试",
+    "Name": "服务守护",
+    "Equivalents": "dxDataGrid, dx-data-grid",
+    "Menus": [
+      {
+        "Title": "主页",
+        "Name": "Index",
+        "DocUrl": "",
+        "Widget": "EventInfo",
+        "DemoType": "Web"
+      }
+    ]
+  },
+  {
+    "Name": "System",
     "Equivalents": "dxDataGrid, dx-data-grid",
     "Groups": [
       {
-        "Name": "主页",
+        "Name": "系统",
         "Equivalents": "",
         "Menus": [
           {
-            "Title": "主页",
+            "Title": "用户",
             "Name": "Index",
             "DocUrl": "",
-            "Widget": "Home",
+            "Widget": "User",
             "DemoType": "Web"
           }
         ]
-      },
-      {
-        "Name": "关于",
-        "Equivalents": "",
-        "Menus": [
-
-          {
-            "Title": "关于",
-            "Name": "About",
-            "DocUrl": "",
-            "Widget": "Home",
-            "DemoType": "Web"
-          }
-        ]
-      }
+      } 
     ]
   }
 ]

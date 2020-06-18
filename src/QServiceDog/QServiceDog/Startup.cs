@@ -26,7 +26,7 @@ namespace QServiceDog
         public override void ConfigureOther(IApplicationBuilder app, IWebHostEnvironment env)
         {
             new BLL.ServiceDBContext().CreateAndInitData();
-            Task.Delay(60000).ContinueWith(t => new QCommon.Service.Jobs.QuartzJobScheduler().RunAsync());
+            Task.Delay(10000).ContinueWith(t => new QCommon.Service.Jobs.QuartzJobScheduler().RunAsync());
         }
 
         public override void ConfigureServicesOther(IServiceCollection services)

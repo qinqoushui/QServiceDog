@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace QServiceDog.Jobs
 {
+    /// <summary>
+    /// 扫描各个服务或程序，判断是否需要启动
+    /// </summary>
     public class ScanJob : QCommon.Service.Jobs.QuartzBase<string>
     {
         public ScanJob() : base(nameof(ScanJob), true)

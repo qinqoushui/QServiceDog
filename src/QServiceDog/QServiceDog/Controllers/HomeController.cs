@@ -17,7 +17,7 @@ namespace QServiceDog.Controllers
 
         public IActionResult Index()
         {
-            return RedirectToAction("", "");
+            return RedirectToAction("Index", "EventInfo");
         }
     }
 }

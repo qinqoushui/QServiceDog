@@ -1613,7 +1613,7 @@
           "lib/netstandard2.0/QCommon.IF.Standard.dll": {}
         }
       },
-      "QCommon.Quartz/1.0.6": {
+      "QCommon.Quartz/1.0.7": {
         "type": "package",
         "dependencies": {
           "QCommon.Standard": "1.0.35",
@@ -5883,10 +5883,10 @@
         "qcommon.if.standard.nuspec"
       ]
     },
-    "QCommon.Quartz/1.0.6": {
-      "sha512": "lxm93v5uO4zT4U5tekaQ7FwAaeI+FofoQWZ7Vho+rTUNfFrHn94ZVOj195MIZmeeP5rR2IO/HY0T8JP+tnCa5A==",
+    "QCommon.Quartz/1.0.7": {
+      "sha512": "ccvLcVYP8s+lCEgc7e94HmMpiASXdMF12Zu0Evx8USAlvWPiGHLdlxCeePFG9/mic2LAT9tQM0iTfWfjWSwl+Q==",
       "type": "package",
-      "path": "qcommon.quartz/1.0.6",
+      "path": "qcommon.quartz/1.0.7",
       "files": [
         ".nupkg.metadata",
         "config/DBJob.cs",
@@ -5894,7 +5894,7 @@
         "content/Jobs/DBJob.cs",
         "content/doc/quartz/readme.txt",
         "lib/netstandard2.0/QCommon.Quartz.dll",
-        "qcommon.quartz.1.0.6.nupkg.sha512",
+        "qcommon.quartz.1.0.7.nupkg.sha512",
         "qcommon.quartz.nuspec",
         "readme.txt"
       ]
@@ -10983,7 +10983,7 @@
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 3.1.4",
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.5",
       "Q.DevExtreme.Tpl >= 1.0.21",
-      "QCommon.Quartz >= 1.0.6"
+      "QCommon.Quartz >= 1.0.7"
     ]
   },
   "packageFolders": {
@@ -11042,7 +11042,7 @@
           },
           "QCommon.Quartz": {
             "target": "Package",
-            "version": "[1.0.6, )"
+            "version": "[1.0.7, )"
           }
         },
         "imports": [

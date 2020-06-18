@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "+I8mZyPYHVaMVEH1MeTOgqHJ81vZutjZ65R94O93o230lzNczMhdUTPsCtdwVpmA4MsdimoHXpsHwSSljv9/ZA==",
+  "dgSpecHash": "63SVbpGXrGkaJpP9nvm/ByIEEa7CG+VGcpvbkTDcrK99NeK8qtctBpduJjfXjm6mbEpZEsS/RvMpmyL5/qENpQ==",
   "success": true,
   "projectFilePath": "D:\\Code\\github\\qinqoushui\\QServiceDog\\src\\QServiceDog\\QServiceDog\\QServiceDog.csproj",
   "expectedPackageFiles": [
@@ -110,7 +110,7 @@
     "e:\\.nuget\\nuget.frameworks\\4.7.0\\nuget.frameworks.4.7.0.nupkg.sha512",
     "e:\\.nuget\\q.devextreme.tpl\\1.0.21\\q.devextreme.tpl.1.0.21.nupkg.sha512",
     "e:\\.nuget\\qcommon.if.standard\\1.0.2\\qcommon.if.standard.1.0.2.nupkg.sha512",
-    "e:\\.nuget\\qcommon.quartz\\1.0.6\\qcommon.quartz.1.0.6.nupkg.sha512",
+    "e:\\.nuget\\qcommon.quartz\\1.0.7\\qcommon.quartz.1.0.7.nupkg.sha512",
     "e:\\.nuget\\qcommon.standard\\1.0.52\\qcommon.standard.1.0.52.nupkg.sha512",
     "e:\\.nuget\\quartz\\3.0.7\\quartz.3.0.7.nupkg.sha512",
     "e:\\.nuget\\quartz.jobs\\3.0.7\\quartz.jobs.3.0.7.nupkg.sha512",

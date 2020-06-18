@@ -13,6 +13,7 @@ namespace QServiceDog
     {
        public static void Main(string[] args)
         {
+
             new Q.DevExtreme.Tpl.ProgramHelper<Startup>().Run(nameof(QServiceDog), "·þÎñÊØ»¤¹·", args,
 #if _Docker
                         true
