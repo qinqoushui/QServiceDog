@@ -7,7 +7,10 @@ using QServiceDog.Helpers;
 using QServiceDog.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
+using System.Net;
+using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -46,6 +49,13 @@ namespace QServiceDog.Jobs
                 if (data.LastStopTime.Add(data.RestartTime) < DateTime.Now) //存活太久，肥了就杀
                 {
                     stop(data);
+                    EventBLL.Instance.AddEvent(new EventInfo()
+                    {
+                        Id = Guid.NewGuid(),
+                        Time = DateTime.Now,
+                        Type = "Dog",
+                        Msg = $"停止{data.Desc}，上次停止于{data.LastStopTime}"
+                    });
                     data.LastStopTime = DateTime.Now;
                     return ("succ", $"stop at {DateTime.Now}");
                 }
@@ -57,6 +67,14 @@ namespace QServiceDog.Jobs
                 if (data.LastAliveTime.Add(data.IdleTime) < DateTime.Now) //沉默太久，冒个泡
                 {
                     run(data);
+                    //再次检查
+                    EventBLL.Instance.AddEvent(new EventInfo()
+                    {
+                        Id = Guid.NewGuid(),
+                        Time = DateTime.Now,
+                        Type = "Dog",
+                        Msg = $"启动{data.Desc}，上次运行于{data.LastAliveTime}。如果连续多次启动，则启动可能一直不成功"
+                    });
                     return ("succ", $"run at {DateTime.Now}");
                 }
                 else
@@ -68,36 +86,30 @@ namespace QServiceDog.Jobs
 
         bool check(ServiceInfo data)
         {
-            //判断服务的检测方式 Get/Post Url ,Telnet IPEndPoint ,Ping IP,GetProcess ProcessName
             DogAction action = getAction(data.CheckName, out EnumAction enumAction);
             if (action != null)
             {
-                string info, error;
-
                 switch (enumAction)
                 {
                     case EnumAction.e打开网页:
-                        break;
+                        return new HttpClient().GetAsync(data.CheckData).GetAwaiter().GetResult().StatusCode == HttpStatusCode.OK;
                     case EnumAction.e检测服务状态:
-                        CommandHelper.execute($"{action.Command} {data.CheckData}", out info, out error);
-                        //判断服务状态
-                        break;
+                        return new QCommon.Service.ServiceController(data.CheckData).Status == System.ServiceProcess.ServiceControllerStatus.Running;
+
                     case EnumAction.e检测端口:
-                        CommandHelper.execute($"{action.Command} {data.CheckData}", out info, out error);
-                        //判断服务状态
-                        break;
+                        return NetHelper.Telnet(IPEndPoint.Parse(data.CheckData));
+
                     case EnumAction.e检测IP:
                         var ping = NetHelper.Ping(data.CheckData, (s, ex) => logger.Warn(s, ex));
                         if (ping == System.Net.NetworkInformation.IPStatus.Success)
                             return true;
                         else
                             return false;
+
                     case EnumAction.e查找进程:
-                        CommandHelper.execute($"{action.Command} {data.CheckData}", out info, out error);
-                        //判断服务状态
-                        break;
+                        return ProcessHelper.Exists(data.CheckData);
                     default:
-                        CommandHelper.execute($"{action.Command} {data.CheckData}", out info, out error);
+                        //CommandHelper.execute($"{action.Command} {data.CheckData}", out info, out error);
                         break;
                 }
                 return false;
@@ -114,17 +126,24 @@ namespace QServiceDog.Jobs
             //Stop KillProcess sc stop redis
             //目前都是命令，后续可能是代码
             DogAction action = getAction(data.StopName, out EnumAction enumAction);
+            bool flag = false;
             if (action != null)
             {
                 logger.Info($"stop {data.Name} begin");
                 switch (enumAction)
                 {
                     case EnumAction.e终止进程:
-                        ProcessHelper.Kill(data.StopData);
+                        flag = ProcessHelper.Kill(data.StopData);
+                        break;
+                    case EnumAction.e停止服务:
+                        flag = new QCommon.Service.ServiceController(data.StopData).Stop();
+                        break;
+                    default:
+                        flag= false;
                         break;
                 }
-
-                return true;
+                logger.Info($"stop {data.Name} end,{flag}");
+                return flag;
             }
             else
             {
@@ -139,17 +158,16 @@ namespace QServiceDog.Jobs
             if (action != null)
             {
                 logger.Info($"run {data.Name} begin");
-                string info = string.Empty;
-                string error = string.Empty;
                 switch (enumAction)
                 {
                     case EnumAction.e启动进程:
                         new Thread(new ThreadStart(() => ProcessHelper.Start(data.RunData, (s, ex) => logger.Info(s, ex)))).Start();
                         break;
+                    case EnumAction.e启动服务:
+                        new QCommon.Service.ServiceController(data.RunData).Start();
+                        break;
                 }
-                if (!string.IsNullOrEmpty(error))
-                    logger.Warn($"run {data.Name} error,{error}");
-                logger.Info($"run {data.Name} end,{info}");
+                logger.Info($"run {data.Name} end ");
                 return true;
             }
             else
@@ -180,7 +198,7 @@ namespace QServiceDog.Jobs
             List<ServiceInfo> result = new List<ServiceInfo>();
             using (var ef = new ServiceDBContext())
             {
-                result = ef.ServiceInfo.Where(r => r.IsEnable).ToList().Take(1).ToList();
+                result = ef.ServiceInfo.Where(r => r.IsEnable && r.Name == "SQLServer").ToList();
             }
             max = result.Count;
             total = result.Count;

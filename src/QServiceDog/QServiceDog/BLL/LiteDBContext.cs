@@ -62,7 +62,7 @@ namespace QServiceDog.BLL
                     DogAction.Add(new DogAction()
                     {
                         Id = Guid.NewGuid(),
-                        Command = "sc stop",
+                        Command = "sc stop {0}",
                         Name = Enums.EnumAction.e停止服务.ToString().Substring(1),
                         Type = "Stop"
                     });
@@ -70,7 +70,7 @@ namespace QServiceDog.BLL
                     DogAction.Add(new DogAction()
                     {
                         Id = Guid.NewGuid(),
-                        Command = "sc start",
+                        Command = "sc start {0}",
                         Name = Enums.EnumAction.e启动服务.ToString().Substring(1),
                         Type = "Run"
                     });
@@ -133,11 +133,11 @@ namespace QServiceDog.BLL
                         Id = Guid.NewGuid(),
                         Desc = "记事本测试",
                         Name = "NotePad",
-                        CheckName = "查找进程",
+                        CheckName = Enums.EnumAction.e查找进程.ToString().Substring(1),
                         CheckData = "Notepad",
-                        RunName = "启动进程",
+                        RunName = Enums.EnumAction.e启动进程.ToString().Substring(1),
                         RunData = @"c:\windows\system32\notepad.exe",
-                        StopName = "终止进程",
+                        StopName = Enums.EnumAction.e终止进程.ToString().Substring(1),
                         StopData = "notepad",
                         LastAliveTime = DateTime.Now,
                         LastStopTime = DateTime.Now,
@@ -151,12 +151,30 @@ namespace QServiceDog.BLL
                         Id = Guid.NewGuid(),
                         Desc = "Url测试",
                         Name = "calc",
-                        CheckName = "打开网页",
-                        CheckData = "192.168.10.37:8080",
-                        RunName = "启动进程",
+                        CheckName = Enums.EnumAction.e打开网页.ToString().Substring(1),
+                        CheckData = "http://192.168.10.37:8080",
+                        RunName = Enums.EnumAction.e启动进程.ToString().Substring(1),
                         RunData = @"c:\windows\system32\calc.exe",
-                        StopName = "终止进程",
+                        StopName = Enums.EnumAction.e终止进程.ToString().Substring(1),
                         StopData = "calc",
+                        LastAliveTime = DateTime.Now,
+                        LastStopTime = DateTime.Now,
+                        IdleTime = TimeSpan.FromMinutes(1),
+                        RestartTime = TimeSpan.FromMinutes(3),
+                        IsEnable = true
+                    });
+
+                    ServiceInfo.Add(new ServiceInfo()
+                    {
+                        Id = Guid.NewGuid(),
+                        Desc = "SQLServer数据库",
+                        Name = "SQLServer",
+                        CheckName = Enums.EnumAction.e检测端口.ToString().Substring(1),
+                        CheckData = "127.0.0.1:1433",
+                        RunName = Enums.EnumAction.e启动服务.ToString().Substring(1),
+                        RunData = @"MSSQL$SQL2014",
+                        StopName = Enums.EnumAction.e停止服务.ToString().Substring(1),
+                        StopData = "MSSQL$SQL2014",
                         LastAliveTime = DateTime.Now,
                         LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),
@@ -169,11 +187,11 @@ namespace QServiceDog.BLL
                         Id = Guid.NewGuid(),
                         Desc = "Redis数据库",
                         Name = "Redis",
-                        CheckName = "检测端口",
-                        CheckData = "127.0.0.1:6379",
-                        RunName = "启动服务",
+                        CheckName = Enums.EnumAction.e检测服务状态.ToString().Substring(1),
+                        CheckData = "redis",
+                        RunName = Enums.EnumAction.e启动服务.ToString().Substring(1),
                         RunData = @"redis",
-                        StopName = "停止服务",
+                        StopName = Enums.EnumAction.e停止服务.ToString().Substring(1),
                         StopData = "redis",
                         LastAliveTime = DateTime.Now,
                         LastStopTime = DateTime.Now,
@@ -187,16 +205,16 @@ namespace QServiceDog.BLL
                         Id = Guid.NewGuid(),
                         Desc = "OpenVPN守护",
                         Name = "OpenVPN",
-                        CheckName = "检测IP",
+                        CheckName = Enums.EnumAction.e检测IP.ToString().Substring(1),
                         CheckData = "192.168.255.1",
-                        RunName = "启动进程",
+                        RunName = Enums.EnumAction.e启动进程.ToString().Substring(1),
                         RunData = new
                         {
                             FileName = @"C:\Program Files\OpenVPN\bin\openvpn.exe",
                             Para = @"""d:\data\openvpn\config\aliyun.ovpn""",
                             WorkingPath = @"d:\data\openvpn\config"
                         }.SerializeObject(),
-                        StopName = "终止进程",
+                        StopName = Enums.EnumAction.e终止进程.ToString().Substring(1),
                         StopData = "openvpn*",
                         LastAliveTime = DateTime.Now,
                         LastStopTime = DateTime.Now,
