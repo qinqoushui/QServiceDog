@@ -49,59 +49,162 @@ namespace QServiceDog.BLL
                     });
                     SaveChanges();
                 }
+                if (!DogAction.Any())
+                {
+                    DogAction.Add(new DogAction()
+                    {
+                        Id = Guid.NewGuid(),
+                        Command = "sc query",
+                        Name = Enums.EnumAction.e检测服务状态.ToString().Substring(1),
+                        Type = "Check"
+                    });
+
+                    DogAction.Add(new DogAction()
+                    {
+                        Id = Guid.NewGuid(),
+                        Command = "sc stop",
+                        Name = Enums.EnumAction.e停止服务.ToString().Substring(1),
+                        Type = "Stop"
+                    });
+
+                    DogAction.Add(new DogAction()
+                    {
+                        Id = Guid.NewGuid(),
+                        Command = "sc start",
+                        Name = Enums.EnumAction.e启动服务.ToString().Substring(1),
+                        Type = "Run"
+                    });
+
+                    DogAction.Add(new DogAction()
+                    {
+                        Id = Guid.NewGuid(),
+                        Command = "Telent",
+                        Name = Enums.EnumAction.e检测端口.ToString().Substring(1),
+                        Type = "Check"
+                    });
+
+                    DogAction.Add(new DogAction()
+                    {
+                        Id = Guid.NewGuid(),
+                        Command = "/c ping {0} -4 -n 2",
+                        Name = Enums.EnumAction.e检测IP.ToString().Substring(1),
+                        Type = "Check"
+                    });
+
+                    DogAction.Add(new DogAction()
+                    {
+                        Id = Guid.NewGuid(),
+                        Command = "/c tasklist|findstr /i",
+                        Name = Enums.EnumAction.e查找进程.ToString().Substring(1),
+                        Type = "Check"
+                    });
+
+                    DogAction.Add(new DogAction()
+                    {
+                        Id = Guid.NewGuid(),
+                        Command = "",
+                        Name = Enums.EnumAction.e启动进程.ToString().Substring(1),
+                        Type = "Run"
+                    });
+
+                    DogAction.Add(new DogAction()
+                    {
+                        Id = Guid.NewGuid(),
+                        Command = "/c TASKKILL /F /IM {0}",
+                        Name = Enums.EnumAction.e终止进程.ToString().Substring(1),
+                        Type = "Stop"
+                    });
+
+                    DogAction.Add(new DogAction()
+                    {
+                        Id = Guid.NewGuid(),
+                        Command = "Get",
+                        Name = Enums.EnumAction.e打开网页.ToString().Substring(1),
+                        Type = "Check"
+                    });
+                    SaveChanges();
+                }
+
+
                 if (!ServiceInfo.Any())
                 {
                     ServiceInfo.Add(new ServiceInfo()
                     {
                         Id = Guid.NewGuid(),
-                        Check = "GetProcess Notepad",
                         Desc = "记事本测试",
                         Name = "NotePad",
-                        RestartTime = TimeSpan.FromMinutes(3),
-                        AliveTime = DateTime.Now,
-                        Run = @"c:\windows\system32\notepad.exe",
-                        Stop = "KillProcess notepad",
+                        CheckName = "查找进程",
+                        CheckData = "Notepad",
+                        RunName = "启动进程",
+                        RunData = @"c:\windows\system32\notepad.exe",
+                        StopName = "终止进程",
+                        StopData = "notepad",
+                        LastAliveTime = DateTime.Now,
+                        LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),
+                        RestartTime = TimeSpan.FromDays(38),
+                        IsEnable = true
                     });
 
                     ServiceInfo.Add(new ServiceInfo()
                     {
                         Id = Guid.NewGuid(),
-                        Check = "Get 192.168.10.37:8080",
                         Desc = "Url测试",
                         Name = "calc",
-                        RestartTime = TimeSpan.FromMinutes(3),
-                        AliveTime = DateTime.Now,
-                        Run = @"c:\windows\system32\calc.exe",
-                        Stop = "KillProcess calc",
+                        CheckName = "打开网页",
+                        CheckData = "192.168.10.37:8080",
+                        RunName = "启动进程",
+                        RunData = @"c:\windows\system32\calc.exe",
+                        StopName = "终止进程",
+                        StopData = "calc",
+                        LastAliveTime = DateTime.Now,
+                        LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),
+                        RestartTime = TimeSpan.FromMinutes(3),
+                        IsEnable = true
                     });
 
                     ServiceInfo.Add(new ServiceInfo()
                     {
                         Id = Guid.NewGuid(),
-                        Check = "Telnet 127.0.0.1:6379",
-                        Run = @"sc start redis",
-                        Stop = "sc stop redis",
                         Desc = "Redis数据库",
                         Name = "Redis",
-                        RestartTime = TimeSpan.FromMinutes(3),
-                        AliveTime = DateTime.Now,
+                        CheckName = "检测端口",
+                        CheckData = "127.0.0.1:6379",
+                        RunName = "启动服务",
+                        RunData = @"redis",
+                        StopName = "停止服务",
+                        StopData = "redis",
+                        LastAliveTime = DateTime.Now,
+                        LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),
+                        RestartTime = TimeSpan.FromMinutes(3),
+                        IsEnable = true
                     });
 
                     ServiceInfo.Add(new ServiceInfo()
                     {
                         Id = Guid.NewGuid(),
-                        Check = "ping 192.168.255.1",
-                        Run = @"C:\Program Files\OpenVPN\bin\openvpn.exe ""d:\data\openvpn\config\aliyun.ovpn""",
-                        Stop = "KillProcess openvpn*",
                         Desc = "OpenVPN守护",
                         Name = "OpenVPN",
-                        RestartTime = TimeSpan.FromMinutes(3),
-                        AliveTime = DateTime.Now,
+                        CheckName = "检测IP",
+                        CheckData = "192.168.255.1",
+                        RunName = "启动进程",
+                        RunData = new
+                        {
+                            FileName = @"C:\Program Files\OpenVPN\bin\openvpn.exe",
+                            Para = @"""d:\data\openvpn\config\aliyun.ovpn""",
+                            WorkingPath = @"d:\data\openvpn\config"
+                        }.SerializeObject(),
+                        StopName = "终止进程",
+                        StopData = "openvpn*",
+                        LastAliveTime = DateTime.Now,
+                        LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),
+                        RestartTime = TimeSpan.FromMinutes(5),
+                        IsEnable = true
                     });
+                    SaveChanges();
                 }
             }
         }
@@ -138,6 +241,7 @@ namespace QServiceDog.BLL
         public DbSet<User> User { get; set; }
         public DbSet<ServiceInfo> ServiceInfo { get; set; }
         public DbSet<EventInfo> EventInfo { get; set; }
+        public DbSet<DogAction> DogAction { get; set; }
 
 
 

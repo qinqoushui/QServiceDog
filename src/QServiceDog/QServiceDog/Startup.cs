@@ -10,6 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Q.DevExtreme.Tpl;
 using Q.Helper;
 using QServiceDog.Helpers;
 
@@ -19,7 +20,6 @@ namespace QServiceDog
     {
         public Startup(IConfiguration configuration) : base(configuration)
         {
-
         }
         protected override string CookieName { get; set; } = nameof(QServiceDog);
 

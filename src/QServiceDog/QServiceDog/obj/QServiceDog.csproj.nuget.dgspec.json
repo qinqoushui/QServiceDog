@@ -57,6 +57,10 @@
             "QCommon.Quartz": {
               "target": "Package",
               "version": "[1.0.7, )"
+            },
+            "QCommon.Standard": {
+              "target": "Package",
+              "version": "[1.0.53, )"
             }
           },
           "imports": [

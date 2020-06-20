@@ -9,9 +9,9 @@ using System.Threading.Tasks;
 
 namespace QServiceDog.Controllers
 {
-    public class EventInfoController :   EntityController<EventInfo, Guid>
+    public class DogActionController : EntityController<DogAction, Guid>
     {
-        public EventInfoController(DbContext db) : base(db)
+        public DogActionController(DbContext db) : base(db)
         {
 
         }
@@ -21,6 +21,11 @@ namespace QServiceDog.Controllers
             return View();
         }
 
-         
+        [HttpGet("GetByType")]
+        public List<DogAction> GetByType(string Type)
+        {
+            return db.Set<DogAction>().Where(r => r.Type == Type).ToList();
+        }
+
     }
 }

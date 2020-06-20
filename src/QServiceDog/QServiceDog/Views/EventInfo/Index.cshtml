@@ -13,5 +13,9 @@
        }).StartDataGrid(nameof(QServiceDog.Models.EventInfo),false)
 )
 <script>
-
+    $(function () {
+        setInterval(function () {
+            reQuery($("#gridContainer"));
+        }, 120000);
+    });
 </script>

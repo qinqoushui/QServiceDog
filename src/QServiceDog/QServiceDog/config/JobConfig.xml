@@ -26,36 +26,64 @@
       </job-data-map>
     </job>
 
-    <trigger>
+    <job>
+      <name>ServiceJob </name>
+      <group>Service</group>
+      <description>服务守护</description>
+      <job-type>QServiceDog.Jobs.ServiceJob, QServiceDog</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+      <job-data-map>
+        <entry>
+          <key>checkPowerOff</key>
+          <value>10</value>
+        </entry>
+      </job-data-map>
+    </job>
+
+    <!--<trigger>
       <cron>
-        <name>tri_event</name>
+        <name>tri_service</name>
         <group>Event</group>
         <description>事件分析</description>
         <job-name>EventJob</job-name>
         <job-group>Event</job-group>
         <start-time>2019-01-01T00:00:00.0Z</start-time>
         <misfire-instruction>SmartPolicy</misfire-instruction>
-        <cron-expression>0/30 * * * * ?</cron-expression>
+        <cron-expression>0 0/2 * * * ?</cron-expression>
       </cron>
 
-    </trigger>
+    </trigger>-->
 
-    <!--<trigger>
+    <trigger>
       <simple>
-        <name>tri_sync</name>
-        <group>Sync</group>
-        <description>同步数据</description>
-        <job-name>Sync</job-name>
-        <job-group>Sync</job-group>
+        <name>tri_event</name>
+        <group>Event</group>
+        <description>事件分析</description>
+        <job-name>EventJob</job-name>
+        <job-group>Event</job-group>
         <start-time>2019-01-01T00:00:00.0Z</start-time>
         <end-time>2050-12-31T23:59:59.0Z</end-time>
         <misfire-instruction>SmartPolicy</misfire-instruction>
         <repeat-count>-1</repeat-count>
-        <repeat-interval>60000</repeat-interval>
+        <repeat-interval>300000</repeat-interval>
       </simple>
-    </trigger>-->
+    </trigger>
 
-
+    <trigger>
+      <simple>
+        <name>tri_service</name>
+        <group>Service</group>
+        <description>服务守护</description>
+        <job-name>ServiceJob</job-name>
+        <job-group>Service</job-group>
+        <start-time>2019-01-01T00:00:00.0Z</start-time>
+        <end-time>2050-12-31T23:59:59.0Z</end-time>
+        <misfire-instruction>SmartPolicy</misfire-instruction>
+        <repeat-count>-1</repeat-count>
+        <repeat-interval>20000</repeat-interval>
+      </simple>
+    </trigger>
 
 
   </schedule>

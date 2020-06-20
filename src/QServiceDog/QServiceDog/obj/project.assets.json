@@ -1627,7 +1627,7 @@
           "lib/netstandard2.0/QCommon.Quartz.dll": {}
         }
       },
-      "QCommon.Standard/1.0.52": {
+      "QCommon.Standard/1.0.53": {
         "type": "package",
         "dependencies": {
           "NLog": "4.5.5",
@@ -5899,14 +5899,14 @@
         "readme.txt"
       ]
     },
-    "QCommon.Standard/1.0.52": {
-      "sha512": "NUCRBcJQRYPyQ1nmwRVWGVKekmGhv/COKqNBs1u6RhlXnzKaXHqlE8khYImpO1s5eKSi8yhX4+2pkgNbfLBQIw==",
+    "QCommon.Standard/1.0.53": {
+      "sha512": "hFHiz8uM3Se1qy2A36r9PveBDqejQfoHGV+INMehI1MPMSbYZxXJ9QokTW7Tihu54zIbADn4dKiywJIW66njOA==",
       "type": "package",
-      "path": "qcommon.standard/1.0.52",
+      "path": "qcommon.standard/1.0.53",
       "files": [
         ".nupkg.metadata",
         "lib/netstandard2.0/QCommon.dll",
-        "qcommon.standard.1.0.52.nupkg.sha512",
+        "qcommon.standard.1.0.53.nupkg.sha512",
         "qcommon.standard.nuspec"
       ]
     },
@@ -10983,7 +10983,8 @@
       "Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation >= 3.1.4",
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.5",
       "Q.DevExtreme.Tpl >= 1.0.21",
-      "QCommon.Quartz >= 1.0.7"
+      "QCommon.Quartz >= 1.0.7",
+      "QCommon.Standard >= 1.0.53"
     ]
   },
   "packageFolders": {
@@ -11043,6 +11044,10 @@
           "QCommon.Quartz": {
             "target": "Package",
             "version": "[1.0.7, )"
+          },
+          "QCommon.Standard": {
+            "target": "Package",
+            "version": "[1.0.53, )"
           }
         },
         "imports": [

@@ -1,0 +1,19 @@
+@{
+    ViewData["Title"] = "业务行为";
+}
+
+@(Html.DevExtreme()
+       .DataGrid<QServiceDog.Models.DogAction>().Columns(columns =>
+       {
+           columns.AddFor(m => m.Name).Caption("名称").MinWidth(200).SortIndex(1) ;
+           columns.AddFor(m => m.Command).Caption("命令").MinWidth(140);
+           columns.AddFor(m => m.Type).Caption("类型").MinWidth(100).SortOrder( SortOrder.Asc).SortIndex(0);
+       }).StartDataGrid(nameof(QServiceDog.Models.DogAction),false)
+)
+<script>
+    $(function () {
+        setInterval(function () {
+            reQuery($("#gridContainer"));
+        }, 120000);
+    });
+</script>

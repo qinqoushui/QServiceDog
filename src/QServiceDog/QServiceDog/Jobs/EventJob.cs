@@ -40,7 +40,7 @@ namespace QServiceDog.Jobs
         {
 
         }
-        protected override void doAfter()
+        protected override void doAfter(IList<string> data)
         {
 
         }

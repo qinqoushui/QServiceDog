@@ -20,6 +20,7 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
     <PackageReference Include="Q.DevExtreme.Tpl" Version="1.0.21" />
     <PackageReference Include="QCommon.Quartz" Version="1.0.7" />
+    <PackageReference Include="QCommon.Standard" Version="1.0.53" />
   </ItemGroup>
 
   <ItemGroup>

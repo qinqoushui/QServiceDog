@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "业务服务";
+}
+
+@(Html.DevExtreme()
+       .DataGrid<QServiceDog.Models.ServiceInfo>().Columns(columns =>
+       {
+           columns.AddFor(m => m.Id).Hide();
+           columns.AddFor(m => m.Name).Caption("名称/服务名") ;
+           columns.AddFor(m => m.Desc).MinWidth(120) ;
+           columns.AddFor(m => m.CheckName).Caption("检测方法").MinWidth(100).Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.DogAction)).LoadAction("GetByType").LoadParams(new { Type = "Check" }).Key("Id"))
+        .DisplayExpr("Name").ValueExpr("Name")
+            );
+           columns.AddFor(m => m.CheckData).Caption("检测数据").MinWidth(120);
+           columns.AddFor(m => m.RunName).Caption("启动方法").MinWidth(100).Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.DogAction)).LoadAction("GetByType").LoadParams(new { Type="Run" }).Key("Id"))
+    .DisplayExpr("Name").ValueExpr("Name")
+        );
+           columns.AddFor(m => m.RunData).Caption("启动数据").MinWidth(120);
+           columns.AddFor(m => m.StopName).Caption("停止方法").MinWidth(100).Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.DogAction)).LoadAction("GetByType").LoadParams(new { Type = "Stop" }).Key("Id"))
+    .DisplayExpr("Name").ValueExpr("Name")
+        );
+           columns.AddFor(m => m.StopData).Caption("停止数据").MinWidth(120);
+
+           columns.AddFor(m => m.LastAliveTime).Caption("上次存活时间").DataType( GridColumnDataType.DateTime).Format("yyyy-MM-dd HH:mm:ss").Width(180);
+           columns.AddFor(m => m.LastStopTime).Caption("上次重启时间").DataType( GridColumnDataType.DateTime).Format("yyyy-MM-dd HH:mm:ss").Width(180);
+           columns.AddFor(m => m.IdleTime).Caption("发呆时长") ;
+           columns.AddFor(m => m.RestartTime).Caption("重启间隔时长") ;
+           columns.AddFor(m => m.IsEnable).Caption("是否启用") ;
+
+       }).StartDataGrid(nameof(QServiceDog.Models.ServiceInfo),true )
+)
+<script>
+    $(function () {
+        setInterval(function () {
+            reQuery($("#gridContainer"));
+        }, 120000);
+    });
+</script>

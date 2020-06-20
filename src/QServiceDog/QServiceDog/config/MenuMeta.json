@@ -4,10 +4,24 @@
     "Equivalents": "dxDataGrid, dx-data-grid",
     "Menus": [
       {
-        "Title": "主页",
+        "Title": "事件",
         "Name": "Index",
         "DocUrl": "",
         "Widget": "EventInfo",
+        "DemoType": "Web"
+      },
+      {
+        "Title": "服务",
+        "Name": "Index",
+        "DocUrl": "",
+        "Widget": "ServiceInfo",
+        "DemoType": "Web"
+      },
+      {
+        "Title": "行为",
+        "Name": "Index",
+        "DocUrl": "",
+        "Widget": "DogAction",
         "DemoType": "Web"
       }
     ]
