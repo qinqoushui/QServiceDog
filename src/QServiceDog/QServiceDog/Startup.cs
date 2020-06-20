@@ -57,7 +57,7 @@ namespace QServiceDog
             {
                 r.AddProfile<Models.AutoMapping>();
             }));
-
+            GlobalConfig.Instance.Client = this.Configuration.GetSection("Client").Value;
         }
 
        

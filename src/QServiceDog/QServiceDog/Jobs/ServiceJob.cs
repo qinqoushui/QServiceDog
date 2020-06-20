@@ -42,7 +42,7 @@ namespace QServiceDog.Jobs
         /// <returns></returns>
         protected override (string result, string error) doJob(ServiceInfo data)
         {
-
+            
             if (check(data))
             {
                 data.LastAliveTime = DateTime.Now;
@@ -92,7 +92,14 @@ namespace QServiceDog.Jobs
                 switch (enumAction)
                 {
                     case EnumAction.e打开网页:
-                        return new HttpClient().GetAsync(data.CheckData).GetAwaiter().GetResult().StatusCode == HttpStatusCode.OK;
+                        try
+                        {
+                            return new HttpClient().GetAsync(data.CheckData).GetAwaiter().GetResult().StatusCode == HttpStatusCode.OK;
+                        }
+                        catch (Exception ex)
+                        {
+                            return false;
+                        }
                     case EnumAction.e检测服务状态:
                         return new QCommon.Service.ServiceController(data.CheckData).Status == System.ServiceProcess.ServiceControllerStatus.Running;
 
@@ -139,7 +146,7 @@ namespace QServiceDog.Jobs
                         flag = new QCommon.Service.ServiceController(data.StopData).Stop();
                         break;
                     default:
-                        flag= false;
+                        flag = false;
                         break;
                 }
                 logger.Info($"stop {data.Name} end,{flag}");
@@ -198,7 +205,7 @@ namespace QServiceDog.Jobs
             List<ServiceInfo> result = new List<ServiceInfo>();
             using (var ef = new ServiceDBContext())
             {
-                result = ef.ServiceInfo.Where(r => r.IsEnable && r.Name == "SQLServer").ToList();
+                result = ef.ServiceInfo.Where(r => r.IsEnable).ToList();
             }
             max = result.Count;
             total = result.Count;

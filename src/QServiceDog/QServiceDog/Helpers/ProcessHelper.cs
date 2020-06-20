@@ -18,18 +18,35 @@ namespace QServiceDog.Helpers
         }
         public static bool Kill(string processName)
         {
-            List<Process> p = null;
-            if (processName.EndsWith("*"))
+            try
             {
-                p = Process.GetProcesses().Where(r => r.ProcessName.StartsWith(processName.Substring(0, processName.Length - 1), StringComparison.OrdinalIgnoreCase)).ToList();
+                List<Process> p = null;
+                if (processName.EndsWith("*"))
+                {
+                    p = Process.GetProcesses().Where(r => r.ProcessName.StartsWith(processName.Substring(0, processName.Length - 1), StringComparison.OrdinalIgnoreCase)).ToList();
 
+                }
+                else
+                {
+                    p = Process.GetProcessesByName(processName).ToList();
+                }
+                p.ForEach(r =>
+                {
+                    try
+                    {
+                        r.Kill();
+                    }
+                    catch (Exception ex)
+                    {
+                        //kill Calculator 的时候会把调试进程 也杀死？？？
+                    }
+                });
+                return true;
             }
-            else
+            catch (Exception ex)
             {
-                p = Process.GetProcessesByName(processName).ToList();
+                return false;
             }
-            p.ForEach(r => r.Kill());
-            return true;
         }
 
         public static bool Start(string data, Action<string, Exception> logger)

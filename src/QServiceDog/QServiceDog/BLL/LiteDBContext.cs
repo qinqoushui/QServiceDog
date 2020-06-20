@@ -136,7 +136,10 @@ namespace QServiceDog.BLL
                         CheckName = Enums.EnumAction.e查找进程.ToString().Substring(1),
                         CheckData = "Notepad",
                         RunName = Enums.EnumAction.e启动进程.ToString().Substring(1),
-                        RunData = @"c:\windows\system32\notepad.exe",
+                        RunData = new
+                        {
+                            FileName = @"c:\windows\system32\notepad.exe"
+                        }.SerializeObject(),
                         StopName = Enums.EnumAction.e终止进程.ToString().Substring(1),
                         StopData = "notepad",
                         LastAliveTime = DateTime.Now,
@@ -150,13 +153,16 @@ namespace QServiceDog.BLL
                     {
                         Id = Guid.NewGuid(),
                         Desc = "Url测试",
-                        Name = "calc",
+                        Name = "regedit",
                         CheckName = Enums.EnumAction.e打开网页.ToString().Substring(1),
                         CheckData = "http://192.168.10.37:8080",
                         RunName = Enums.EnumAction.e启动进程.ToString().Substring(1),
-                        RunData = @"c:\windows\system32\calc.exe",
+                        RunData = new
+                        {
+                            FileName = @"c:\windows\system32\regedit.exe"
+                        }.SerializeObject(),
                         StopName = Enums.EnumAction.e终止进程.ToString().Substring(1),
-                        StopData = "calc",
+                        StopData = "regedit",
                         LastAliveTime = DateTime.Now,
                         LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),

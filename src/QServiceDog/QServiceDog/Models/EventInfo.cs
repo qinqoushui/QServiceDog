@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QServiceDog.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -11,6 +12,7 @@ namespace QServiceDog.Models
         [Key]
         public Guid Id { get; set; }
 
+        public string Client { get; set; } = GlobalConfig.Instance.Client;
         
         public string Type { get; set; } //类型
         public DateTime Time { get; set; }

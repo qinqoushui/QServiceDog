@@ -8,6 +8,7 @@ namespace QServiceDog.Helpers
         public static GlobalConfig Instance { get; } = _;
         public IMapper Mapper { get; set; }
  
+        public string Client { get; set; }
  
     }
 }
