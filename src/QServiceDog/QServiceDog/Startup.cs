@@ -32,7 +32,12 @@ namespace QServiceDog
         public override void ConfigureServicesOther(IServiceCollection services)
         {
             Logging.Init(Configuration.GetSection("Logging").Get<Logging>());
-            LogHelper.Default.StartLogServer(nameof(QServiceDog), Logging.Instance.LogServer, System.Text.Encoding.UTF8);
+            string client = this.Configuration.GetSection("Client").Value;
+            if (string.IsNullOrEmpty(client))
+                client = nameof(QServiceDog);
+            else
+                client=client+"."+ nameof(QServiceDog);
+            LogHelper.Default.StartLogServer(client , Logging.Instance.LogServer, System.Text.Encoding.UTF8);
 
             //services.AddEntityFrameworkSqlServer();
             //services.AddDbContext<Helpers.LogDBContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"), opt => opt.MaxBatchSize(1000)));
@@ -58,6 +63,7 @@ namespace QServiceDog
                 r.AddProfile<Models.AutoMapping>();
             }));
             GlobalConfig.Instance.Client = this.Configuration.GetSection("Client").Value;
+            
         }
 
        
