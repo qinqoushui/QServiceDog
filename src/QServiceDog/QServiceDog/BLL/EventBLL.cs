@@ -20,5 +20,13 @@ namespace QServiceDog.BLL
                 ef.SaveChanges();
             }
         }
+
+        public List<EventInfo> FetchListByTime(DateTime s, DateTime e)
+        {
+            using (var ef = new ServiceDBContext())
+            {
+                return ef.EventInfo.Where(r => r.Time >= s && r.Time <= e).ToList();
+            }
+        }
     }
 }

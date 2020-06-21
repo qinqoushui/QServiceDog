@@ -20,14 +20,20 @@ namespace QServiceDog.Controllers
         {
             return View();
         }
+    }
 
+    [ApiController]
+    [Route("[Controller]")]
+    public class SyncController :ControllerBase 
+    {
         /// <summary>
         /// 收取客户端上报来的数据
         /// </summary>
-        [HttpPost("Recv")]
-        public void Recv([FromBody] List<EventInfo> data)
+        [HttpPost("Event")]
+        public object RecvEvent([FromBody] List<EventInfo> data)
         {
             //db.Set<EventInfo>()
+            return new { Code = 0, Msg = $"{data.Count}" };
         }
     }
 }
