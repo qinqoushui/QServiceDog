@@ -6,12 +6,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Models\EventSubscriber.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <None Remove="config\JobConfig.xml" />
+    <None Remove="data\app.db" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="config\JobConfig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="data\app.db">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 
@@ -21,10 +29,6 @@
     <PackageReference Include="Q.DevExtreme.Tpl" Version="1.0.21" />
     <PackageReference Include="QCommon.Quartz" Version="1.0.7" />
     <PackageReference Include="QCommon.Standard" Version="1.0.53" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="data\" />
   </ItemGroup>
 
 </Project>

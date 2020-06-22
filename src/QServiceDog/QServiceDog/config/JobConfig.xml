@@ -20,11 +20,11 @@
       <job-data-map>
         <entry>
           <key>minutes</key>
-          <value>2</value>
+          <value>5</value>
         </entry>
         <entry>
           <key>eventinfo</key>
-          <value>http://127.0.0.1:5000/Sync/Event</value>
+          <value>http://m.icloudcard.net:5885/Sync/Event</value>
         </entry>
       </job-data-map>
     </job>
@@ -67,7 +67,7 @@
         <job-group>Sync</job-group>
         <start-time>2019-01-01T00:00:00.0Z</start-time>
         <misfire-instruction>SmartPolicy</misfire-instruction>
-        <cron-expression>0 0/2 * * * ?</cron-expression>
+        <cron-expression>0 0/4 * * * ?</cron-expression>
       </cron>
 
     </trigger>

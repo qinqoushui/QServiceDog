@@ -23,6 +23,20 @@
         "DocUrl": "",
         "Widget": "DogAction",
         "DemoType": "Web"
+      },
+      {
+        "Title": "事件订阅者",
+        "Name": "Index",
+        "DocUrl": "",
+        "Widget": "EventSubscriber",
+        "DemoType": "Web"
+      },
+      {
+        "Title": "事件推送记录",
+        "Name": "Index",
+        "DocUrl": "",
+        "Widget": "EventPushRecord",
+        "DemoType": "Web"
       }
     ]
   },

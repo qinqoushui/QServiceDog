@@ -36,20 +36,25 @@ namespace QServiceDog
             if (string.IsNullOrEmpty(client))
                 client = nameof(QServiceDog);
             else
-                client=client+"."+ nameof(QServiceDog);
-            LogHelper.Default.StartLogServer(client , Logging.Instance.LogServer, System.Text.Encoding.UTF8);
+                client = client + "." + nameof(QServiceDog);
+            LogHelper.Default.StartLogServer(client, Logging.Instance.LogServer, System.Text.Encoding.UTF8);
 
             //services.AddEntityFrameworkSqlServer();
             //services.AddDbContext<Helpers.LogDBContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"), opt => opt.MaxBatchSize(1000)));
 
-
+#if DEBUG
+           
+            BLL.ServiceDBContext.ConnectionString =$"Data Source={System.IO.Path.Combine(  "data" , "app.db")};";
+#else
+            BLL.ServiceDBContext.ConnectionString = $"Data Source={System.IO.Path.Combine(System.IO.Path.Combine(AppContext.BaseDirectory, "data"), "app.db")};";
+#endif
+            Q.Helper.LogHelper.Default.Info($"ServiceDB={BLL.ServiceDBContext.ConnectionString}");
             services.AddEntityFrameworkSqlite();
             services.AddDbContext<BLL.ServiceDBContext>(options =>
             {
-                options.UseSqlite(Configuration.GetConnectionString("ServiceDB"), o => o.MinBatchSize(100));
+                options.UseSqlite(BLL.ServiceDBContext.ConnectionString, o => o.MinBatchSize(100));
             });
 
-            BLL.ServiceDBContext.ConnectionString = Configuration.GetConnectionString("ServiceDB");
             services.AddScoped<DbContext, BLL.ServiceDBContext>();
             services.AddSingleton<Q.DevExtreme.Tpl.Models.IUserBLL, BLL.UserBLL>();
 
@@ -63,10 +68,10 @@ namespace QServiceDog
                 r.AddProfile<Models.AutoMapping>();
             }));
             GlobalConfig.Instance.Client = this.Configuration.GetSection("Client").Value;
-            
+
         }
 
-       
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         //public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         //{

@@ -1,0 +1,35 @@
+@{
+    ViewData["Title"] = "事件推送记录";
+}
+
+@(Html.DevExtreme()
+       .DataGrid<QServiceDog.Models.EventPushRecord>().Columns(columns =>
+       {
+           columns.AddFor(m => m.Id).Hide();
+           columns.Add().Caption("事件").Columns(col =>
+           {
+               col.AddFor(m => m.EventInfo.Time).Caption("时间").Format("yyyy-MM-dd HH:mm:ss").Width(200);
+               col.AddFor(m => m.EventInfo.Type).Caption("类型");
+               col.AddFor(m => m.EventInfo.Msg).Caption("内容");
+
+           });
+           columns.Add().Caption("订阅者").Columns(col =>
+           {
+               col.AddFor(m => m.EventSubscriber.Name).Caption("姓名") ;
+               col.AddFor(m => m.EventSubscriber.EMail).Caption("邮箱");
+               col.AddFor(m => m.EventSubscriber.WXName).Caption("企业微信");
+
+           });
+
+           columns.AddFor(m => m.PushTime).Caption("推送时间").Format("yyyy-MM-dd HH:mm:ss").Width(200);
+           columns.AddFor(m => m.Pushed).Caption("已推送") ;
+
+       }).StartDataGrid(nameof(QServiceDog.Models.EventPushRecord),true)
+)
+<script>
+    $(function () {
+        setInterval(function () {
+            reQuery($("#gridContainer"));
+        }, 120000);
+    });
+</script>

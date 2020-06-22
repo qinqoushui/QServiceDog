@@ -230,6 +230,18 @@ namespace QServiceDog.BLL
                     });
                     SaveChanges();
                 }
+
+                if (!EventSubscriber.Any())
+                {
+                    EventSubscriber.Add(new EventSubscriber()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "张文相",
+                        WXName = "ZhangWenXiang",
+                        EMail = "18001036828@189.cn"
+                    });
+                    SaveChanges();
+                }
             }
         }
 
@@ -250,8 +262,8 @@ namespace QServiceDog.BLL
             aa<User>();
             aa<ServiceInfo>();
             aa<EventInfo>();
-            //aa<MailAccount2>();
-            //aa<Bank>();
+            aa<EventSubscriber>();
+            aa<EventPushRecord>();
             //aa<Card>();
             //aa<Bill>();
             //aa<Tran>();
@@ -259,13 +271,16 @@ namespace QServiceDog.BLL
             //modelBuilder.Entity<Card>().HasOne(b => b.Bank).WithMany().HasForeignKey(b => b.BankId).OnDelete(DeleteBehavior.Restrict);
             //modelBuilder.Entity<Bill>().HasOne(b => b.Card).WithMany().HasForeignKey(b => b.CardId);
             //modelBuilder.Entity<Tran>().HasOne(b => b.Card).WithMany().HasForeignKey(b => b.CardId);
-            //modelBuilder.Entity<Amortize>().HasOne(b => b.Card).WithMany().HasForeignKey(b => b.CardId);
+           modelBuilder.Entity<EventPushRecord>().HasOne(b => b.EventInfo).WithMany().HasForeignKey(b => b.Event);
+           modelBuilder.Entity<EventPushRecord>().HasOne(b => b.EventSubscriber).WithMany().HasForeignKey(b => b.Subscriber);
 
         }
         public DbSet<User> User { get; set; }
         public DbSet<ServiceInfo> ServiceInfo { get; set; }
         public DbSet<EventInfo> EventInfo { get; set; }
         public DbSet<DogAction> DogAction { get; set; }
+        public DbSet<EventSubscriber> EventSubscriber { get; set; }
+        public DbSet<EventPushRecord> EventPushRecord { get; set; }
 
 
 
