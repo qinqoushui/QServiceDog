@@ -31,7 +31,7 @@ using System.ServiceProcess;
 
 namespace QCommon.Service
 {
-    public class ServiceController
+    public class ServiceHelper
     {
         System.ServiceProcess.ServiceController sc = null;
         public string ServiceName { get; private set; }
@@ -47,7 +47,7 @@ namespace QCommon.Service
             }
         }
 
-        public ServiceController(string name)
+        public ServiceHelper(string name)
         {
             sc = new System.ServiceProcess.ServiceController(name);
             ServiceName = name;

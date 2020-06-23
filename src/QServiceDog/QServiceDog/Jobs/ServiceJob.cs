@@ -66,6 +66,8 @@ namespace QServiceDog.Jobs
             {
                 if (data.LastAliveTime.Add(data.IdleTime) < DateTime.Now) //沉默太久，冒个泡
                 {
+                    stop(data);
+                    System.Threading.Thread.Sleep(10000);
                     run(data);
                     //再次检查
                     EventBLL.Instance.AddEvent(new EventInfo()
@@ -101,7 +103,7 @@ namespace QServiceDog.Jobs
                             return false;
                         }
                     case EnumAction.e检测服务状态:
-                        return new QCommon.Service.ServiceController(data.CheckData).Status == System.ServiceProcess.ServiceControllerStatus.Running;
+                        return new QCommon.Service.ServiceHelper(data.CheckData).Status == System.ServiceProcess.ServiceControllerStatus.Running;
 
                     case EnumAction.e检测端口:
                         return NetHelper.Telnet(IPEndPoint.Parse(data.CheckData));
@@ -143,7 +145,7 @@ namespace QServiceDog.Jobs
                         flag = ProcessHelper.Kill(data.StopData);
                         break;
                     case EnumAction.e停止服务:
-                        flag = new QCommon.Service.ServiceController(data.StopData).Stop();
+                        flag = new QCommon.Service.ServiceHelper(data.StopData).Stop();
                         break;
                     default:
                         flag = false;
@@ -171,7 +173,7 @@ namespace QServiceDog.Jobs
                         new Thread(new ThreadStart(() => ProcessHelper.Start(data.RunData, (s, ex) => logger.Info(s, ex)))).Start();
                         break;
                     case EnumAction.e启动服务:
-                        new QCommon.Service.ServiceController(data.RunData).Start();
+                        new QCommon.Service.ServiceHelper(data.RunData).Start();
                         break;
                 }
                 logger.Info($"run {data.Name} end ");

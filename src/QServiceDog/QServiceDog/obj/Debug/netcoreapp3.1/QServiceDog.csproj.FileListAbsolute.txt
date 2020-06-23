@@ -467,7 +467,6 @@ D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netc
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.dll
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.pdb
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.genruntimeconfig.cache
-D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.csprojAssemblyReference.cache
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netcoreapp3.1\config\JobConfig.xml
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\Razor\Views\ServiceInfo\Index.cshtml.g.cs
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.csproj.CoreCompileInputs.cache

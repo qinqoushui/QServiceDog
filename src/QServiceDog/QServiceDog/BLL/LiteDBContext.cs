@@ -32,7 +32,7 @@ namespace QServiceDog.BLL
                     return;
                 _created = true;
 #if DEBUG
-                Database.EnsureDeleted();
+              //  Database.EnsureDeleted();
 #endif
 
                 if (!Database.EnsureCreated())
