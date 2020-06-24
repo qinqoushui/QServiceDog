@@ -1,10 +1,15 @@
-﻿using Q.DevExtreme.Tpl;
+﻿using MailKit.Net.Smtp;
+using MimeKit;
+using Q.DevExtreme.Tpl;
+using QServiceDog.Models;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Xml;
 
@@ -16,36 +21,65 @@ namespace QServiceDog.Helpers
     /// <remarks>邮件、微信、短信</remarks>
     public class MsgHelper
     {
-        public void Send(string title, string msg, string url)
+        public void Send(List<EventPushRecord> records, List<Sender> senders)
         {
-            sendByWechat("ZhangWenXiang", title, msg, url);
+            foreach (var sender in senders)
+            {
+                if (Enum.TryParse<Enums.EnumSender>("e" + sender.TypeName, out var e))
+                {
+                    switch (e)
+                    {
+                        case Enums.EnumSender.e企业微信:
+                            foreach (var record in records)
+                            {
+                                if (string.IsNullOrEmpty(record.EventSubscriber.WXName))
+                                    continue;
+                                sendByWechat(record.EventSubscriber.WXName, $"{record.EventInfo.Client} {record.EventInfo.Time.ToString("yyyy-MM-dd HH:mm:ss")} {record.EventInfo.Msg}", sender.Para);
+                                record.Pushed = true;
+                                record.PushTime = DateTime.Now;
+                            }
+                            break;
+                        case Enums.EnumSender.e邮箱:
+                            sendByEmail(records.Select(r => r.EventSubscriber).ToArray(), $"{records.First().EventInfo.Msg}", $"{records.First().EventInfo.Client} {records.First().EventInfo.Time.ToString("yyyy-MM-dd HH:mm:ss")} {records.First().EventInfo.Msg}", sender.Para);
+                            records.ForEach(r =>
+                            {
+                                r.Pushed = true;
+                                r.PushTime = DateTime.Now;
+                            });
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
         }
 
-        void sendByWechat(string user, string title, string msg, string url)
+        void sendByWechat(string user, string msg, string para)
         {
+            var p = para.DeserializeAnonymousType(new { agentid = 0, url = "" });
             var wechatMsg = new
             {
                 touser = user,
                 toparty = "",
                 totag = "",
                 msgtype = "text",
-                agentid = 1000045,// 1000002,
+                agentid = p.agentid,// 1000002,
                 safe = 0,
                 text = new
                 {
-                    content = "警告，停电恢复<a href=\"http://www.sina.com.cn\">sina</a>"
+                    content = msg
                 }
             }.SerializeObject();
 
-           // callWebService("http://qywx.bjzycx.net/WechatWebService.asmx", wechatMsg);
+            // callWebService("", wechatMsg);
             //1000045
-            callWebService("http://work.jstayc.com/WechatWebService.asmx", wechatMsg);
+            callWebService(p.url, wechatMsg);
         }
 
         string callWebService(string webWebServiceUrl, string data)
         {
             string soapText = string.Empty;
-            using (var ms = new StringWriter( ))
+            using (var ms = new StringWriter())
             {
                 using (XmlTextWriter Xmltr = new XmlTextWriter(ms))
                 {
@@ -65,7 +99,7 @@ namespace QServiceDog.Helpers
                 soapText = ms.ToString();
                 ms.Close();
             }
-            
+
             using (WebClient webClient = new WebClient())
             {
                 try
@@ -86,6 +120,33 @@ namespace QServiceDog.Helpers
                 }
             }
 
+        }
+
+
+        void sendByEmail(EventSubscriber[] reciver, string title, string content, string para)
+        {
+            if (reciver.Count(r => !string.IsNullOrEmpty(r.EMail)) == 0)
+                return;
+            var p = para.DeserializeAnonymousType(new { account = "", password = "", smtp = "", port = 25, cc = new string[0] });
+            MimeMessage message = new MimeMessage();
+            message.Subject = title;
+            message.From.Add(new MailboxAddress(p.account, p.account));
+            message.To.AddRange(reciver.Select(r => new MailboxAddress(r.Name, r.EMail)).ToList());
+            TextPart textPart = new TextPart("html");
+            textPart.SetText(Encoding.UTF8, content);
+            var mimeparts = new Multipart("mixed");
+            mimeparts.Add(textPart);
+            message.Body = mimeparts;
+            using (SmtpClient smtpClient = new SmtpClient())
+            {
+                smtpClient.Connect(p.smtp, p.port, MailKit.Security.SecureSocketOptions.Auto, default(CancellationToken));
+                smtpClient.ServerCertificateValidationCallback = (s, c, h, e) => true;
+                //smtpClient.Authenticate(p.account,p.password, default(CancellationToken));
+                NetworkCredential nc = new NetworkCredential(p.account, p.password);
+                smtpClient.Authenticate(nc, default(CancellationToken));
+                smtpClient.Send(message, default(CancellationToken), null);
+                smtpClient.Disconnect(true, default(CancellationToken));
+            }
         }
 
 

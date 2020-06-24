@@ -44,6 +44,22 @@
     </job>
 
     <job>
+      <name>EventMsgJob </name>
+      <group>Event</group>
+      <description>事件订阅推送</description>
+      <job-type>QServiceDog.Jobs.EventMsgJob, QServiceDog</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+      <job-data-map>
+        <entry>
+          <key>minutes</key>
+          <value>10</value>
+        </entry>
+      </job-data-map>
+    </job>
+
+
+    <job>
       <name>ServiceJob </name>
       <group>Service</group>
       <description>服务守护</description>
@@ -84,6 +100,22 @@
         <misfire-instruction>SmartPolicy</misfire-instruction>
         <repeat-count>-1</repeat-count>
         <repeat-interval>300000</repeat-interval>
+      </simple>
+    </trigger>
+
+
+    <trigger>
+      <simple>
+        <name>tri_eventmsg</name>
+        <group>Event</group>
+        <description>事件订阅推送</description>
+        <job-name>EventMsgJob</job-name>
+        <job-group>Event</job-group>
+        <start-time>2019-01-01T00:00:00.0Z</start-time>
+        <end-time>2050-12-31T23:59:59.0Z</end-time>
+        <misfire-instruction>SmartPolicy</misfire-instruction>
+        <repeat-count>-1</repeat-count>
+        <repeat-interval>60000</repeat-interval>
       </simple>
     </trigger>
 

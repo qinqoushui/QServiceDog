@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace QServiceDog.Controllers
 {
-    public class ServiceInfoController :   EntityController<ServiceInfo, Guid>
+    public class ServiceInfoController : EntityController<ServiceInfo, Guid>
     {
         public ServiceInfoController(DbContext db) : base(db)
         {
@@ -20,5 +20,7 @@ namespace QServiceDog.Controllers
         {
             return View();
         }
+
+       
     }
 }

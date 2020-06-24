@@ -22,6 +22,7 @@ namespace QServiceDog.Models
 
         public string WXName { get; set; }
 
+        public bool IsEnable { get; set; } = true;
     }
 
     /// <summary>
@@ -53,5 +54,17 @@ namespace QServiceDog.Models
         [NotMapped]
         public virtual EventSubscriber EventSubscriber { get; set; }
 
+    }
+
+    public class Sender : Q.DevExtreme.Tpl.Models.IKeyEntity<Guid>
+    {
+        [Key]
+        public Guid Id { get; set; }
+        public string Name { get; set; }
+
+        public string TypeName { get; set; } = "EMail";// email ,wx
+
+        public string Para { get; set; }//发送参数
+        public bool IsEnable { get; set; }
     }
 }

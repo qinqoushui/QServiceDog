@@ -18,4 +18,10 @@ namespace QServiceDog.Enums
         e打开网页,
         e未知
     }
+    public enum EnumSender
+    {
+        e微信,
+        e企业微信,
+        e邮箱
+    }
 }

@@ -23,7 +23,14 @@
         "DocUrl": "",
         "Widget": "DogAction",
         "DemoType": "Web"
-      },
+      } 
+    ]
+  },
+  {
+    "Name": "事件订阅",
+    "Equivalents": "dxDataGrid, dx-data-grid",
+    "Menus": [
+       
       {
         "Title": "事件订阅者",
         "Name": "Index",
@@ -36,6 +43,13 @@
         "Name": "Index",
         "DocUrl": "",
         "Widget": "EventPushRecord",
+        "DemoType": "Web"
+      },
+      {
+        "Title": "事件发送器",
+        "Name": "Index",
+        "DocUrl": "",
+        "Widget": "Sender",
         "DemoType": "Web"
       }
     ]
@@ -56,7 +70,7 @@
             "DemoType": "Web"
           }
         ]
-      } 
+      }
     ]
   }
 ]

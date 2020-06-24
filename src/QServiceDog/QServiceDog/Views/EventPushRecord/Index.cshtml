@@ -10,7 +10,7 @@
            {
                col.AddFor(m => m.EventInfo.Time).Caption("时间").Format("yyyy-MM-dd HH:mm:ss").Width(200);
                col.AddFor(m => m.EventInfo.Type).Caption("类型");
-               col.AddFor(m => m.EventInfo.Msg).Caption("内容");
+               col.AddFor(m => m.EventInfo.Msg).Caption("内容").MinWidth(600);
 
            });
            columns.Add().Caption("订阅者").Columns(col =>
@@ -22,7 +22,7 @@
            });
 
            columns.AddFor(m => m.PushTime).Caption("推送时间").Format("yyyy-MM-dd HH:mm:ss").Width(200);
-           columns.AddFor(m => m.Pushed).Caption("已推送") ;
+           columns.AddFor(m => m.Pushed).Caption("已推送").Width(60) ;
 
        }).StartDataGrid(nameof(QServiceDog.Models.EventPushRecord),true)
 )

@@ -32,7 +32,7 @@ namespace QServiceDog.BLL
                     return;
                 _created = true;
 #if DEBUG
-              //  Database.EnsureDeleted();
+                 Database.EnsureDeleted();
 #endif
 
                 if (!Database.EnsureCreated())
@@ -238,8 +238,62 @@ namespace QServiceDog.BLL
                         Id = Guid.NewGuid(),
                         Name = "张文相",
                         WXName = "ZhangWenXiang",
-                        EMail = "18001036828@189.cn"
+                        EMail = "18001036828@189.cn",
+                        IsEnable = true
                     });
+                    EventSubscriber.Add(new EventSubscriber()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "牛家隆",
+                        WXName = "NiuJiaLong",
+                        EMail = "niujialong@jstayc.com",
+                        IsEnable = true
+                    });
+                    EventSubscriber.Add(new EventSubscriber()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "马健",
+                        WXName = "MaJian",
+                        EMail = "majian@jstayc.com",
+                        IsEnable = true
+                    });
+                    EventSubscriber.Add(new EventSubscriber()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "于中涛",
+                        WXName = "YuZhongTao",
+                        EMail = "yuzhongtao@jstayc.com",
+                        IsEnable = true
+                    });
+                    SaveChanges();
+                }
+
+                if (!Sender.Any())
+                {
+                    Sender.Add(new Sender()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "同安企业微信",
+                        TypeName = Enums.EnumSender.e企业微信.ToString().Substring(1), IsEnable=true,
+                        Para = new { agentid= 1000045,url= "http://work.jstayc.com/WechatWebService.asmx" }.SerializeObject()
+                    });
+                    Sender.Add(new Sender()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "中云企业微信",
+                        TypeName = Enums.EnumSender.e企业微信.ToString().Substring(1),
+                        IsEnable = false,
+                        Para = new { agentid = 1000002, url = "http://qywx.bjzycx.net/WechatWebService.asmx" }.SerializeObject()
+                    });
+                    Sender.Add(new Sender()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "126邮箱",
+                        TypeName = Enums.EnumSender.e邮箱.ToString().Substring(1),
+                        IsEnable = true,
+                        Para = new { account = "2739427628@qq.com", password = "dirxzskqwbkwdhbb", smtp = "smtp.qq.com", port = 465, cc = new string[0] }.SerializeObject()
+                    });
+
                     SaveChanges();
                 }
             }
@@ -271,8 +325,8 @@ namespace QServiceDog.BLL
             //modelBuilder.Entity<Card>().HasOne(b => b.Bank).WithMany().HasForeignKey(b => b.BankId).OnDelete(DeleteBehavior.Restrict);
             //modelBuilder.Entity<Bill>().HasOne(b => b.Card).WithMany().HasForeignKey(b => b.CardId);
             //modelBuilder.Entity<Tran>().HasOne(b => b.Card).WithMany().HasForeignKey(b => b.CardId);
-           modelBuilder.Entity<EventPushRecord>().HasOne(b => b.EventInfo).WithMany().HasForeignKey(b => b.Event);
-           modelBuilder.Entity<EventPushRecord>().HasOne(b => b.EventSubscriber).WithMany().HasForeignKey(b => b.Subscriber);
+            modelBuilder.Entity<EventPushRecord>().HasOne(b => b.EventInfo).WithMany().HasForeignKey(b => b.Event);
+            modelBuilder.Entity<EventPushRecord>().HasOne(b => b.EventSubscriber).WithMany().HasForeignKey(b => b.Subscriber);
 
         }
         public DbSet<User> User { get; set; }
@@ -281,7 +335,7 @@ namespace QServiceDog.BLL
         public DbSet<DogAction> DogAction { get; set; }
         public DbSet<EventSubscriber> EventSubscriber { get; set; }
         public DbSet<EventPushRecord> EventPushRecord { get; set; }
-
+        public DbSet<Sender> Sender { get; set; }
 
 
     }
