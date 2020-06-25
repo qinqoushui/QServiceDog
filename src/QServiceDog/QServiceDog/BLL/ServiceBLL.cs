@@ -24,6 +24,19 @@ namespace QServiceDog.BLL
             }
         }
 
+        internal int Add4Cloud(List<ServiceInfo> data)
+        {
+            //新增或更新
+            using (var ef = new ServiceDBContext())
+            {
+                var client = data.First().Client;
+                var oldList = ef.ServiceInfo.Where(r=>r.Client==client).ToList();
+                ef.ServiceInfo.RemoveRange(oldList);
+                ef.ServiceInfo.AddRange(data);
+                return ef.SaveChanges();
+            }
+        }
+
         //public void Update(List<ServiceInfo> serviceInfo)
         //{
         //    using (var ef = new ServiceDBContext())

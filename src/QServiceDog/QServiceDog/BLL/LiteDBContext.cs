@@ -32,7 +32,7 @@ namespace QServiceDog.BLL
                     return;
                 _created = true;
 #if DEBUG
-                 Database.EnsureDeleted();
+                Database.EnsureDeleted();
 #endif
 
                 if (!Database.EnsureCreated())
@@ -146,6 +146,7 @@ namespace QServiceDog.BLL
                         LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),
                         RestartTime = TimeSpan.FromDays(38),
+                        Client = "TEST",
                         IsEnable = true
                     });
 
@@ -167,6 +168,7 @@ namespace QServiceDog.BLL
                         LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),
                         RestartTime = TimeSpan.FromMinutes(3),
+                        Client = "TEST",
                         IsEnable = true
                     });
 
@@ -185,6 +187,7 @@ namespace QServiceDog.BLL
                         LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),
                         RestartTime = TimeSpan.FromMinutes(3),
+                        Client = "TEST",
                         IsEnable = true
                     });
 
@@ -203,6 +206,7 @@ namespace QServiceDog.BLL
                         LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),
                         RestartTime = TimeSpan.FromMinutes(3),
+                        Client = "TEST",
                         IsEnable = true
                     });
 
@@ -226,6 +230,7 @@ namespace QServiceDog.BLL
                         LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),
                         RestartTime = TimeSpan.FromMinutes(5),
+                        Client = "TEST",
                         IsEnable = true
                     });
                     SaveChanges();
@@ -255,7 +260,7 @@ namespace QServiceDog.BLL
                         Name = "马健",
                         WXName = "MaJian",
                         EMail = "majian@jstayc.com",
-                        IsEnable = true
+                        IsEnable = false 
                     });
                     EventSubscriber.Add(new EventSubscriber()
                     {
@@ -263,8 +268,29 @@ namespace QServiceDog.BLL
                         Name = "于中涛",
                         WXName = "YuZhongTao",
                         EMail = "yuzhongtao@jstayc.com",
-                        IsEnable = true
+                        IsEnable = false 
                     });
+                    EventSubscriber.Add(new EventSubscriber()
+                    {
+                        Id = Guid.NewGuid(),
+                        Name = "董梓莘",
+                        WXName = "DongZiShen",
+                        EMail = "2795338562@qq.com",
+                        IsEnable = false 
+                    });
+                    SaveChanges();
+                }
+
+                if (!ClientEventSubscriber.Any())
+                {
+                    EventSubscriber.Where(r=>r.IsEnable).ToList() .ToList().ForEach(r =>
+                    ClientEventSubscriber.Add(
+                    new ClientEventSubscriber()
+                    {
+                        Id = Guid.NewGuid(),
+                        Subscriber = r.Id,
+                        Client = "TEST"
+                    }));
                     SaveChanges();
                 }
 
@@ -274,8 +300,9 @@ namespace QServiceDog.BLL
                     {
                         Id = Guid.NewGuid(),
                         Name = "同安企业微信",
-                        TypeName = Enums.EnumSender.e企业微信.ToString().Substring(1), IsEnable=true,
-                        Para = new { agentid= 1000045,url= "http://work.jstayc.com/WechatWebService.asmx" }.SerializeObject()
+                        TypeName = Enums.EnumSender.e企业微信.ToString().Substring(1),
+                        IsEnable = true,
+                        Para = new { agentid = 1000045, url = "http://work.jstayc.com/WechatWebService.asmx" }.SerializeObject()
                     });
                     Sender.Add(new Sender()
                     {
@@ -318,6 +345,7 @@ namespace QServiceDog.BLL
             aa<EventInfo>();
             aa<EventSubscriber>();
             aa<EventPushRecord>();
+            aa<ClientEventSubscriber>();
             //aa<Card>();
             //aa<Bill>();
             //aa<Tran>();
@@ -327,6 +355,7 @@ namespace QServiceDog.BLL
             //modelBuilder.Entity<Tran>().HasOne(b => b.Card).WithMany().HasForeignKey(b => b.CardId);
             modelBuilder.Entity<EventPushRecord>().HasOne(b => b.EventInfo).WithMany().HasForeignKey(b => b.Event);
             modelBuilder.Entity<EventPushRecord>().HasOne(b => b.EventSubscriber).WithMany().HasForeignKey(b => b.Subscriber);
+            modelBuilder.Entity<ClientEventSubscriber>().HasOne(b => b.EventSubscriber).WithMany().HasForeignKey(b => b.Subscriber);
 
         }
         public DbSet<User> User { get; set; }
@@ -336,6 +365,7 @@ namespace QServiceDog.BLL
         public DbSet<EventSubscriber> EventSubscriber { get; set; }
         public DbSet<EventPushRecord> EventPushRecord { get; set; }
         public DbSet<Sender> Sender { get; set; }
+        public DbSet<ClientEventSubscriber> ClientEventSubscriber { get; set; }
 
 
     }

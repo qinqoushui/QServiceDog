@@ -30,12 +30,19 @@
     "Name": "事件订阅",
     "Equivalents": "dxDataGrid, dx-data-grid",
     "Menus": [
-       
+
       {
         "Title": "事件订阅者",
         "Name": "Index",
         "DocUrl": "",
         "Widget": "EventSubscriber",
+        "DemoType": "Web"
+      },
+      {
+        "Title": "事件订阅规则",
+        "Name": "Index",
+        "DocUrl": "",
+        "Widget": "ClientEventSubscriber",
         "DemoType": "Web"
       },
       {

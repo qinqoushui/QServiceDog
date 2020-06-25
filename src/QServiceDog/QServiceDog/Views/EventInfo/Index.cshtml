@@ -6,7 +6,7 @@
        .DataGrid<QServiceDog.Models.EventInfo>().Columns(columns =>
        {
            columns.AddFor(m => m.Client).Caption("位置").Width(160);
-           columns.AddFor(m => m.Time).Caption("时间").DataType( GridColumnDataType.DateTime).Format("yyyy-MM-dd HH:mm:ss").Width(180);
+           columns.AddFor(m => m.Time).Caption("时间").DataType( GridColumnDataType.DateTime).Format("yyyy-MM-dd HH:mm:ss").Width(180).SortOrder( SortOrder.Desc).SortIndex(0);
            columns.AddFor(m => m.Type).Caption("类别").Width(140);
            columns.AddFor(m => m.Id).Hide();
            columns.AddFor(m => m.Msg).Caption("内容").MinWidth(500);

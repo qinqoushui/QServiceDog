@@ -40,12 +40,13 @@ namespace QServiceDog.Helpers
                             }
                             break;
                         case Enums.EnumSender.e邮箱:
-                            sendByEmail(records.Select(r => r.EventSubscriber).ToArray(), $"{records.First().EventInfo.Msg}", $"{records.First().EventInfo.Client} {records.First().EventInfo.Time.ToString("yyyy-MM-dd HH:mm:ss")} {records.First().EventInfo.Msg}", sender.Para);
-                            records.ForEach(r =>
-                            {
-                                r.Pushed = true;
-                                r.PushTime = DateTime.Now;
-                            });
+                            //QQ邮箱反垃圾群发，阿里云禁止25端口，用不了126邮箱
+                            //sendByEmail(records.Select(r => r.EventSubscriber).ToArray(), $"{records.First().EventInfo.Msg}", $"{records.First().EventInfo.Client} {records.First().EventInfo.Time.ToString("yyyy-MM-dd HH:mm:ss")} {records.First().EventInfo.Msg}", sender.Para);
+                            //records.ForEach(r =>
+                            //{
+                            //    r.Pushed = true;
+                            //    r.PushTime = DateTime.Now;
+                            //});
                             break;
                         default:
                             break;

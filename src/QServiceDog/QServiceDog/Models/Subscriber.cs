@@ -22,15 +22,25 @@ namespace QServiceDog.Models
 
         public string WXName { get; set; }
 
+
+
         public bool IsEnable { get; set; } = true;
     }
 
     /// <summary>
-    /// 访问类型（暂不实现）
+    /// 订阅地点
     /// </summary>
-    public class aa
+    public class ClientEventSubscriber : Q.DevExtreme.Tpl.Models.IKeyEntity<Guid>
     {
+        [Key]
+        public Guid Id { get; set; }
 
+        public string Client { get; set; }
+
+        public Guid Subscriber { get; set; }
+
+        [NotMapped]
+        public virtual EventSubscriber EventSubscriber { get; set; }
     }
 
     /// <summary>

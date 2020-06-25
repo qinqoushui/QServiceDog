@@ -46,6 +46,9 @@ namespace QServiceDog
            
             BLL.ServiceDBContext.ConnectionString =$"Data Source={System.IO.Path.Combine(  "data" , "app.db")};";
 #else
+            if (!System.IO.Directory.Exists(System.IO.Path.Combine(AppContext.BaseDirectory, "data")))
+                System.IO.Directory.CreateDirectory(System.IO.Path.Combine(AppContext.BaseDirectory, "data"));
+
             BLL.ServiceDBContext.ConnectionString = $"Data Source={System.IO.Path.Combine(System.IO.Path.Combine(AppContext.BaseDirectory, "data"), "app.db")};";
 #endif
             Q.Helper.LogHelper.Default.Info($"ServiceDB={BLL.ServiceDBContext.ConnectionString}");

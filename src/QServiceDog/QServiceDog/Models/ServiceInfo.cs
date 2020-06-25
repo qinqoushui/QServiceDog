@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -20,14 +21,15 @@ namespace QServiceDog.Models
         [Required]
         public string Name { get; set; }
         public string Desc { get; set; }
+        public string Client { get; set; }
 
         public string RunName { get; set; } //服务启动参数
         public string RunData { get; set; } //服务启动参数
-        public string StopName { get; set; }  
-        public string StopData { get; set; }  
+        public string StopName { get; set; }
+        public string StopData { get; set; }
 
-        public string CheckName { get; set; } 
-        public string CheckData { get; set; } 
+        public string CheckName { get; set; }
+        public string CheckData { get; set; }
 
 
         public DateTime LastAliveTime { get; set; } //上次存活时间
@@ -38,5 +40,14 @@ namespace QServiceDog.Models
         public TimeSpan RestartTime { get; set; } //强制重启时间
 
         public bool IsEnable { get; set; } = true;//启用
+       
+        [NotMapped]
+        public bool IsAlive
+        {
+            get
+            {
+                return LastAliveTime.Add(IdleTime) > DateTime.Now;
+            }
+        }
     }
 }

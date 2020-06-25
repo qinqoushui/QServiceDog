@@ -472,7 +472,6 @@ D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netc
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\Razor\Views\DogAction\Index.cshtml.g.cs
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\Razor\Views\EventPushRecord\Index.cshtml.g.cs
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\Razor\Views\EventSubscriber\Index.cshtml.g.cs
-D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.csprojAssemblyReference.cache
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\Razor\Views\Sender\Index.cshtml.g.cs
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netcoreapp3.1\MailKit.dll
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netcoreapp3.1\MimeKit.dll
@@ -480,3 +479,5 @@ D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netc
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.csproj.CoreCompileInputs.cache
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.MvcApplicationPartsAssemblyInfo.cs
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.MvcApplicationPartsAssemblyInfo.cache
+D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\Razor\Views\ClientEventSubscriber\Index.cshtml.g.cs
+D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.csprojAssemblyReference.cache

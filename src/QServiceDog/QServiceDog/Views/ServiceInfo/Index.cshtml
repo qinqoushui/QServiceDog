@@ -6,6 +6,7 @@
        .DataGrid<QServiceDog.Models.ServiceInfo>().Columns(columns =>
        {
            columns.AddFor(m => m.Id).Hide();
+           columns.AddFor(m => m.Client).Caption("项目位置") ;
            columns.AddFor(m => m.Name).Caption("名称/服务名") ;
            columns.AddFor(m => m.Desc).MinWidth(120) ;
            columns.AddFor(m => m.CheckName).Caption("检测方法").MinWidth(100).Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.DogAction)).LoadAction("GetByType").LoadParams(new { Type = "Check" }).Key("Id"))
@@ -26,8 +27,9 @@
            columns.AddFor(m => m.IdleTime).Caption("发呆时长") ;
            columns.AddFor(m => m.RestartTime).Caption("重启间隔时长") ;
            columns.AddFor(m => m.IsEnable).Caption("是否启用") ;
+           columns.AddFor(m => m.IsAlive).Caption("是否存活") ;
 
-       }).StartDataGrid(nameof(QServiceDog.Models.ServiceInfo),true ).OnInitNewRow("inseredEvent")
+       }).StartDataGrid(nameof(QServiceDog.Models.ServiceInfo),true ).OnRowPrepared("onRowPrepared"). OnInitNewRow("inseredEvent")
 )
 <script>
     $(function () {
@@ -38,9 +40,19 @@
     function inseredEvent(data) {
         var day2 = new Date();
 
-        data.data.LastAliveTime = day2.getFullYear() + "-" + (day2.getMonth() + 1)+"-" + day2.getDate() + " 00:00:01";
-        data.data.LastStopTime = day2.getFullYear() + "-" + (day2.getMonth() + 1) + "-"+ day2.getDate() + " 00:00:01";
+        data.data.LastAliveTime = day2.getFullYear() + "-" + (day2.getMonth() + 1) + "-" + day2.getDate() + " 00:00:01";
+        data.data.LastStopTime = day2.getFullYear() + "-" + (day2.getMonth() + 1) + "-" + day2.getDate() + " 00:00:01";
         data.data.IdleTime = "00:05:00";
         data.data.RestartTime = "1.00:00:01";
+    }
+    function onRowPrepared(e) {
+
+        if (e.rowType == "data" && !e.data.IsAlive) {
+            e.rowElement[0].style.color = "red";
+            //e.rowElement[0].style.backgroundColor = "red";
+        }
+        else {
+            e.rowElement[0].style.color = "black";
+        }
     }
 </script>

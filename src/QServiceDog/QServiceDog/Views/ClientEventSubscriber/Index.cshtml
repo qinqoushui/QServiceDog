@@ -1,0 +1,26 @@
+@{
+    ViewData["Title"] = "事件订阅地点";
+}
+
+@(Html.DevExtreme()
+       .DataGrid<QServiceDog.Models.ClientEventSubscriber>().Columns(columns =>
+       {
+           columns.AddFor(m => m.Id).Hide();
+           columns.AddFor(m => m.Client).Caption("地点").SortIndex(0).SortOrder( SortOrder.Asc).Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.EventInfo)).LoadAction("GetClients") ));
+           columns.AddFor(m=>m.Subscriber).Caption("订阅者").Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.EventSubscriber)).LoadAction("Get2").Key("Id"))
+    .DisplayExpr("Name").ValueExpr("Id")
+        );
+
+       }).StartDataGrid(nameof(QServiceDog.Models.ClientEventSubscriber),true, GridEditMode.Form).OnInitNewRow("inseredEvent")
+)
+<script>
+    $(function () {
+        setInterval(function () {
+            reQuery($("#gridContainer"));
+        }, 120000);
+    });
+    function inseredEvent(data) {
+         
+        
+    }
+</script>

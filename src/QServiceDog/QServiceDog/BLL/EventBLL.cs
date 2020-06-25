@@ -15,26 +15,44 @@ namespace QServiceDog.BLL
 
         public void AddEvent(EventInfo info)
         {
+            //本地添加事件不产生订阅
             using (var ef = new ServiceDBContext())
             {
                 ef.EventInfo.Add(info);
-                //TODO:根据订阅规则进行订阅
-                ef.EventSubscriber.Where(r => r.IsEnable
-               ).ToList().ForEach(s =>
-               {
-                   ef.EventPushRecord.Add(new EventPushRecord()
-                   {
-                       Id = Guid.NewGuid(),
-                       Pushed = false,
-                       PushTime = DateTime.Now,
-                       Event = info.Id,
-                       Subscriber = s.Id
-                   });
-               });
                 ef.SaveChanges();
             }
         }
 
+        public int AddEvent4Cloud(List<EventInfo> infoList)
+        {
+            using (var ef = new ServiceDBContext())
+            {
+                int c = 0;
+                foreach (var info in infoList)
+                {
+                    if (!ef.EventInfo.Any(r => r.Id == info.Id))
+                    {
+                        ef.EventInfo.Add(info);
+                        c++;
+                        var sub = ef.ClientEventSubscriber.Include(r => r.EventSubscriber).Where(r => r.Client == info.Client && r.EventSubscriber.IsEnable).ToList();
+
+                        sub.ForEach(s =>
+                        {
+                            ef.EventPushRecord.Add(new EventPushRecord()
+                            {
+                                Id = Guid.NewGuid(),
+                                Pushed = false,
+                                PushTime = DateTime.Now,
+                                Event = info.Id,
+                                Subscriber = s.Subscriber
+                            });
+                        });
+                    }
+                }
+                ef.SaveChanges();
+                return c;
+            }
+        }
         public List<EventInfo> FetchListByTime(DateTime s, DateTime e)
         {
             using (var ef = new ServiceDBContext())
@@ -47,7 +65,7 @@ namespace QServiceDog.BLL
         {
             using (var ef = new ServiceDBContext())
             {
-                return ef.EventPushRecord.Include(r=>r.EventInfo).Include(r=>r.EventSubscriber).Where(r =>!r.Pushed && r.EventInfo.Time >= s && r.EventInfo.Time <= e).ToList();
+                return ef.EventPushRecord.Include(r => r.EventInfo).Include(r => r.EventSubscriber).Where(r => !r.Pushed && r.EventInfo.Time >= s && r.EventInfo.Time <= e).ToList();
             }
         }
 
@@ -55,7 +73,7 @@ namespace QServiceDog.BLL
         {
             using (var ef = new ServiceDBContext())
             {
-                return ef.Sender.Where(r=>r.IsEnable).ToList();
+                return ef.Sender.Where(r => r.IsEnable).ToList();
             }
         }
     }

@@ -35,10 +35,14 @@ namespace QServiceDog.Jobs
         /// <returns></returns>
         protected override (string result, string error) doJob(string data)
         {
+            int m = GetValueInRange("minutes", 3, 120, 10);
+            string url = jobDataMap.GetString("url");
             switch (data)
             {
                 case nameof(EventInfo):
-                    return syncEventInfo();
+                    return sync(url+"Event",EventBLL.Instance.FetchListByTime(DateTime.Now.AddMinutes(0 - m), DateTime.Now));
+                case nameof(ServiceInfo):
+                    return sync(url+"Service",ServiceBLL.Instance.FetchList(false));
                 default:
                     break;
             }
@@ -46,11 +50,8 @@ namespace QServiceDog.Jobs
             return ("skip", "");
         }
 
-        (string result, string error) syncEventInfo()
+        (string result, string error) sync(string url, System.Collections.IList list)
         {
-            int m = GetValueInRange("minutes", 3, 120, 10);
-            string url = jobDataMap.GetString("eventinfo");
-            var list = EventBLL.Instance.FetchListByTime(DateTime.Now.AddMinutes(0 - m), DateTime.Now);
             if (list?.Count > 0)
             {
                 try
@@ -81,6 +82,8 @@ namespace QServiceDog.Jobs
                 return ("skip", "无数据");
         }
 
+
+
         protected override bool doPre()
         {
             return true;
@@ -88,7 +91,7 @@ namespace QServiceDog.Jobs
 
         protected override IList<string> getJobs(out int max, out int total)
         {
-            var ss = new string[] { nameof(EventInfo) };
+            var ss = new string[] { nameof(EventInfo), nameof(ServiceInfo) };
             max = ss.Length;
             total = ss.Length;
             return ss;

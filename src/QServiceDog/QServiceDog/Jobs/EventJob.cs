@@ -1,5 +1,6 @@
 ﻿using Q.Helper;
 using QServiceDog.BLL;
+using QServiceDog.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -17,6 +18,38 @@ namespace QServiceDog.Jobs
 
         }
 
+        protected override bool doPre()
+        {
+#if DEBUG
+            return true;
+#else
+            bool isCloud = GlobalConfig.Instance.Client.StartsWith("Cloud", StringComparison.OrdinalIgnoreCase);
+            if (isCloud)
+            {
+                //禁用本地检测服务
+                switch (JobName)
+                {
+                    case nameof(EventJob):
+                    case nameof(ServiceJob):
+                    case nameof(SyncEventJob):
+                        return false;
+                    default:
+                        return true;
+                }
+            }
+            else
+            {
+                //禁用云模式
+                switch (JobName)
+                {
+                    case nameof(EventMsgJob):
+                        return false;
+                    default:
+                        return true;
+                }
+            }
+#endif
+        }
         protected int GetValueInRange(string key, int min, int max, int defaultValue)
         {
             if (jobDataMap.ContainsKey(key))

@@ -67,7 +67,8 @@ namespace QServiceDog.Jobs
                     }
                     catch (Exception ex)
                     {
-                        return ("fail", ex.GetExceptionMsg());
+                        logger.Error("SendMsg", ex);
+                        continue;
                     }
                 }
 
