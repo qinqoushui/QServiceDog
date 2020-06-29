@@ -2,12 +2,11 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-	<MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
-	 
-	<CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
-    <CopyRefAssembliesToPublishDirectory>false</CopyRefAssembliesToPublishDirectory>
+	   <RazorCompileOnBuild>false</RazorCompileOnBuild>
+    <MvcRazorCompileOnPublish>false</MvcRazorCompileOnPublish>
+	 <CopyRazorGenerateFilesToPublishDirectory>true</CopyRazorGenerateFilesToPublishDirectory>
   </PropertyGroup>
-
+  
   <ItemGroup>
     <Compile Remove="Models\EventSubscriber.cs" />
   </ItemGroup>

@@ -42,7 +42,7 @@ namespace QServiceDog.Jobs
         /// <returns></returns>
         protected override (string result, string error) doJob(ServiceInfo data)
         {
-            
+
             if (check(data))
             {
                 data.LastAliveTime = DateTime.Now;
@@ -64,7 +64,7 @@ namespace QServiceDog.Jobs
             }
             else
             {
-                if (data.LastAliveTime.Add(data.IdleTime) < DateTime.Now) //沉默太久，冒个泡
+                if (DateTime.Now.Hour < 6 && data.LastAliveTime.Add(data.IdleTime) < DateTime.Now) //沉默太久，冒个泡,限6点前
                 {
                     stop(data);
                     System.Threading.Thread.Sleep(10000);
