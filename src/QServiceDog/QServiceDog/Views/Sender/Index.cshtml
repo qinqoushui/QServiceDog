@@ -7,7 +7,7 @@
        {
            columns.AddFor(m => m.Id).Hide();
            columns.AddFor(m => m.Name).Caption("名称") ;
-           columns.AddFor(m => m.TypeName).Caption("名称").Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.Sender)).LoadAction("GetSenderType"))
+           columns.AddFor(m => m.TypeName).Caption("类型").Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.Sender)).LoadAction("GetSenderType"))
 
         );
            columns.AddFor(m => m.Para).Caption("参数") ;

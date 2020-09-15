@@ -55,7 +55,7 @@ namespace QServiceDog.Jobs
                         Time = DateTime.Now,
                         Type = "Dog",
                         Msg = $"运维自检，主动停止{data.Desc}，上次停止于{data.LastStopTime}"
-                    });
+                    },false);
                     data.LastStopTime = DateTime.Now;
                     return ("succ", $"stop at {DateTime.Now}");
                 }
@@ -76,7 +76,7 @@ namespace QServiceDog.Jobs
                         Time = DateTime.Now,
                         Type = "Dog",
                         Msg = $"启动{data.Desc}，上次运行于{data.LastAliveTime}。如果连续多次启动，则启动可能一直不成功"
-                    });
+                    },false );
                     return ("succ", $"run at {DateTime.Now}");
                 }
                 else

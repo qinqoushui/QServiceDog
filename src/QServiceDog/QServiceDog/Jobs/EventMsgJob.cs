@@ -57,7 +57,7 @@ namespace QServiceDog.Jobs
             if (list?.Count > 0)
             {
                 MsgHelper msgHelper = new MsgHelper();
-                //调用推送者推送
+                //每条消息， 调用推送者推送所有订阅者
                 foreach (var g in list.GroupBy(r=>r.EventInfo.Id))
                 {
                     try

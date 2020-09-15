@@ -39,7 +39,7 @@
       <job-data-map>
         <entry>
           <key>checkPowerOff</key>
-          <value>10</value>
+          <value>20</value>
         </entry>
       </job-data-map>
     </job>
@@ -90,21 +90,18 @@
     </trigger>
 
     <trigger>
-      <simple>
+      <cron>
         <name>tri_event</name>
         <group>Event</group>
         <description>事件分析</description>
         <job-name>EventJob</job-name>
         <job-group>Event</job-group>
         <start-time>2019-01-01T00:00:00.0Z</start-time>
-        <end-time>2050-12-31T23:59:59.0Z</end-time>
         <misfire-instruction>SmartPolicy</misfire-instruction>
-        <repeat-count>-1</repeat-count>
-        <repeat-interval>300000</repeat-interval>
-      </simple>
+        <cron-expression>0 0/5 * * * ?</cron-expression>
+      </cron>
+
     </trigger>
-
-
     <trigger>
       <simple>
         <name>tri_eventmsg</name>

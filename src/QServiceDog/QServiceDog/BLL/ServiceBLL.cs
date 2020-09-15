@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using QServiceDog.Helpers;
 using QServiceDog.Models;
 using System;
 using System.Collections.Generic;
@@ -26,15 +27,20 @@ namespace QServiceDog.BLL
 
         internal int Add4Cloud(List<ServiceInfo> data)
         {
-            //新增或更新
-            using (var ef = new ServiceDBContext())
+            //新增或更新，仅在CLOUD模式下
+            if (GlobalConfig.Instance.Client == "CLOUD")
             {
-                var client = data.First().Client;
-                var oldList = ef.ServiceInfo.Where(r=>r.Client==client).ToList();
-                ef.ServiceInfo.RemoveRange(oldList);
-                ef.ServiceInfo.AddRange(data);
-                return ef.SaveChanges();
+                using (var ef = new ServiceDBContext())
+                {
+                    var client = data.First().Client;
+                    var oldList = ef.ServiceInfo.Where(r => r.Client == client).ToList();
+                    ef.ServiceInfo.RemoveRange(oldList);
+                    ef.ServiceInfo.AddRange(data);
+                    return ef.SaveChanges();
+                }
             }
+            else
+                return 0;
         }
 
         //public void Update(List<ServiceInfo> serviceInfo)

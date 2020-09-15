@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Eventing.Reader;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
@@ -11,9 +12,8 @@ namespace QServiceDog
 {
     public class Program
     {
-       public static void Main(string[] args)
+        public static void Main(string[] args)
         {
-
             new Q.DevExtreme.Tpl.ProgramHelper<Startup>().Run(nameof(QServiceDog), "·þÎñÊØ»¤¹·", args,
 #if _Docker
                         true

@@ -11,6 +11,7 @@ using System.Net;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Web;
 using System.Xml;
 
 namespace QServiceDog.Helpers
@@ -36,7 +37,7 @@ namespace QServiceDog.Helpers
                                     continue;
                                 sendByWechat(record.EventSubscriber.WXName, $"{record.EventInfo.Client} {record.EventInfo.Time.ToString("yyyy-MM-dd HH:mm:ss")} {record.EventInfo.Msg}", sender.Para);
                                 record.Pushed = true;
-                                record.PushTime = DateTime.Now;
+                                record.PushTime = DateTime.Now; //只要有一种方法通知 到了就行
                             }
                             break;
                         case Enums.EnumSender.e邮箱:
@@ -49,7 +50,8 @@ namespace QServiceDog.Helpers
                             //});
                             break;
                         case Enums.EnumSender.e短信:
-                            sendBySMS(records.Select(r => r.EventSubscriber).ToArray(), $"{records.First().EventInfo.Client} {records.First().EventInfo.Time.ToString("yyyy-MM-dd HH:mm:ss")} {records.First().EventInfo.Msg}", sender.Para);
+                            //只处理与类型相关的事件
+                            sendBySMS(records.Select(r => r.EventSubscriber).ToArray(), $"{records.First().EventInfo.Client} {records.First().EventInfo.Time.ToString("yyyy-MM-dd HH:mm:ss")} {records.First().EventInfo.Msg}", records.First().EventInfo.Type, sender.Para);
                             records.ForEach(r =>
                             {
                                 r.Pushed = true;
@@ -131,9 +133,18 @@ namespace QServiceDog.Helpers
 
         }
 
-        void sendBySMS(EventSubscriber[] reciver, string content, string para)
+        void sendBySMS(EventSubscriber[] reciver, string content, string eventType, string para)
         {
-            Console.WriteLine($"send sms:{content}");
+            var x = para.DeserializeAnonymousType(new { type = "", url = "" });
+            if (x.type.Split(',').Count(r => r.Equals(eventType, StringComparison.OrdinalIgnoreCase)) > 0)
+            {
+
+                foreach (var a in reciver.Where(r => !string.IsNullOrEmpty(r.Phone)))
+                {
+                    new System.Net.Http.HttpClient().GetAsync(string.Format(x.url, a.Phone, HttpUtility.UrlEncode(content, System.Text.Encoding.GetEncoding("gb2312")))).Wait(3000);
+                    // Console.WriteLine($"send sms:{content}");
+                }
+            }
 
         }
 
