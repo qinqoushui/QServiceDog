@@ -1,13 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\doc",
     "\\src",
     "\\src\\QServiceDog",
     "\\src\\QServiceDog\\QServiceDog",
-    "\\src\\QServiceDog\\QServiceDog\\Areas",
-    "\\src\\QServiceDog\\QServiceDog\\Areas\\SysMenu"
+    "\\src\\QServiceDog\\QServiceDog\\config",
+    "\\src\\QServiceDog\\QServiceDog\\Jobs",
+    "\\src\\QServiceDog\\QServiceDog\\Views",
+    "\\src\\QServiceDog\\QServiceDog\\Views\\ClientEventSubscriber",
+    "\\src\\QServiceDog\\QServiceDog\\Views\\DogAction",
+    "\\src\\QServiceDog\\QServiceDog\\Views\\EventSubscriber"
   ],
-  "SelectedNode": "\\doc",
+  "SelectedNode": "\\src\\QServiceDog\\QServiceDog\\config\\JobConfig.xml",
   "PreviewInSolutionExplorer": false
 }

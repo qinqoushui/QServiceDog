@@ -34,6 +34,7 @@ namespace QServiceDog.BLL
                     {
                         ef.EventInfo.Add(info);
                         c++;
+                        //根据订阅规则生成待推送记录
                         var sub = ef.ClientEventSubscriber.Include(r => r.EventSubscriber).Where(r => r.Client == info.Client && r.EventSubscriber.IsEnable).ToList();
 
                         sub.ForEach(s =>

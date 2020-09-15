@@ -11,7 +11,7 @@
            columns.AddFor(m => m.Id).Hide();
            columns.AddFor(m => m.Msg).Caption("内容").MinWidth(500);
 
-       }).StartDataGrid(nameof(QServiceDog.Models.EventInfo),false)
+       }).StartDataGrid(nameof(QServiceDog.Models.EventInfo),"Id",false)
 )
 <script>
     $(function () {

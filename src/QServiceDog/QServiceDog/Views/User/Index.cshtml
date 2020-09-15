@@ -6,7 +6,7 @@
            columns.AddFor(m => m.Password).Width(140);
            columns.AddFor(m => m.Role);
 
-       }).StartDataGrid(nameof(User), true, GridEditMode.Row)
+       }).StartDataGrid(nameof(User),"Id", true, GridEditMode.Row)
 )
 <script>
 

@@ -11,7 +11,7 @@
     .DisplayExpr("Name").ValueExpr("Id")
         );
 
-       }).StartDataGrid(nameof(QServiceDog.Models.ClientEventSubscriber),true, GridEditMode.Form).OnInitNewRow("inseredEvent")
+       }).StartDataGrid(nameof(QServiceDog.Models.ClientEventSubscriber),"Id",true, GridEditMode.Form).OnInitNewRow("inseredEvent")
 )
 <script>
     $(function () {

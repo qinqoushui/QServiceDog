@@ -89,6 +89,9 @@ namespace QServiceDog.Jobs
             {
                 case "PowerOff":
                     return checkPowerOff();
+                case nameof(Q.Helper.LogHelper.ClearLog):
+                   LogHelper.ClearLog(DateTime.Today.AddDays(-7));
+                    return ("succ", "");
                 default:
                     break;
             }
@@ -149,7 +152,7 @@ namespace QServiceDog.Jobs
 
         protected override IList<string> getJobs(out int max, out int total)
         {
-            var ss = new string[] { "PowerOff" };
+            var ss = new string[] { "PowerOff",nameof(Q.Helper.LogHelper.ClearLog) };
             max = ss.Length;
             total = ss.Length;
             return ss;

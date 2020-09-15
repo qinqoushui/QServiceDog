@@ -1,4 +1,4 @@
-@inject MenuMeta meta
+﻿@inject MenuMeta meta
 @functions {
     string GetSimulatorCssClass()
     {
@@ -58,9 +58,12 @@
             }
             //alert(x);
         }
+        function logout() {
+            window.location = "../Home/Logout";
+        }
 
     </script>
-    
+
 </head>
 <body class="dx-viewport">
     <header class="header">
@@ -71,21 +74,26 @@
             <div class="header-menu">
                 <a class="dx-icon-menu" href="javascript:hideMenu()"></a>
             </div>
-
+            <div class="logo" style="text-decoration:none;float:right;margin-top:18px;">
+                <a class="dx-icon-export" style="font-size:24px;" href="javascript:logout()"></a>
+            </div>
+            <div style="margin-top:-15px;">
+                <h4 style="padding-top:15px;"><span style="margin-left:-200px;">@ViewData["Title"]</span> </h4>
+            </div>
         </div>
     </header>
     <div class="body">
         @await Html.PartialAsync("~/Areas/SysMenu/Views/Menu.cshtml")
 
         <div class="demo-wrapper" id="demo-wrapper">
-            <h4>@ViewData["Title"]</h4>
+            @*  <h4>@meta.GetBreadcrumb(meta.CurrentDemo, "{0} ▸ {1}")</h4>
 
-            @*<div class="description">
-                    @if (!String.IsNullOrEmpty(meta.CurrentDemo.DescriptionHtml))
-                    {
-                        <div>@Html.Raw(meta.CurrentDemo.DescriptionHtml)</div>
-                    }
-                </div>*@
+                <div class="description">
+                          @if (!String.IsNullOrEmpty(meta.CurrentDemo.DescriptionHtml))
+                          {
+                              <div>@Html.Raw(meta.CurrentDemo.DescriptionHtml)</div>
+                          }
+                      </div>*@
 
             <div class="@GetSimulatorCssClass()">
                 <div class="demo-device">

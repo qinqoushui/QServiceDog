@@ -71,7 +71,7 @@ namespace QServiceDog.Controllers
         {
             r.Id = Guid.NewGuid();
         }
-        protected override bool beforeSave(ClientEventSubscriber r, out string err)
+        protected override bool beforeSave(ClientEventSubscriber r, ClientEventSubscriber old, out string err)
         {
             if (db.Set<ClientEventSubscriber>().Any(o =>r.Id!=o.Id && r.Subscriber == o.Subscriber && r.Client == o.Client))
             {
@@ -79,7 +79,7 @@ namespace QServiceDog.Controllers
                 return false;
             }
             else
-                return base.beforeSave(r, out err);
+                return base.beforeSave(r,old, out err);
 
         }
     }

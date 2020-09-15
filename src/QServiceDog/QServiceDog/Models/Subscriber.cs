@@ -21,6 +21,7 @@ namespace QServiceDog.Models
         public string EMail { get; set; }
 
         public string WXName { get; set; }
+        public string Phone { get; set; }
 
 
 
@@ -28,7 +29,7 @@ namespace QServiceDog.Models
     }
 
     /// <summary>
-    /// 订阅地点
+    /// 订阅地点(一个订阅者可以订阅多个地点)
     /// </summary>
     public class ClientEventSubscriber : Q.DevExtreme.Tpl.Models.IKeyEntity<Guid>
     {

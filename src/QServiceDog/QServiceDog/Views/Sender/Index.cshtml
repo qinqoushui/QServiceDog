@@ -8,12 +8,12 @@
            columns.AddFor(m => m.Id).Hide();
            columns.AddFor(m => m.Name).Caption("名称") ;
            columns.AddFor(m => m.TypeName).Caption("名称").Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.Sender)).LoadAction("GetSenderType"))
-     
+
         );
            columns.AddFor(m => m.Para).Caption("参数") ;
-           columns.AddFor(m => m.IsEnable).Caption("是否启用") ;
+           columns.AddFor(m => m.IsEnable).Caption("是否启用").TrueText("是").FalseText("否").ShowEditorAlways(false);
 
-       }).StartDataGrid(nameof(QServiceDog.Models.Sender),true)
+       }).StartDataGrid(nameof(QServiceDog.Models.Sender),"Id",true)
 )
 <script>
     $(function () {

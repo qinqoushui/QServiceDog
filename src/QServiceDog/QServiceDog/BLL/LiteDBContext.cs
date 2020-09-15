@@ -24,7 +24,7 @@ namespace QServiceDog.BLL
 
         object lck = new object();
 
-        public void CreateAndInitData()
+        public void CreateAndInitData(string clientName)
         {
             lock (lck)
             {
@@ -32,7 +32,7 @@ namespace QServiceDog.BLL
                     return;
                 _created = true;
 #if DEBUG
-               // Database.EnsureDeleted();
+                // Database.EnsureDeleted();
 #endif
 
                 if (!Database.EnsureCreated())
@@ -235,6 +235,14 @@ namespace QServiceDog.BLL
                     });
                     SaveChanges();
                 }
+                else
+                {
+                    if (!clientName.Equals("CLOUD", StringComparison.OrdinalIgnoreCase))
+                    {
+                        ServiceInfo.Where(r => r.Client != clientName).ToList().ForEach(r => r.Client = clientName);
+                        SaveChanges();
+                    }
+                }
 
                 if (!EventSubscriber.Any())
                 {
@@ -260,7 +268,7 @@ namespace QServiceDog.BLL
                         Name = "马健",
                         WXName = "MaJian",
                         EMail = "majian@jstayc.com",
-                        IsEnable = false 
+                        IsEnable = false
                     });
                     EventSubscriber.Add(new EventSubscriber()
                     {
@@ -268,7 +276,7 @@ namespace QServiceDog.BLL
                         Name = "于中涛",
                         WXName = "YuZhongTao",
                         EMail = "yuzhongtao@jstayc.com",
-                        IsEnable = false 
+                        IsEnable = false
                     });
                     EventSubscriber.Add(new EventSubscriber()
                     {
@@ -276,24 +284,24 @@ namespace QServiceDog.BLL
                         Name = "董梓莘",
                         WXName = "DongZiShen",
                         EMail = "2795338562@qq.com",
-                        IsEnable = false 
+                        IsEnable = false
                     });
                     SaveChanges();
                 }
 
                 if (!ClientEventSubscriber.Any())
                 {
-                    EventSubscriber.Where(r=>r.IsEnable).ToList() .ToList().ForEach(r =>
-                    ClientEventSubscriber.Add(
-                    new ClientEventSubscriber()
-                    {
-                        Id = Guid.NewGuid(),
-                        Subscriber = r.Id,
-                        Client = "TEST"
-                    }));
+                    EventSubscriber.Where(r => r.IsEnable).ToList().ToList().ForEach(r =>
+                     ClientEventSubscriber.Add(
+                     new ClientEventSubscriber()
+                     {
+                         Id = Guid.NewGuid(),
+                         Subscriber = r.Id,
+                         Client = "TEST"
+                     }));
                     SaveChanges();
                 }
-
+                 
                 if (!Sender.Any())
                 {
                     Sender.Add(new Sender()
@@ -323,6 +331,9 @@ namespace QServiceDog.BLL
 
                     SaveChanges();
                 }
+
+                //更新本地标志
+
             }
         }
 

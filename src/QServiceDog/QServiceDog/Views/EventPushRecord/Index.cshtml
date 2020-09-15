@@ -22,9 +22,9 @@
            });
 
            columns.AddFor(m => m.PushTime).Caption("推送时间").Format("yyyy-MM-dd HH:mm:ss").Width(200);
-           columns.AddFor(m => m.Pushed).Caption("已推送").Width(60) ;
+           columns.AddFor(m => m.Pushed).Caption("已推送").Width(60).TrueText("是").FalseText("否").ShowEditorAlways(false) ;
 
-       }).StartDataGrid(nameof(QServiceDog.Models.EventPushRecord),false)
+       }).StartDataGrid(nameof(QServiceDog.Models.EventPushRecord),"Id",false)
 )
 <script>
     $(function () {

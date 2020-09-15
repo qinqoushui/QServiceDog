@@ -54,7 +54,7 @@ namespace QServiceDog.Jobs
                         Id = Guid.NewGuid(),
                         Time = DateTime.Now,
                         Type = "Dog",
-                        Msg = $"停止{data.Desc}，上次停止于{data.LastStopTime}"
+                        Msg = $"运维自检，主动停止{data.Desc}，上次停止于{data.LastStopTime}"
                     });
                     data.LastStopTime = DateTime.Now;
                     return ("succ", $"stop at {DateTime.Now}");

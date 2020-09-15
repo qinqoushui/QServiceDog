@@ -27,6 +27,7 @@
 
 using System;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.ServiceProcess;
 
 namespace QCommon.Service
@@ -49,6 +50,12 @@ namespace QCommon.Service
 
         public ServiceHelper(string name)
         {
+            //判断服务有无安装
+            if (ServiceController.GetServices().Count(r => r.ServiceName.Equals(name, StringComparison.OrdinalIgnoreCase)) == 0)
+                throw new Exception($"服务{name}不存在");
+
+
+
             sc = new System.ServiceProcess.ServiceController(name);
             ServiceName = name;
         }
@@ -145,7 +152,7 @@ namespace QCommon.Service
         /// sc failure msftpsvc reset= 30 actions= restart/5000
         /// sc failure dfs reset= 60 actions= reboot/30000
         /// </remarks>
-        public static  bool RestartWhenFailure(string serviceName, string action= "reset= 30 actions= restart/120000")
+        public static bool RestartWhenFailure(string serviceName, string action = "reset= 30 actions= restart/120000")
         {
             if (IsExisted(serviceName))
             {

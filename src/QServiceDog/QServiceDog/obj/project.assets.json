@@ -1615,7 +1615,7 @@
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
         }
       },
-      "Q.DevExtreme.Tpl/1.0.21": {
+      "Q.DevExtreme.Tpl/1.0.30": {
         "type": "package",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
@@ -6009,10 +6009,10 @@
         "portable.bouncycastle.nuspec"
       ]
     },
-    "Q.DevExtreme.Tpl/1.0.21": {
-      "sha512": "zmSEG3JLockT0cOR0K1cinpFcyEcrMPZsOx1a+a71MFz9daghiOlZVxc8jVoecC7YRwqjVXWAps7AyfvNV13oQ==",
+    "Q.DevExtreme.Tpl/1.0.30": {
+      "sha512": "dU84CsY20G5d7gA+lb1AjEOTWGG4eWwcHpogxzeBzYNnqAk9T40bOiFk9mpuzq+eHDK8yfaIpGe5mVO4TShdkQ==",
       "type": "package",
-      "path": "q.devextreme.tpl/1.0.21",
+      "path": "q.devextreme.tpl/1.0.30",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -6038,6 +6038,7 @@
         "content/wwwroot/bundle.min.js",
         "content/wwwroot/css/bundle.min.css",
         "content/wwwroot/css/devextreme/devextreme.min.css",
+        "content/wwwroot/css/devextreme/dx-diagram.css",
         "content/wwwroot/css/devextreme/dx.dark.css",
         "content/wwwroot/css/devextreme/fonts/Roboto-300.ttf",
         "content/wwwroot/css/devextreme/fonts/Roboto-300.woff",
@@ -6067,7 +6068,7 @@
         "content/wwwroot/css/images/Menu/treeview_expanded_icon.png",
         "content/wwwroot/favicon.ico",
         "lib/netcoreapp3.1/Q.DevExtreme.Tpl.dll",
-        "q.devextreme.tpl.1.0.21.nupkg.sha512",
+        "q.devextreme.tpl.1.0.30.nupkg.sha512",
         "q.devextreme.tpl.nuspec",
         "readme.txt",
         "tools/init.ps1"
@@ -6248,7 +6249,7 @@
       ]
     },
     "runtime.native.System.Net.Http/4.3.0": {
-      "sha512": "ZVuZJqnnegJhd2k/PtAbbIcZ3aZeITq3sj06oKfMBSfphW3HDmk/t4ObvbOk/JA/swGR0LNqMksAh/f7gpTROg==",
+      "sha512": "guqHgQOK2eUgtJae2VKjNawBn1xjC0hfOt5wASHa60XHbIdCsQlqtvMsFG+3hy7yp88V+gi9fZCjubuDkeakcQ==",
       "type": "package",
       "path": "runtime.native.system.net.http/4.3.0",
       "files": [
@@ -7047,7 +7048,7 @@
       ]
     },
     "System.ComponentModel.TypeConverter/4.3.0": {
-      "sha512": "16pQ6P+EdhcXzPiEK4kbA953Fu0MNG2ovxTZU81/qsCd1zPRsKc3uif5NgvllCY598k6bI0KUyKW8fanlfaDQg==",
+      "sha512": "HZiP0DwTHJ+C+rdFqP47nBYUh5283kcwXIGY2zOVVhsJmVI/2tYiX2zNRdjRQRHsTox58Ydkec6h0pWSh8wAsw==",
       "type": "package",
       "path": "system.componentmodel.typeconverter/4.3.0",
       "files": [
@@ -8274,7 +8275,7 @@
       ]
     },
     "System.Net.Http/4.3.0": {
-      "sha512": "sYg+FtILtRQuYWSIAuNOELwVuVsxVyJGWQyOnlAzhV4xvhyFnON1bAzYYC+jjRW8JREM45R0R5Dgi8MTC5sEwA==",
+      "sha512": "6BBc6BUa7pWFL7KUI/c8wb18IobTZHTtcQKksxJI5F9DRDShdtOvBEJzg5jJbFdTll7gRE+5yXUlq72ciLE+QQ==",
       "type": "package",
       "path": "system.net.http/4.3.0",
       "files": [
@@ -8890,7 +8891,7 @@
       ]
     },
     "System.Reflection.Metadata/1.6.0": {
-      "sha512": "COC1aiAJjCoA5GBF+QKL2uLqEBew4JsCkQmoHKbN3TlOZKa2fKLz5CpiRQKDz0RsAOEGsVKqOD5bomsXq/4STQ==",
+      "sha512": "I4aWCii7N1bmn43vviRfJQYW6UAco1G/CcjJouvgGdb/sr2BRTSnddhaPMg2oxu9VHFn8T1z3dTLq0pna8zmtA==",
       "type": "package",
       "path": "system.reflection.metadata/1.6.0",
       "files": [
@@ -10009,7 +10010,7 @@
       ]
     },
     "System.Security.Cryptography.OpenSsl/4.3.0": {
-      "sha512": "h4CEgOgv5PKVF/HwaHzJRiVboL2THYCou97zpmhjghx5frc7fIvlkY1jL+lnIQyChrJDMNEXS6r7byGif8Cy4w==",
+      "sha512": "vOYy7Jv9KsG3ld2hLt0GoERd82SZi4BelrbXLwI9yFBYX7kpbvUCWYo4eyevk47cuJXZ9ZLVAryANcc7iY71aA==",
       "type": "package",
       "path": "system.security.cryptography.openssl/4.3.0",
       "files": [
@@ -10171,7 +10172,7 @@
       ]
     },
     "System.Security.Permissions/4.5.0": {
-      "sha512": "9gdyuARhUR7H+p5CjyUB/zPk7/Xut3wUSP8NJQB6iZr8L3XUXTMdoLeVAg9N4rqF8oIpE7MpdqHdDHQ7XgJe0g==",
+      "sha512": "vDQ7q30Soe0a1cPhvxn+7IFmMeTG5IP+hTQrnKQDjTNpD2epqwbZSzMM2Git5TXBr4Kwwhc/0SEtJY0qPoiegA==",
       "type": "package",
       "path": "system.security.permissions/4.5.0",
       "files": [
@@ -10561,7 +10562,7 @@
       ]
     },
     "System.Text.Encodings.Web/4.5.0": {
-      "sha512": "Xg4G4Indi4dqP1iuAiMSwpiWS54ZghzR644OtsRCm/m/lBMG8dUBhLVN7hLm8NNrNTR+iGbshCPTwrvxZPlm4g==",
+      "sha512": "JF+wDdfFiRl3rz3dPMfR6aR568AW2J5CUMmhSflgHDz4zbVK4/00ax8UHnHyEMvblPewgNugjuA4oyoL8Pex2g==",
       "type": "package",
       "path": "system.text.encodings.web/4.5.0",
       "files": [
@@ -11342,14 +11343,14 @@
       "MailKit >= 2.7.0",
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.5",
       "MimeKit >= 2.8.0",
-      "Q.DevExtreme.Tpl >= 1.0.21",
+      "Q.DevExtreme.Tpl >= 1.0.30",
       "QCommon.Quartz >= 1.0.7",
       "QCommon.Standard >= 1.0.53"
     ]
   },
   "packageFolders": {
     "e:\\.nuget": {},
-    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
+    "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
     "version": "1.0.0",
@@ -11361,7 +11362,7 @@
       "outputPath": "D:\\Code\\github\\qinqoushui\\QServiceDog\\src\\QServiceDog\\QServiceDog\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
-        "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        "C:\\Program Files (x86)\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\zwx\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -11403,7 +11404,7 @@
           },
           "Q.DevExtreme.Tpl": {
             "target": "Package",
-            "version": "[1.0.21, )"
+            "version": "[1.0.30, )"
           },
           "QCommon.Quartz": {
             "target": "Package",
@@ -11432,7 +11433,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.202\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files (x86)\\dotnet\\sdk\\3.1.300\\RuntimeIdentifierGraph.json"
       }
     }
   }

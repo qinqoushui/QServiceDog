@@ -48,6 +48,14 @@ namespace QServiceDog.Helpers
                             //    r.PushTime = DateTime.Now;
                             //});
                             break;
+                        case Enums.EnumSender.e短信:
+                            sendBySMS(records.Select(r => r.EventSubscriber).ToArray(), $"{records.First().EventInfo.Client} {records.First().EventInfo.Time.ToString("yyyy-MM-dd HH:mm:ss")} {records.First().EventInfo.Msg}", sender.Para);
+                            records.ForEach(r =>
+                            {
+                                r.Pushed = true;
+                                r.PushTime = DateTime.Now;
+                            });
+                            break;
                         default:
                             break;
                     }
@@ -120,6 +128,12 @@ namespace QServiceDog.Helpers
                     return e.GetExceptionMsg();
                 }
             }
+
+        }
+
+        void sendBySMS(EventSubscriber[] reciver, string content, string para)
+        {
+            Console.WriteLine($"send sms:{content}");
 
         }
 

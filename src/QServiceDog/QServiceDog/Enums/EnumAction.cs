@@ -22,6 +22,7 @@ namespace QServiceDog.Enums
     {
         e微信,
         e企业微信,
-        e邮箱
+        e邮箱,
+        e短信
     }
 }

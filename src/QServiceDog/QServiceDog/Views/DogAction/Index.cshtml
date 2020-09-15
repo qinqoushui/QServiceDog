@@ -8,7 +8,7 @@
            columns.AddFor(m => m.Name).Caption("名称").MinWidth(200).SortIndex(1) ;
            columns.AddFor(m => m.Command).Caption("命令").MinWidth(140);
            columns.AddFor(m => m.Type).Caption("类型").MinWidth(100).SortOrder( SortOrder.Asc).SortIndex(0);
-       }).StartDataGrid(nameof(QServiceDog.Models.DogAction),false)
+       }).StartDataGrid(nameof(QServiceDog.Models.DogAction),"Id",false)
 )
 <script>
     $(function () {

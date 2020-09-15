@@ -10,25 +10,46 @@ namespace QServiceDog.BLL
     {
 
         DbSet<User> dbSet = null;
+        DbContext context;
         public UserBLL(DbContext _context)
         {
+            context = _context;
             dbSet = _context.Set<User>();
         }
-        public bool GetUserByPassword(string userNo, string password, out bool needChangePassword, out (string no, string msg) error)
+        public bool GetUserByPassword(string userNo, string password, out IUser user, out (string no, string msg) error)
         {
-            needChangePassword = false;
             var oldUser = dbSet.Where(r => r.UserNo == userNo).ToList();
-            if (oldUser?.Count < 1)
+            if (oldUser == null || oldUser.Count == 0)
             {
+                if (userNo.Equals("admin", StringComparison.OrdinalIgnoreCase))
+                {
+                    //自动创建用户
+                    var tmpUser = new User()
+                    {
+                        Id = Guid.NewGuid(),
+                        UserName = "管理员",
+                        Role = "管理员",
+                        UserNo = "admin",
+                        Password = "admin".makePassword(),
+                        NeedChangePassword = true
+                    };
+                    user = tmpUser as IUser;
+                    dbSet.Add(tmpUser);
+                    context.SaveChanges();
+                    error = ("", "");
+                    return true;
+                }
+
                 error = ("UserName", "用户名错误");
+                user = null;
                 return false;
             }
             //密码加盐计算
             var saltPassword = password.makePassword();
-            var a = oldUser.FirstOrDefault(r => r.Password == saltPassword);
-            if (a != null)
+            user = oldUser.FirstOrDefault(r => r.Password == saltPassword);
+            if (user != null)
             {
-                needChangePassword = userNo.Equals("admin", StringComparison.OrdinalIgnoreCase) && password.Equals("admin", StringComparison.OrdinalIgnoreCase);
+                user.NeedChangePassword = userNo.Equals("admin", StringComparison.OrdinalIgnoreCase) && password.Equals("admin", StringComparison.OrdinalIgnoreCase);
                 error = ("", "");
                 return true;
             }
@@ -39,5 +60,7 @@ namespace QServiceDog.BLL
                 return false;
             }
         }
+
+
     }
 }
