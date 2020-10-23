@@ -64,15 +64,37 @@ namespace QDBDogUI.Properties {
         ///   查找类似 USE master;
         ///CREATE MASTER KEY ENCRYPTION BY PASSWORD = &apos;ZyDBBak20200408&apos;;
         ///go
-        ///USE master;
+        /// 
         ///CREATE CERTIFICATE AutoBakCert FROM FILE = &apos;{0}\AutoBakCert.cer&apos;
         ///WITH PRIVATE KEY (  FILE = &apos;{0}\AutoBakCert.pkey&apos;, DECRYPTION  BY PASSWORD =&apos;Cert123&apos;);
         ///go
-        /// 的本地化字符串。
+        ///
+        ///print N&apos;启用证书和主控密钥完成&apos;;
+        ///go  的本地化字符串。
         /// </summary>
         internal static string AutoBakCert {
             get {
                 return ResourceManager.GetString("AutoBakCert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] AutoBakCert1 {
+            get {
+                object obj = ResourceManager.GetObject("AutoBakCert1", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] AutoBakCert2 {
+            get {
+                object obj = ResourceManager.GetObject("AutoBakCert2", resourceCulture);
+                return ((byte[])(obj));
             }
         }
         
@@ -83,6 +105,23 @@ namespace QDBDogUI.Properties {
             get {
                 object obj = ResourceManager.GetObject("database", resourceCulture);
                 return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似 USE master;
+        ///DROP CERTIFICATE AutoBakCert ;
+        ///go
+        ///
+        ///drop MASTER KEY ;
+        ///go
+        ///
+        ///print N&apos;移除证书和主控密钥完成&apos;;
+        ///go  的本地化字符串。
+        /// </summary>
+        internal static string DropAutoBakCert {
+            get {
+                return ResourceManager.GetString("DropAutoBakCert", resourceCulture);
             }
         }
     }

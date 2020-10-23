@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using DevComponents.DotNetBar;
+using QCommon.UI;
+using QDBDog;
 
 namespace QDBDogUI.UI
 {
     public partial class UIBase : UserControl
     {
+        protected static readonly Q.Helper.ILogHelper logger = Q.Helper.LogHelper.Default.Get(nameof(UIBase));
         public UIBase()
         {
             InitializeComponent();
@@ -31,7 +34,8 @@ namespace QDBDogUI.UI
             return config;
         }
 
-        public UIBase LoadConfig() {
+        public UIBase LoadConfig()
+        {
             render(loadConfig());
             return this;
         }
@@ -138,6 +142,31 @@ namespace QDBDogUI.UI
         protected virtual void collectSub(Dictionary<string, string> data)
         {
 
+        }
+
+        protected void showResult(string result, string title = "提示")
+        {
+            Form frm = new Form();
+            frm.Size = new Size(400, 400);
+            frm.StartPosition = FormStartPosition.CenterParent;
+            frm.TopMost = true;
+            TextBox tb = new TextBox();
+            frm.Controls.Add(tb);
+            tb.Dock = DockStyle.Fill;
+            tb.Multiline = true;
+            tb.ScrollBars = ScrollBars.Vertical;
+            tb.Text = result;
+            frm.MinimizeBox = false;
+            frm.Text = title;
+            frm.ShowDialog();
+        }
+
+        protected void execSql(Config config, string script, string name)
+        {
+            string sqlFile = string.Format(script, System.IO.Path.Combine(Application.StartupPath, "sql"));
+            var result = QDBDog.SqlSugarHelper.Exec(sqlFile, config.DBServer);
+            logger.Info(name + "\r\n" + result, null);
+            showResult(result, name);
         }
     }
 }

@@ -121,7 +121,16 @@
   <data name="AutoBakCert" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\sql\autobakcert.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="AutoBakCert1" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sql\autobakcert.cer;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="AutoBakCert2" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sql\autobakcert.pkey;System.Byte[], mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
   <data name="database" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\database.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="DropAutoBakCert" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\sql\dropautobakcert.sql;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
 </root>

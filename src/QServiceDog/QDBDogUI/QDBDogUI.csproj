@@ -52,13 +52,16 @@
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
-      <HintPath>..\packages\NLog.4.0.1\lib\net45\NLog.dll</HintPath>
+      <HintPath>..\packages\NLog.4.6.5\lib\net45\NLog.dll</HintPath>
     </Reference>
     <Reference Include="ProgressODoom, Version=1.0.6117.26918, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\ProgressODoom.1.0.6117.26918\lib\net20\ProgressODoom.dll</HintPath>
     </Reference>
-    <Reference Include="QCommon, Version=1.0.0.17, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\QCommon.1.0.0.17\lib\net35\QCommon.dll</HintPath>
+    <Reference Include="QCommon, Version=1.0.49.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QCommon.1.0.49\lib\net452\QCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="QCommon.IF, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QCommon.IF.1.0.5\lib\net35\QCommon.IF.dll</HintPath>
     </Reference>
     <Reference Include="QCommon.Service, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\QCommon.Service.1.0.0.3\lib\net452\QCommon.Service.dll</HintPath>
@@ -70,7 +73,12 @@
       <HintPath>..\packages\sqlSugar.5.0.0.19\lib\SqlSugar.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -148,6 +156,7 @@
     <Content Include="database.ico" />
     <Content Include="Doc\qservice_readme.txt" />
     <Content Include="qservice_readme.txt" />
+    <Content Include="sql\DropAutoBakCert.sql" />
     <Content Include="sql\AutoBakCert.cer">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

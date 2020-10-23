@@ -67,6 +67,31 @@ namespace QDBDog
             }
         }
 
+        public static string Exec(string script, string serverName, string dbname = "master")
+        {
+            string file = System.IO.Path.GetTempFileName();
+            System.IO.File.WriteAllText(file, script, Encoding.UTF8);
+            try
+            {
+                return ExecFile(file, serverName, dbname);
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+            finally
+            {
+                try
+                {
+                    System.IO.File.Delete(file);
+                }
+                catch
+                {
+
+                }
+            }
+        }
+
         /// <summary>
         /// 使用sqlcmd执行脚本
         /// </summary>
@@ -74,49 +99,53 @@ namespace QDBDog
         /// <param name="deleteWhenSuccess"></param>
         /// <param name="dbname"></param>
         /// <returns></returns>
-        //public static string ExecFile(string file, bool deleteWhenSuccess, string dbname)
-        //{
-        //    //查找所有可用的sqlcmd,从高版本往低版本查 150-90，找不到就抛错
-        //    if (!System.IO.File.Exists(file))
-        //        return "";
-        //    string sqlcmd = "";
-        //    try
-        //    {
-        //        Microsoft.Win32.RegistryKey reg = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(string.Format(@"SOFTWARE\Microsoft\Microsoft SQL Server\{0}\Tools\ClientSetup", Properties.Settings.Default.sqlver));
-        //        if (reg == null)
-        //        {
-        //            throw new Exception("\r\n本机没有安装SQL2005，请与管理人员联系以进行数据库升级\r\n");
-        //        }
-        //        sqlcmd = System.IO.Path.Combine(reg.GetValue("Path").ToString(), "sqlcmd.exe");
-        //        if (!System.IO.File.Exists(sqlcmd))
-        //            return "";
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        throw ex;
-        //    }
-
-        //    System.Diagnostics.Process pro = new System.Diagnostics.Process();
-        //    pro.StartInfo.FileName = sqlcmd;
-        //    pro.StartInfo.UseShellExecute = false;
-        //    pro.StartInfo.RedirectStandardInput = true;
-        //    pro.StartInfo.RedirectStandardOutput = true;
-        //    pro.StartInfo.RedirectStandardError = true;
-        //    pro.StartInfo.CreateNoWindow = true;
-
-        //    pro.StartInfo.Arguments = string.Format("-S{0} -d{1} -U{3} -P{4} -i\"{2}\"",
-        //        ".\\sqlexpress", dbname, file, "sa", "Sa1234567");
-        //    pro.Start();
+        public static string ExecFile(string file, string serverName, string dbname = "master")
+        {
+            //查找所有可用的sqlcmd,从高版本往低版本查 150-90，找不到就抛错
+            if (!System.IO.File.Exists(file))
+                return "";
+            string sqlcmd = "";
+            for (int i = 220; i > 80; i -= 10)
+            {
+                Microsoft.Win32.RegistryKey reg = Microsoft.Win32.Registry.LocalMachine.OpenSubKey($"SOFTWARE\\Microsoft\\Microsoft SQL Server\\{i}\\Tools\\ClientSetup");
+                if (reg == null)
+                    continue;
+                sqlcmd = System.IO.Path.Combine(reg.GetValue("Path", "").ToString(), "sqlcmd.exe");
+                if (System.IO.File.Exists(sqlcmd))
+                    break;//找到第一个可用的
+            }
+            if (string.IsNullOrEmpty(sqlcmd))
+            {
+                throw new Exception("本机没有安装SQLServer，无法执行脚本");
+            }
 
 
-        //    pro.WaitForExit();
-        //    string result = pro.StandardOutput.ReadToEnd();
+            System.Diagnostics.Process pro = new System.Diagnostics.Process();
+            pro.StartInfo.FileName = sqlcmd;
+            pro.StartInfo.UseShellExecute = false;
+            pro.StartInfo.RedirectStandardInput = true;
+            pro.StartInfo.RedirectStandardOutput = true;
+            pro.StartInfo.RedirectStandardError = true;
+            pro.StartInfo.CreateNoWindow = true;
 
-        //    if (deleteWhenSuccess && System.IO.File.Exists(file))
-        //        System.IO.File.Delete(file);
+            ////解析连接信息
+            //System.Collections.Hashtable properties = new System.Collections.Hashtable();
+            //char[] ch = new char[] { '=' };
+            //foreach (String item in ConnectionString.Split(new char[] { ';' }, StringSplitOptions.RemoveEmptyEntries))
+            //{
 
-        //    return result;
-        //}
-   
+            //    if (item.Split(ch).Length != 2)
+            //        continue;
+            //    properties.Add(item.Split(ch)[0].Trim().ToUpper(), item.Split(ch)[1]);
+            //}
+            pro.StartInfo.Arguments = $"-S{serverName} -d{dbname} -E -i\"{file}\"";
+            pro.Start();
+
+
+            pro.WaitForExit();
+            string result = pro.StandardOutput.ReadToEnd();
+            return result;
+        }
+
     }
 }
