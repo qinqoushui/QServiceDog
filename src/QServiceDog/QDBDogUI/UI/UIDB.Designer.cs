@@ -170,6 +170,7 @@
             this.button10.TabIndex = 2;
             this.button10.Text = "清除备份";
             this.button10.UseVisualStyleBackColor = true;
+            this.button10.Click += new System.EventHandler(this.button10_Click);
             // 
             // button9
             // 
@@ -180,6 +181,7 @@
             this.button9.TabIndex = 1;
             this.button9.Text = "立即备份";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // label4
             // 

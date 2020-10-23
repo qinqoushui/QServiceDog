@@ -158,6 +158,7 @@
     <Content Include="database.ico" />
     <Content Include="Doc\qservice_readme.txt" />
     <Content Include="qservice_readme.txt" />
+    <Content Include="sql\BackupDB.sql" />
     <Content Include="sql\DropAutoBakCert.sql" />
     <Content Include="sql\AutoBakCert.cer">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

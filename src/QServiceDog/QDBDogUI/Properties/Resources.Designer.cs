@@ -99,6 +99,17 @@ namespace QDBDogUI.Properties {
         }
         
         /// <summary>
+        ///   查找类似 USE master;
+        ///BACKUP DATABASE [@dbname@] TO  DISK = N&apos;&apos;&apos;&apos;@localPath@\@time@\@dbname@.dll&apos;&apos;&apos;&apos; WITH RETAINDAYS = 30, NOFORMAT, INIT,  NAME = N&apos;&apos;&apos;&apos;{0}自动完整备份&apos;&apos;&apos;&apos;, SKIP, NOREWIND, NOUNLOAD,COMPRESSION,   STATS = 10 {3};&apos;&apos; ,
+        ///go 的本地化字符串。
+        /// </summary>
+        internal static string BackupDB {
+            get {
+                return ResourceManager.GetString("BackupDB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
         /// </summary>
         internal static System.Drawing.Icon database {

@@ -23,13 +23,17 @@ namespace QDBDogUI.UI
         protected TableLayoutPanel theTableLayoutPanel;
 
         protected string defaultFileName = System.IO.Path.Combine(Application.StartupPath, "config\\appsettings.json");
-        public QDBDog.Config loadConfig()
+        public QDBDog.Config loadConfig(bool allowNew = true)
         {
             QDBDog.Config config = new QDBDog.Config();
             if (System.IO.File.Exists(defaultFileName))
             {
                 string s = System.IO.File.ReadAllText(defaultFileName, Encoding.UTF8);
                 config = s.De<QDBDog.Config>();
+            }
+            else if (!allowNew)
+            {
+                throw new Exception($"未找到配置文件{defaultFileName}");
             }
             return config;
         }
@@ -157,7 +161,7 @@ namespace QDBDogUI.UI
         protected void showResult(string result, string title = "提示")
         {
             Form frm = new Form();
-            frm.Size = new Size(400, 400);
+            frm.Size = new Size(600, 600);
             frm.StartPosition = FormStartPosition.CenterParent;
             frm.TopMost = true;
             TextBox tb = new TextBox();
@@ -171,12 +175,13 @@ namespace QDBDogUI.UI
             frm.ShowDialog();
         }
 
-        protected void execSql(Config config, string script, string name)
+        protected string execSql(Config config, string script, string name, bool canShowResult = true)
         {
-            string sqlFile = string.Format(script, System.IO.Path.Combine(Application.StartupPath, "sql"));
-            var result = QDBDog.SqlSugarHelper.Exec(sqlFile, config.DBServer);
+            var result = SqlSugarHelper.Exec(script, config.DBServer);
             logger.Info(name + "\r\n" + result, null);
-            showResult(result, name);
+            if (canShowResult)
+                showResult(result, name);
+            return result;
         }
 
         protected void lockButton(int second, Button btn)

@@ -44,6 +44,14 @@ namespace QDBDogUI.UI
         protected override void collectSub(Dictionary<string, string> data)
         {
             base.collectSub(data);
+            foreach (var control in panel1.Controls)
+            {
+                var ac = control as RadioButton;
+                if (ac != null && ac.Tag != null && ac.Checked)
+                {
+                    data["ExpireType"] = ac.Tag.ToString();
+                }
+            }
             data["Name"] = tbName.Text;
             data["ExpireValue"] = numExpire.Value.ToString("0");
         }
