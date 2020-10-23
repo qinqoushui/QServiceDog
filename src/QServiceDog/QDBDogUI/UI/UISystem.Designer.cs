@@ -60,6 +60,7 @@
             this.button12 = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.button8 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
@@ -148,7 +149,7 @@
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(170, 39);
             this.label10.TabIndex = 29;
-            this.label10.Text = "备份上传节点名";
+            this.label10.Text = "备份上传节点代码";
             this.label10.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // textBox5
@@ -462,6 +463,7 @@
             // 
             // panel3
             // 
+            this.panel3.Controls.Add(this.button5);
             this.panel3.Controls.Add(this.button8);
             this.panel3.Controls.Add(this.button2);
             this.panel3.Controls.Add(this.button1);
@@ -471,15 +473,28 @@
             this.panel3.Size = new System.Drawing.Size(788, 41);
             this.panel3.TabIndex = 40;
             // 
+            // button5
+            // 
+            this.button5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button5.Location = new System.Drawing.Point(240, 0);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(80, 41);
+            this.button5.TabIndex = 3;
+            this.button5.Text = "执行脚本";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // button8
             // 
+            this.button8.BackColor = System.Drawing.Color.DarkOrange;
             this.button8.Dock = System.Windows.Forms.DockStyle.Left;
             this.button8.Location = new System.Drawing.Point(160, 0);
             this.button8.Name = "button8";
             this.button8.Size = new System.Drawing.Size(80, 41);
             this.button8.TabIndex = 2;
             this.button8.Text = "生成脚本";
-            this.button8.UseVisualStyleBackColor = true;
+            this.button8.UseVisualStyleBackColor = false;
+            this.button8.Click += new System.EventHandler(this.button8_Click);
             // 
             // button2
             // 
@@ -488,8 +503,9 @@
             this.button2.Name = "button2";
             this.button2.Size = new System.Drawing.Size(80, 41);
             this.button2.TabIndex = 1;
-            this.button2.Text = "执 行";
+            this.button2.Text = "运 行";
             this.button2.UseVisualStyleBackColor = true;
+            this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
             // button1
             // 
@@ -500,6 +516,7 @@
             this.button1.TabIndex = 0;
             this.button1.Text = "安 装";
             this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // label2
             // 
@@ -595,5 +612,6 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
+        private System.Windows.Forms.Button button5;
     }
 }

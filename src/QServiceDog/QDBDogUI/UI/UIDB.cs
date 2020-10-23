@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using QDBDogUI.Properties;
 using QDBDog;
+using System.Configuration;
 
 namespace QDBDogUI.UI
 {
@@ -54,6 +55,8 @@ namespace QDBDogUI.UI
 
         private void button2_Click(object sender, EventArgs e)
         {
+            lockButton(5, sender as Button);
+
             new QDBDog.SqlSugarHelper($"server={tbServer.Text};Initial Catalog=master;Integrated Security=True;Connection Timeout=5;").DoOne(client =>
             {
                 try
@@ -127,6 +130,15 @@ namespace QDBDogUI.UI
             System.IO.File.WriteAllBytes(certFile, Resources.AutoBakCert1);
             System.IO.File.WriteAllBytes(pkFile, Resources.AutoBakCert2);
             MessageBox.Show("OK");
+        }
+
+        private void button11_Click(object sender, EventArgs e)
+        {
+            var config = loadConfig();
+            if (System.IO.Directory.Exists(config.LocalPath))
+                System.Diagnostics.Process.Start("explorer.exe", config.LocalPath);
+            else
+                MessageBox.Show($"{config.LocalPath}不存在");
         }
     }
 }

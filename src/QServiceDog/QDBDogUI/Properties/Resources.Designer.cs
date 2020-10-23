@@ -109,6 +109,16 @@ namespace QDBDogUI.Properties {
         }
         
         /// <summary>
+        ///   查找 System.Byte[] 类型的本地化资源。
+        /// </summary>
+        internal static byte[] dbBack {
+            get {
+                object obj = ResourceManager.GetObject("dbBack", resourceCulture);
+                return ((byte[])(obj));
+            }
+        }
+        
+        /// <summary>
         ///   查找类似 USE master;
         ///DROP CERTIFICATE AutoBakCert ;
         ///go

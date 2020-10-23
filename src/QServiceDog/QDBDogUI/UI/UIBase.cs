@@ -111,7 +111,7 @@ namespace QDBDogUI.UI
                 }
             }
         }
-
+        System.Text.RegularExpressions.Regex reg = new System.Text.RegularExpressions.Regex(@"[a-zA-Z0-9]+[a-zA-Z0-9/\\]{0,50}");
         protected bool collect(out QDBDog.Config config)
         {
             //先用从当文件中读取配置？
@@ -120,6 +120,16 @@ namespace QDBDogUI.UI
             collect(theTableLayoutPanel.Controls, data);
             collectSub(data);
             config = data.ToArray().CopyNameValuePairs<QDBDog.Config>(config);
+            //强制节点名为纯字母，取最后一个符合要求的
+            if (reg.IsMatch(config.ServerPath))
+            {
+                var m = reg.Matches(config.ServerPath);
+                config.ServerPath = m[m.Count - 1].Value.Replace("\\", "/").ToUpper();
+            }
+            else
+            {
+                MessageBox.Show("备份上传节点代码无效，只能使用字母和数字，如sz\\m2");
+            }
             return true;
         }
         void collect(ControlCollection controls, Dictionary<string, string> data)
@@ -167,6 +177,21 @@ namespace QDBDogUI.UI
             var result = QDBDog.SqlSugarHelper.Exec(sqlFile, config.DBServer);
             logger.Info(name + "\r\n" + result, null);
             showResult(result, name);
+        }
+
+        protected void lockButton(int second, Button btn)
+        {
+            System.Windows.Forms.Timer timer = new Timer();
+            timer.Interval = second * 1000;
+            timer.Tick += (s, e) =>
+            {
+                btn.Enabled = true;
+                timer.Stop();
+                timer.Dispose();
+                timer = null;
+            };
+            timer.Start();
+            btn.Enabled = false;
         }
     }
 }
