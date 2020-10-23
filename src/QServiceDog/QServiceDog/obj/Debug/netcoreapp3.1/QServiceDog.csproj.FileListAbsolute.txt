@@ -439,3 +439,4 @@ D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netc
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.genruntimeconfig.cache
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netcoreapp3.1\appsettings.json
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netcoreapp3.1\bundleconfig.json
+D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.csprojAssemblyReference.cache

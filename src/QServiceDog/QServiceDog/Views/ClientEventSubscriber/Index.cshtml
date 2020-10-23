@@ -3,7 +3,7 @@
 }
 
 @(Html.DevExtreme()
-       .DataGrid<QServiceDog.Models.ClientEventSubscriber>().Columns(columns =>
+       .DataGrid<QServiceDog.Models.ClientEventSubscriber>().ID("gridContainer").Columns(columns =>
        {
            columns.AddFor(m => m.Id).Hide();
            columns.AddFor(m => m.Client).Caption("地点").SortIndex(0).SortOrder( SortOrder.Asc).Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.EventInfo)).LoadAction("GetClients") ));

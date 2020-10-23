@@ -3,7 +3,7 @@
 }
 
 @(Html.DevExtreme()
-       .DataGrid<QServiceDog.Models.EventPushRecord>().Columns(columns =>
+       .DataGrid<QServiceDog.Models.EventPushRecord>().ID("gridContainer").Columns(columns =>
        {
            columns.AddFor(m => m.Id).Hide();
            columns.Add().Caption("事件").Columns(col =>

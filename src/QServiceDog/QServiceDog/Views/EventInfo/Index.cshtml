@@ -3,7 +3,7 @@
 }
 
 @(Html.DevExtreme()
-       .DataGrid<QServiceDog.Models.EventInfo>().Columns(columns =>
+       .DataGrid<QServiceDog.Models.EventInfo>().ID("gridContainer").Columns(columns =>
        {
            columns.AddFor(m => m.Client).Caption("位置").Width(160);
            columns.AddFor(m => m.Time).Caption("时间").DataType( GridColumnDataType.DateTime).Format("yyyy-MM-dd HH:mm:ss").Width(180).SortOrder( SortOrder.Desc).SortIndex(0);

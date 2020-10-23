@@ -1,0 +1,3 @@
+D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Debug\QDBDog.csprojAssemblyReference.cache
+D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Debug\QDBDog.exe.config
+D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Debug\QDBDog.csproj.CoreCompileInputs.cache

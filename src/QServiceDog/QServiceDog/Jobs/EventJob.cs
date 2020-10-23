@@ -132,12 +132,11 @@ namespace QServiceDog.Jobs
                 string ccc = System.Text.Encoding.UTF8.GetString(new byte[] { 0xe2, 0x80, 0x8e }); //移除特殊的字符
                 while ((entry = elr.ReadEvent()) != null && entry.TimeCreated.HasValue)
                 {
-                    info = $"{entry.MachineName}意外关机，时间{entry.Properties[1].Value.ToString().Replace(ccc,"")} {entry.Properties.First().Value}";
+                    if (entry.TimeCreated.Value > powerTime) //启动之后创建的事件才有效
+                        info = $"{entry.MachineName}意外关机，时间{entry.Properties[1].Value.ToString().Replace(ccc, "")} {entry.Properties.First().Value}";
                 }
                 if (!string.IsNullOrEmpty(info))
                 {
-                    //去重
-                    
                     EventBLL.Instance.AddEvent(new Models.EventInfo()
                     {
                         Id = Guid.NewGuid(),
@@ -149,7 +148,7 @@ namespace QServiceDog.Jobs
 #endif
                         Type = "PowerOff"
 
-                    },true);
+                    }, true);
                     //写入告警列表
                     return ("succ", info);
                 }

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<job-scheduling-data xmlns="http://quartznet.sourceforge.net/JobSchedulingData"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ 				version="2.0">
+
+  <processing-directives>
+    <overwrite-existing-data>true</overwrite-existing-data>
+  </processing-directives>
+
+  <schedule>
+
+
+    <job>
+      <name>DBJob </name>
+      <group>Sync</group>
+      <description>同步基础数据</description>
+      <job-type>TAYC.Gate.VisitorService.Jobs.GetDeviceInfo, TAYC.Gate.VisitorService</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+     
+    <trigger>
+      <cron>
+        <name>tri_getDB</name>
+        <group>Sync</group>
+        <description>同步基础数据</description>
+        <job-name>DBJob</job-name>
+        <job-group>Sync</job-group>
+        <start-time>2019-01-01T00:00:00.0Z</start-time>
+        <misfire-instruction>SmartPolicy</misfire-instruction>
+        <cron-expression>0 0/30 * * * ?</cron-expression>
+      </cron>
+
+    </trigger>
+    
+    <!--<trigger>
+      <simple>
+        <name>tri_sync</name>
+        <group>Sync</group>
+        <description>同步数据</description>
+        <job-name>Sync</job-name>
+        <job-group>Sync</job-group>
+        <start-time>2019-01-01T00:00:00.0Z</start-time>
+        <end-time>2050-12-31T23:59:59.0Z</end-time>
+        <misfire-instruction>SmartPolicy</misfire-instruction>
+        <repeat-count>-1</repeat-count>
+        <repeat-interval>60000</repeat-interval>
+      </simple>
+    </trigger>-->
+ 
+
+    
+    
+  </schedule>
+
+</job-scheduling-data>

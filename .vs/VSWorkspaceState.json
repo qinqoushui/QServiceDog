@@ -4,13 +4,13 @@
     "\\src",
     "\\src\\QServiceDog",
     "\\src\\QServiceDog\\QServiceDog",
-    "\\src\\QServiceDog\\QServiceDog\\config",
+    "\\src\\QServiceDog\\QServiceDog\\Helpers",
     "\\src\\QServiceDog\\QServiceDog\\Jobs",
     "\\src\\QServiceDog\\QServiceDog\\Views",
     "\\src\\QServiceDog\\QServiceDog\\Views\\ClientEventSubscriber",
     "\\src\\QServiceDog\\QServiceDog\\Views\\DogAction",
     "\\src\\QServiceDog\\QServiceDog\\Views\\EventSubscriber"
   ],
-  "SelectedNode": "\\src\\QServiceDog\\QServiceDog\\config\\JobConfig.xml",
+  "SelectedNode": "\\src\\QServiceDog\\QServiceDog\\Helpers\\MsgHelper.cs",
   "PreviewInSolutionExplorer": false
 }

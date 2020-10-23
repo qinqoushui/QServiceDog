@@ -5,3 +5,6 @@
 /src/QServiceDog/QServiceDog/bin
 /src/QServiceDog/QServiceDog/obj
 /src/QServiceDog/.vs
+/src/QServiceDog/packages
+/src/QServiceDog/QDBDogUI/bin/Debug
+/src/QServiceDog/QDBDogUI/obj

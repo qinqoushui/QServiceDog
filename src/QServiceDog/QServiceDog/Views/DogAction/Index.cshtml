@@ -3,7 +3,7 @@
 }
 
 @(Html.DevExtreme()
-       .DataGrid<QServiceDog.Models.DogAction>().Columns(columns =>
+       .DataGrid<QServiceDog.Models.DogAction>().ID("gridContainer").Columns(columns =>
        {
            columns.AddFor(m => m.Name).Caption("名称").MinWidth(200).SortIndex(1) ;
            columns.AddFor(m => m.Command).Caption("命令").MinWidth(140);

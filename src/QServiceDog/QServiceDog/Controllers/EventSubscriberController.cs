@@ -26,6 +26,18 @@ namespace QServiceDog.Controllers
             r.Id = Guid.NewGuid();
         }
 
+        public override IActionResult Put(string key, string values)
+        {
+            try
+            {
+                return base.Put(key, values);
+            }
+            catch (Exception ex)
+            {
+                return NotFound(ex.ToString());
+            }
+        }
+
         [HttpGet("Get2")]
         public IList<EventSubscriber> Get2()
         {

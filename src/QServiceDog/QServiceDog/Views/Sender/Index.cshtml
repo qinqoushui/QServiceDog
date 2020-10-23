@@ -3,7 +3,7 @@
 }
 
 @(Html.DevExtreme()
-       .DataGrid<QServiceDog.Models.Sender>().Columns(columns =>
+       .DataGrid<QServiceDog.Models.Sender>().ID("gridContainer").Columns(columns =>
        {
            columns.AddFor(m => m.Id).Hide();
            columns.AddFor(m => m.Name).Caption("名称") ;

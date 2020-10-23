@@ -3,7 +3,7 @@
 }
 
 @(Html.DevExtreme()
-       .DataGrid<QServiceDog.Models.ServiceInfo>().Columns(columns =>
+       .DataGrid<QServiceDog.Models.ServiceInfo>().ID("gridContainer").Columns(columns =>
        {
            columns.AddFor(m => m.Id).Hide();
            columns.AddFor(m => m.Client).Caption("项目位置").AllowEditing(false).FormItem(r=>r.Visible(false));
