@@ -45,7 +45,18 @@ namespace QDBDogUI
             });
             return t;
         }
+        public static T CopyNameValuePairs<T>(this KeyValuePair<string, string>[] para,T oldData) where T : class, new()
+        {
+            Type type = typeof(T);//t.GetType();
+            type.GetProperties().Where(r => r.CanWrite).ToList().ForEach(r =>
+            {
+                var p = para.FirstOrDefault(f => f.Key == r.Name);
+                if (!string.IsNullOrEmpty(p.Value))
+                    r.SetValue(oldData, Convert.ChangeType(p.Value, r.PropertyType));
 
+            });
+            return oldData;
+        }
 
         /// <summary>
         /// 从对象中导出属性字典

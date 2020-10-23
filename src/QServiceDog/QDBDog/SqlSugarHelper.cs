@@ -74,48 +74,49 @@ namespace QDBDog
         /// <param name="deleteWhenSuccess"></param>
         /// <param name="dbname"></param>
         /// <returns></returns>
-        public static string ExecFile(string file, bool deleteWhenSuccess, string dbname)
-        {
-            //查找所有可用的sqlcmd,从高版本往低版本查 150-90，找不到就抛错
-            if (!System.IO.File.Exists(file))
-                return "";
-            string sqlcmd = "";
-            try
-            {
-                Microsoft.Win32.RegistryKey reg = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(string.Format(@"SOFTWARE\Microsoft\Microsoft SQL Server\{0}\Tools\ClientSetup", Properties.Settings.Default.sqlver));
-                if (reg == null)
-                {
-                    throw new Exception("\r\n本机没有安装SQL2005，请与管理人员联系以进行数据库升级\r\n");
-                }
-                sqlcmd = System.IO.Path.Combine(reg.GetValue("Path").ToString(), "sqlcmd.exe");
-                if (!System.IO.File.Exists(sqlcmd))
-                    return "";
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
+        //public static string ExecFile(string file, bool deleteWhenSuccess, string dbname)
+        //{
+        //    //查找所有可用的sqlcmd,从高版本往低版本查 150-90，找不到就抛错
+        //    if (!System.IO.File.Exists(file))
+        //        return "";
+        //    string sqlcmd = "";
+        //    try
+        //    {
+        //        Microsoft.Win32.RegistryKey reg = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(string.Format(@"SOFTWARE\Microsoft\Microsoft SQL Server\{0}\Tools\ClientSetup", Properties.Settings.Default.sqlver));
+        //        if (reg == null)
+        //        {
+        //            throw new Exception("\r\n本机没有安装SQL2005，请与管理人员联系以进行数据库升级\r\n");
+        //        }
+        //        sqlcmd = System.IO.Path.Combine(reg.GetValue("Path").ToString(), "sqlcmd.exe");
+        //        if (!System.IO.File.Exists(sqlcmd))
+        //            return "";
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        throw ex;
+        //    }
 
-            System.Diagnostics.Process pro = new System.Diagnostics.Process();
-            pro.StartInfo.FileName = sqlcmd;
-            pro.StartInfo.UseShellExecute = false;
-            pro.StartInfo.RedirectStandardInput = true;
-            pro.StartInfo.RedirectStandardOutput = true;
-            pro.StartInfo.RedirectStandardError = true;
-            pro.StartInfo.CreateNoWindow = true;
+        //    System.Diagnostics.Process pro = new System.Diagnostics.Process();
+        //    pro.StartInfo.FileName = sqlcmd;
+        //    pro.StartInfo.UseShellExecute = false;
+        //    pro.StartInfo.RedirectStandardInput = true;
+        //    pro.StartInfo.RedirectStandardOutput = true;
+        //    pro.StartInfo.RedirectStandardError = true;
+        //    pro.StartInfo.CreateNoWindow = true;
 
-            pro.StartInfo.Arguments = string.Format("-S{0} -d{1} -U{3} -P{4} -i\"{2}\"",
-                ".\\sqlexpress", dbname, file, "sa", "Sa1234567");
-            pro.Start();
+        //    pro.StartInfo.Arguments = string.Format("-S{0} -d{1} -U{3} -P{4} -i\"{2}\"",
+        //        ".\\sqlexpress", dbname, file, "sa", "Sa1234567");
+        //    pro.Start();
 
 
-            pro.WaitForExit();
-            string result = pro.StandardOutput.ReadToEnd();
+        //    pro.WaitForExit();
+        //    string result = pro.StandardOutput.ReadToEnd();
 
-            if (deleteWhenSuccess && System.IO.File.Exists(file))
-                System.IO.File.Delete(file);
+        //    if (deleteWhenSuccess && System.IO.File.Exists(file))
+        //        System.IO.File.Delete(file);
 
-            return result;
-        }
+        //    return result;
+        //}
+   
     }
 }

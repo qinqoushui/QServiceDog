@@ -66,13 +66,23 @@ namespace QDBDogUI.Properties {
         ///go
         ///USE master;
         ///CREATE CERTIFICATE AutoBakCert FROM FILE = &apos;{0}\AutoBakCert.cer&apos;
-        ///WITH PRIVATE KEY (  FILE = &apos;{1}\AutoBakCert.pkey&apos;, DECRYPTION  BY PASSWORD =&apos;Cert123&apos;);
+        ///WITH PRIVATE KEY (  FILE = &apos;{0}\AutoBakCert.pkey&apos;, DECRYPTION  BY PASSWORD =&apos;Cert123&apos;);
         ///go
         /// 的本地化字符串。
         /// </summary>
         internal static string AutoBakCert {
             get {
                 return ResourceManager.GetString("AutoBakCert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
+        /// </summary>
+        internal static System.Drawing.Icon database {
+            get {
+                object obj = ResourceManager.GetObject("database", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
             }
         }
     }

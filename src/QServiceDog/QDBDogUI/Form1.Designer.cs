@@ -81,7 +81,7 @@
             this.tbServer.Location = new System.Drawing.Point(146, 4);
             this.tbServer.Margin = new System.Windows.Forms.Padding(4);
             this.tbServer.Name = "tbServer";
-            this.tbServer.Size = new System.Drawing.Size(556, 26);
+            this.tbServer.Size = new System.Drawing.Size(555, 26);
             this.tbServer.TabIndex = 2;
             this.tbServer.Tag = "DBServer";
             // 
@@ -90,7 +90,7 @@
             this.tableLayoutPanel1.ColumnCount = 3;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 20.191F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 79.80901F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 127F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 128F));
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 8);
             this.tableLayoutPanel1.Controls.Add(this.textBox7, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.textBox6, 1, 6);
@@ -147,7 +147,7 @@
             this.textBox7.Location = new System.Drawing.Point(146, 220);
             this.textBox7.Margin = new System.Windows.Forms.Padding(4);
             this.textBox7.Name = "textBox7";
-            this.textBox7.Size = new System.Drawing.Size(556, 26);
+            this.textBox7.Size = new System.Drawing.Size(555, 26);
             this.textBox7.TabIndex = 33;
             this.textBox7.Tag = "FtpCron";
             // 
@@ -157,7 +157,7 @@
             this.textBox6.Location = new System.Drawing.Point(146, 256);
             this.textBox6.Margin = new System.Windows.Forms.Padding(4);
             this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(556, 26);
+            this.textBox6.Size = new System.Drawing.Size(555, 26);
             this.textBox6.TabIndex = 32;
             this.textBox6.Tag = "ServerPath";
             // 
@@ -178,17 +178,17 @@
             this.textBox5.Location = new System.Drawing.Point(146, 184);
             this.textBox5.Margin = new System.Windows.Forms.Padding(4);
             this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(556, 26);
+            this.textBox5.Size = new System.Drawing.Size(555, 26);
             this.textBox5.TabIndex = 24;
             this.textBox5.Tag = "ClearCron";
             // 
             // button4
             // 
             this.button4.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button4.Location = new System.Drawing.Point(710, 148);
+            this.button4.Location = new System.Drawing.Point(709, 148);
             this.button4.Margin = new System.Windows.Forms.Padding(4);
             this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(120, 28);
+            this.button4.Size = new System.Drawing.Size(121, 28);
             this.button4.TabIndex = 21;
             this.button4.Text = "设置方法";
             this.button4.UseVisualStyleBackColor = true;
@@ -200,17 +200,17 @@
             this.textBox4.Location = new System.Drawing.Point(146, 148);
             this.textBox4.Margin = new System.Windows.Forms.Padding(4);
             this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(556, 26);
+            this.textBox4.Size = new System.Drawing.Size(555, 26);
             this.textBox4.TabIndex = 20;
             this.textBox4.Tag = "BackupCron";
             // 
             // button3
             // 
             this.button3.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button3.Location = new System.Drawing.Point(710, 112);
+            this.button3.Location = new System.Drawing.Point(709, 112);
             this.button3.Margin = new System.Windows.Forms.Padding(4);
             this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(120, 28);
+            this.button3.Size = new System.Drawing.Size(121, 28);
             this.button3.TabIndex = 19;
             this.button3.Text = "指定目录";
             this.button3.UseVisualStyleBackColor = true;
@@ -223,7 +223,7 @@
             this.tbPath.Margin = new System.Windows.Forms.Padding(4);
             this.tbPath.Name = "tbPath";
             this.tbPath.ReadOnly = true;
-            this.tbPath.Size = new System.Drawing.Size(556, 26);
+            this.tbPath.Size = new System.Drawing.Size(555, 26);
             this.tbPath.TabIndex = 18;
             this.tbPath.Tag = "LocalPath";
             // 
@@ -274,10 +274,10 @@
             // button2
             // 
             this.button2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button2.Location = new System.Drawing.Point(710, 40);
+            this.button2.Location = new System.Drawing.Point(709, 40);
             this.button2.Margin = new System.Windows.Forms.Padding(4);
             this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(120, 64);
+            this.button2.Size = new System.Drawing.Size(121, 64);
             this.button2.TabIndex = 5;
             this.button2.Text = "检索数据库";
             this.button2.UseVisualStyleBackColor = true;
@@ -290,7 +290,7 @@
             this.tbNames.Margin = new System.Windows.Forms.Padding(4);
             this.tbNames.Multiline = true;
             this.tbNames.Name = "tbNames";
-            this.tbNames.Size = new System.Drawing.Size(556, 64);
+            this.tbNames.Size = new System.Drawing.Size(555, 64);
             this.tbNames.TabIndex = 4;
             this.tbNames.Tag = "DBNames";
             // 
@@ -324,7 +324,7 @@
             this.panel1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel1.Location = new System.Drawing.Point(145, 291);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(558, 30);
+            this.panel1.Size = new System.Drawing.Size(557, 30);
             this.panel1.TabIndex = 34;
             this.panel1.Tag = "ExpireType";
             // 
@@ -379,10 +379,10 @@
             // 
             this.button5.BackColor = System.Drawing.Color.LightBlue;
             this.button5.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button5.Location = new System.Drawing.Point(710, 328);
+            this.button5.Location = new System.Drawing.Point(709, 328);
             this.button5.Margin = new System.Windows.Forms.Padding(4);
             this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(120, 29);
+            this.button5.Size = new System.Drawing.Size(121, 29);
             this.button5.TabIndex = 35;
             this.button5.Text = "保 存";
             this.button5.UseVisualStyleBackColor = false;
@@ -396,7 +396,7 @@
             this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
             this.panel2.Location = new System.Drawing.Point(145, 327);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(558, 31);
+            this.panel2.Size = new System.Drawing.Size(557, 31);
             this.panel2.TabIndex = 37;
             // 
             // tbName
@@ -413,7 +413,7 @@
             // 
             this.button7.BackColor = System.Drawing.Color.Silver;
             this.button7.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button7.Location = new System.Drawing.Point(364, 0);
+            this.button7.Location = new System.Drawing.Point(363, 0);
             this.button7.Margin = new System.Windows.Forms.Padding(4);
             this.button7.Name = "button7";
             this.button7.Size = new System.Drawing.Size(97, 31);
@@ -426,7 +426,7 @@
             // 
             this.button6.BackColor = System.Drawing.Color.Honeydew;
             this.button6.Dock = System.Windows.Forms.DockStyle.Right;
-            this.button6.Location = new System.Drawing.Point(461, 0);
+            this.button6.Location = new System.Drawing.Point(460, 0);
             this.button6.Margin = new System.Windows.Forms.Padding(4);
             this.button6.Name = "button6";
             this.button6.Size = new System.Drawing.Size(97, 31);
@@ -439,10 +439,10 @@
             // 
             this.button1.BackColor = System.Drawing.Color.LightCoral;
             this.button1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.button1.Location = new System.Drawing.Point(710, 292);
+            this.button1.Location = new System.Drawing.Point(709, 292);
             this.button1.Margin = new System.Windows.Forms.Padding(4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(120, 28);
+            this.button1.Size = new System.Drawing.Size(121, 28);
             this.button1.TabIndex = 39;
             this.button1.Text = "设置备份证书";
             this.button1.UseVisualStyleBackColor = false;

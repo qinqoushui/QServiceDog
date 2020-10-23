@@ -33,8 +33,38 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="DevComponents.DotNetBar.Keyboard, Version=12.5.0.2, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL">
+      <HintPath>..\packages\QCommon.UI.Resource.1.0.3.19660\lib\DevComponents.DotNetBar.Keyboard.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar.SuperGrid, Version=12.5.0.2, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL">
+      <HintPath>..\packages\QCommon.UI.Resource.1.0.3.19660\lib\DevComponents.DotNetBar.SuperGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.DotNetBar2, Version=12.5.0.2, Culture=neutral, PublicKeyToken=c39c3242a43eee2b, processorArchitecture=MSIL">
+      <HintPath>..\packages\QCommon.UI.Resource.1.0.3.19660\lib\DevComponents.DotNetBar2.dll</HintPath>
+    </Reference>
+    <Reference Include="DevComponents.TreeGX, Version=12.5.0.2, Culture=neutral, PublicKeyToken=cfcbd7476b2389d1, processorArchitecture=MSIL">
+      <HintPath>..\packages\QCommon.UI.Resource.1.0.3.19660\lib\DevComponents.TreeGX.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=12.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.12.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.0.1\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="ProgressODoom, Version=1.0.6117.26918, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\ProgressODoom.1.0.6117.26918\lib\net20\ProgressODoom.dll</HintPath>
+    </Reference>
+    <Reference Include="QCommon, Version=1.0.0.17, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QCommon.1.0.0.17\lib\net35\QCommon.dll</HintPath>
+    </Reference>
+    <Reference Include="QCommon.Service, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QCommon.Service.1.0.0.3\lib\net452\QCommon.Service.dll</HintPath>
+    </Reference>
+    <Reference Include="QCommon.UI, Version=1.0.6.36782, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\QCommon.UI.1.0.6.36782\lib\net35\QCommon.UI.dll</HintPath>
     </Reference>
     <Reference Include="SqlSugar, Version=5.0.0.19, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\sqlSugar.5.0.0.19\lib\SqlSugar.dll</HintPath>
@@ -50,6 +80,9 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="Topshelf, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b800c4cfcdeea87b, processorArchitecture=MSIL">
+      <HintPath>..\packages\Topshelf.4.0.3\lib\net452\Topshelf.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\QDBDog\Config.cs">
@@ -58,17 +91,32 @@
     <Compile Include="..\QDBDog\SqlSugarHelper.cs">
       <Link>SqlSugarHelper.cs</Link>
     </Compile>
-    <Compile Include="Extension.cs" />
-    <Compile Include="Form1.cs">
+    <Compile Include="content\FormX.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
-    </Compile>
+    <Compile Include="Extension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="UI\UIBase.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UIBase.Designer.cs">
+      <DependentUpon>UIBase.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UIDB.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UIDB.Designer.cs">
+      <DependentUpon>UIDB.cs</DependentUpon>
+    </Compile>
+    <Compile Include="UI\UISystem.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="UI\UISystem.Designer.cs">
+      <DependentUpon>UISystem.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="content\FormX.resx">
+      <DependentUpon>FormX.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -80,6 +128,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="UI\UIDB.resx">
+      <DependentUpon>UIDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="UI\UISystem.resx">
+      <DependentUpon>UISystem.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -90,6 +144,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="content\Readme.txt" />
+    <Content Include="database.ico" />
+    <Content Include="Doc\qservice_readme.txt" />
+    <Content Include="qservice_readme.txt" />
     <Content Include="sql\AutoBakCert.cer">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
