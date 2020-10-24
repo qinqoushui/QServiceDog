@@ -85,7 +85,7 @@ namespace QDBDogUI.UI
             lockButton(3, sender as Button);
             if (System.Diagnostics.Process.GetProcessesByName("FreeFileSync").Length > 0)
             {
-                MessageBox.Show("已在运行中!!!");
+                MessageBox.Show(this, "已在运行中!!!");
                 return;
             }
             System.Diagnostics.Process.Start(ftpExe);
@@ -94,11 +94,11 @@ namespace QDBDogUI.UI
         {
             if (System.Diagnostics.Process.GetProcessesByName("FreeFileSyncSetup").Length > 0)
             {
-                MessageBox.Show("安装已在进行中!!!\r\n请完成安装向导，不要修改安装目录!");
+                MessageBox.Show(this,  "安装已在进行中!!!\r\n请完成安装向导，不要修改安装目录!");
                 return;
             }
             bool needInstall = true;
-            if (System.IO.File.Exists(ftpExe) && MessageBox.Show("是否重新安装？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (System.IO.File.Exists(ftpExe) && MessageBox.Show(this,  "是否重新安装？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 needInstall = false;
             }
@@ -110,7 +110,7 @@ namespace QDBDogUI.UI
                 ps = System.Diagnostics.Process.GetProcessesByName("FreeFileSync");
                 foreach (var p in ps)
                     p.Kill();
-                MessageBox.Show("请完成安装向导\r\n不要修改安装目录!!!");
+                MessageBox.Show(this,"请完成安装向导\r\n不要修改安装目录!!!");
                 System.Diagnostics.Process.Start(ftpInstallExe);
                 //锁定按钮10秒
                 lockButton(20, sender as Button);
@@ -121,7 +121,7 @@ namespace QDBDogUI.UI
         {
             //重新生成脚本
             bool needInstall = true;
-            if (System.IO.File.Exists(ftpScript) && MessageBox.Show("是否重新生成？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (System.IO.File.Exists(ftpScript) && MessageBox.Show(this,"是否重新生成？", "提示", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
             {
                 needInstall = false;
             }
@@ -130,7 +130,7 @@ namespace QDBDogUI.UI
                 var config = loadConfig();
                 string ss = Encoding.UTF8.GetString(Resources.dbBack).Replace("@localPath@", config.LocalPath).Replace("@serverPath@", config.ServerPath);
                 System.IO.File.WriteAllText(ftpScript, ss, Encoding.UTF8);
-                MessageBox.Show("OK");
+                MessageBox.Show(this,"OK");
             }
         }
 
@@ -139,19 +139,19 @@ namespace QDBDogUI.UI
             //运行脚本
             if (System.Diagnostics.Process.GetProcessesByName("FreeFileSync").Length > 0)
             {
-                MessageBox.Show("已在运行中!!!");
+                MessageBox.Show(this,"已在运行中!!!");
                 return;
             }
             if (!System.IO.File.Exists(ftpScript))
             {
-                MessageBox.Show("脚本尚未生成");
+                MessageBox.Show(this,"脚本尚未生成");
                 return;
             }
             //临时显示界面 <ProgressDialog Minimized="true" AutoClose="true"/>
             string testFile = ftpScript + "_test.ffs_batch";
             System.IO.File.WriteAllText(testFile, System.IO.File.ReadAllText(ftpScript, Encoding.UTF8).Replace(@"<ProgressDialog Minimized=""true"" AutoClose=""true""/>", @"<ProgressDialog Minimized=""false"" AutoClose=""false""/>"), Encoding.UTF8);
             lockButton(15, sender as Button);
-            MessageBox.Show("请观察运行效果,点击确定开始运行");
+            MessageBox.Show(this,"请观察运行效果,点击确定开始运行");
             var p = System.Diagnostics.Process.Start(ftpExe, testFile);
             p.WaitForExit();
             p.Dispose();
@@ -203,7 +203,7 @@ namespace QDBDogUI.UI
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(this, ex.Message);
             }
         }
 

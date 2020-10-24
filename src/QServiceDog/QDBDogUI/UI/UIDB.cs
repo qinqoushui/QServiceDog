@@ -81,7 +81,7 @@ namespace QDBDogUI.UI
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show(ex.Message);
+                    MessageBox.Show(this,ex.Message);
                 }
             });
         }
@@ -89,14 +89,14 @@ namespace QDBDogUI.UI
         private void button1_Click(object sender, EventArgs e)
         {
             var config = loadConfig();
-            if (MessageBox.Show($"将为当前指定的数据库服务器{config.DBServer}启用备份加密密钥和证书，启用证书后，备份文件将无法在未使用特定证书的服务器上还原，是否继续？", "数据库配置", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (MessageBox.Show(this,$"将为当前指定的数据库服务器{config.DBServer}启用备份加密密钥和证书，启用证书后，备份文件将无法在未使用特定证书的服务器上还原，是否继续？", "数据库配置", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             //检查指定目录下有无证书
             string certFile = System.IO.Path.Combine(Application.StartupPath, "sql\\AutoBakCert.cer");
             string pkFile = System.IO.Path.Combine(Application.StartupPath, "sql\\AutoBakCert.pkey");
             if (!System.IO.File.Exists(certFile) || !System.IO.File.Exists(pkFile))
             {
-                MessageBox.Show("加密证书不存在！操作失败");
+                MessageBox.Show(this,"加密证书不存在！操作失败");
                 return;
             }
             showResult(SQLServerHelper.Exec(string.Format(Resources.AutoBakCert, System.IO.Path.Combine(Application.StartupPath, "sql")), config.DBServer), (sender as Button).Text);
@@ -108,7 +108,7 @@ namespace QDBDogUI.UI
             //    }
             //    catch (Exception ex)
             //    {
-            //        MessageBox.Show(ex.Message);
+            //        MessageBox.Show(this,ex.Message);
             //    }
             //});
         }
@@ -116,7 +116,7 @@ namespace QDBDogUI.UI
         private void button3_Click(object sender, EventArgs e)
         {
             var config = loadConfig();
-            if (MessageBox.Show($"将为当前指定的数据库服务器{config.DBServer}上移除备份加密密钥和证书，移除后，备份文件可以在任意服务器上还原，这可能导致数据泄露，是否继续？", "数据库配置", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (MessageBox.Show(this,$"将为当前指定的数据库服务器{config.DBServer}上移除备份加密密钥和证书，移除后，备份文件可以在任意服务器上还原，这可能导致数据泄露，是否继续？", "数据库配置", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             showResult(SQLServerHelper.Exec(string.Format(Resources.DropAutoBakCert, Path.Combine(Application.StartupPath, "sql")), config.DBServer),
             (sender as Button).Text);
@@ -125,14 +125,14 @@ namespace QDBDogUI.UI
         private void button4_Click(object sender, EventArgs e)
         {
             //从资源中释放证书
-            if (MessageBox.Show($"从程序资源文件中释放默认证书，当前证书文件将被覆盖，是否继续？", "数据库配置", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
+            if (MessageBox.Show(this,$"从程序资源文件中释放默认证书，当前证书文件将被覆盖，是否继续？", "数据库配置", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.No)
                 return;
             //检查指定目录下有无证书
             string certFile = System.IO.Path.Combine(Application.StartupPath, "sql\\AutoBakCert.cer");
             string pkFile = System.IO.Path.Combine(Application.StartupPath, "sql\\AutoBakCert.pkey");
             System.IO.File.WriteAllBytes(certFile, Resources.AutoBakCert1);
             System.IO.File.WriteAllBytes(pkFile, Resources.AutoBakCert2);
-            MessageBox.Show("OK");
+            MessageBox.Show(this,"OK");
         }
 
         private void button11_Click(object sender, EventArgs e)
@@ -141,7 +141,7 @@ namespace QDBDogUI.UI
             if (System.IO.Directory.Exists(config.LocalPath))
                 System.Diagnostics.Process.Start("explorer.exe", config.LocalPath);
             else
-                MessageBox.Show($"{config.LocalPath}不存在");
+                MessageBox.Show(this,$"{config.LocalPath}不存在");
         }
 
         private void button9_Click(object sender, EventArgs e)
@@ -159,11 +159,11 @@ namespace QDBDogUI.UI
                     System.Diagnostics.Process.Start("explorer.exe", subPath);
                 }
                 else
-                    MessageBox.Show(a.err);
+                    MessageBox.Show(this,a.err);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(this,ex.Message);
             }
         }
 
@@ -175,11 +175,11 @@ namespace QDBDogUI.UI
             {
                 var config = loadConfig(false);
                 var result = BackupHelper.Instance.ClearBackupFiles(config);
-                MessageBox.Show(result.err);
+                MessageBox.Show(this,result.err);
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show(this,ex.Message);
             }
         }
 

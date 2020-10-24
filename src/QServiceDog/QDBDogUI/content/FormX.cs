@@ -104,6 +104,7 @@ namespace QDBDogUI
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormX));
+             
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
             this.mySideNav1 = new QCommon.UI.MySideNav();
             this.sideNavPanelX1 = new DevComponents.DotNetBar.Controls.SideNavPanel();
@@ -115,6 +116,7 @@ namespace QDBDogUI
             this.sideNavItem3 = new DevComponents.DotNetBar.Controls.SideNavItem();
             this.sideNavItem4 = new DevComponents.DotNetBar.Controls.SideNavItem();
             this.sideNavItemExit = new DevComponents.DotNetBar.Controls.SideNavItem();
+            this.panelTop.SuspendLayout();
             this.panelBottom.SuspendLayout();
             this.panelFill.SuspendLayout();
             this.mySideNav1.SuspendLayout();
@@ -122,6 +124,7 @@ namespace QDBDogUI
             // 
             // panelTop
             // 
+            this.panelTop.Controls.Add(this.reflectionLabel1);
             this.panelTop.DisabledBackColor = System.Drawing.Color.Empty;
             this.panelTop.Dock = System.Windows.Forms.DockStyle.Top;
             this.panelTop.Location = new System.Drawing.Point(0, 0);
@@ -153,6 +156,20 @@ namespace QDBDogUI
             // 
             this.panelFill.Controls.Add(this.mySideNav1);
             this.panelFill.Size = new System.Drawing.Size(843, 474);
+            // 
+            // reflectionLabel1
+            // 
+            // 
+            // 
+            // 
+            this.reflectionLabel1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.reflectionLabel1.Dock = System.Windows.Forms.DockStyle.Left;
+            this.reflectionLabel1.Location = new System.Drawing.Point(0, 0);
+            this.reflectionLabel1.Name = "reflectionLabel1";
+            this.reflectionLabel1.Size = new System.Drawing.Size(448, 70);
+            this.reflectionLabel1.TabIndex = 0;
+            this.reflectionLabel1.Text = "    <b><font size=\"+6\" color=\"#5C4A3D\"><i>数据</i><font color=\"#B02B2C\"> 备份上传配置</fo" +
+    "nt></font></b>";
             // 
             // styleManager1
             // 
@@ -189,9 +206,9 @@ namespace QDBDogUI
             this.sideNavPanelX1.BackColor = System.Drawing.Color.AliceBlue;
             this.sideNavPanelX1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.sideNavPanelX1.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.sideNavPanelX1.Location = new System.Drawing.Point(129, 32);
+            this.sideNavPanelX1.Location = new System.Drawing.Point(162, 32);
             this.sideNavPanelX1.Name = "sideNavPanelX1";
-            this.sideNavPanelX1.Size = new System.Drawing.Size(713, 441);
+            this.sideNavPanelX1.Size = new System.Drawing.Size(680, 441);
             this.sideNavPanelX1.TabIndex = 2;
             // 
             // sideNavPanelX3
@@ -260,20 +277,6 @@ namespace QDBDogUI
             this.sideNavItemExit.Symbol = "";
             this.sideNavItemExit.Text = "退出";
             // 
-            // reflectionLabel1
-            // 
-            // 
-            // 
-            // 
-            this.reflectionLabel1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.reflectionLabel1.Dock = System.Windows.Forms.DockStyle.Left;
-            this.reflectionLabel1.Location = new System.Drawing.Point(0, 0);
-            this.reflectionLabel1.Name = "reflectionLabel1";
-            this.reflectionLabel1.Size = new System.Drawing.Size(448, 70);
-            this.reflectionLabel1.TabIndex = 0;
-            this.reflectionLabel1.Text = "    <b><font size=\"+6\" color=\"#5C4A3D\"><i>数据</i><font color=\"#B02B2C\"> 备份上传配置</font></font></b>";
-
-            // 
             // FormX
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 13F);
@@ -282,7 +285,8 @@ namespace QDBDogUI
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FormX";
             this.Text = "Form1";
-             
+            
+            this.panelTop.ResumeLayout(false);
             this.panelBottom.ResumeLayout(false);
             this.panelFill.ResumeLayout(false);
             this.mySideNav1.ResumeLayout(false);

@@ -11,3 +11,9 @@
 /src/QServiceDog/QDBDog/bin/Debug/logs
 /src/QServiceDog/QDBDog/bin/Debug
 /src/QServiceDog/QDBDog/obj/Debug/Costura
+/src/QServiceDog/QDBDog/bin/Release/config
+/src/QServiceDog/QDBDog/bin/Release/sql
+/src/QServiceDog/QDBDog/bin/Release
+/src/QServiceDog/QDBDog/obj/Release/Costura
+/src/QServiceDog/QDBDogUI/bin/Release
+/src/QServiceDog/QDBDogUI/bin/QDBDog_V1.0.rar
