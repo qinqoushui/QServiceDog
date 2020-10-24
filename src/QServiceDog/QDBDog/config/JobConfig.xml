@@ -12,44 +12,63 @@
 
 
     <job>
-      <name>DBJob </name>
+      <name>BackupJob</name>
       <group>Sync</group>
-      <description>同步基础数据</description>
-      <job-type>TAYC.Gate.VisitorService.Jobs.GetDeviceInfo, TAYC.Gate.VisitorService</job-type>
+      <description>备份数据</description>
+      <job-type>QDBDog.BackupJob, QDBDog</job-type>
       <durable>true</durable>
       <recover>false</recover>
     </job>
-     
+
+    <job>
+      <name>FtpJob</name>
+      <group>Sync</group>
+      <description>上传备份</description>
+      <job-type>QDBDog.FtpJob, QDBDog</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+    </job>
+    
+    <job>
+      <name>ClearJob</name>
+      <group>Sync</group>
+      <description>清除数据</description>
+      <job-type>QDBDog.ClearJob, QDBDog</job-type>
+      <durable>true</durable>
+      <recover>false</recover>
+      <job-data-map>
+        <entry>
+          <key>logDay</key>
+          <value>-7</value>
+        </entry>
+      </job-data-map>
+    </job>
+    
     <trigger>
       <cron>
-        <name>tri_getDB</name>
+        <name>tri_backup</name>
         <group>Sync</group>
-        <description>同步基础数据</description>
-        <job-name>DBJob</job-name>
+        <description>备份数据</description>
+        <job-name>BackupJob</job-name>
         <job-group>Sync</job-group>
         <start-time>2019-01-01T00:00:00.0Z</start-time>
         <misfire-instruction>SmartPolicy</misfire-instruction>
         <cron-expression>0 0/30 * * * ?</cron-expression>
       </cron>
-
     </trigger>
-    
-    <!--<trigger>
-      <simple>
-        <name>tri_sync</name>
+
+    <trigger>
+      <cron>
+        <name>tri_backup</name>
         <group>Sync</group>
-        <description>同步数据</description>
-        <job-name>Sync</job-name>
+        <description>备份数据</description>
+        <job-name>BackupJob</job-name>
         <job-group>Sync</job-group>
         <start-time>2019-01-01T00:00:00.0Z</start-time>
-        <end-time>2050-12-31T23:59:59.0Z</end-time>
         <misfire-instruction>SmartPolicy</misfire-instruction>
-        <repeat-count>-1</repeat-count>
-        <repeat-interval>60000</repeat-interval>
-      </simple>
-    </trigger>-->
- 
-
+        <cron-expression>0 0/30 * * * ?</cron-expression>
+      </cron>
+    </trigger>
     
     
   </schedule>

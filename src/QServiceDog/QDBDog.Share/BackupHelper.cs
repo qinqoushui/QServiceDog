@@ -9,24 +9,47 @@ namespace QDBDog.Share
 {
     public class BackupHelper
     {
+        static Q.Helper.ILogHelper logger = Q.Helper.LogHelper.Default.Get(nameof(BackupHelper));
         static BackupHelper _ = new BackupHelper();
         public static BackupHelper Instance { get; } = _;
 
-        public string Backupdb(Config config, string template, List<string> dbList, out string subPath, Action<string> msgbox = null, Action<string> showResult = null)
+        public (string flag, string err) Backupdb(Config config, string template, out string subPath, Action<string> showResult = null)
         {
             subPath = string.Empty;
             List<string> selected = new List<string>();
-            if (string.IsNullOrEmpty(config.DBNames) || dbList.Count == 0)
+            if (string.IsNullOrEmpty(config.DBNames))
             {
-                msgbox?.Invoke("没有需要备份的数据库");
-                return string.Empty;
+                return ("skip", "没有需要备份的数据库");
             }
+            List<string> dbList = new List<string>();
+            string error = string.Empty;
+            new SqlSugarHelper($"server={config.DBServer};Initial Catalog=master;Integrated Security=True;Connection Timeout=5;").DoOne(client =>
+            {
+                try
+                {
+                    var dt = client.Ado.GetDataTable(" SELECT name FROM   sys.databases WHERE    state = 0 order by name");
+                    if (dt.Rows.Count > 0)
+                    {
+                        dbList = dt.Select().Select(row => row[0].ToString()).ToList();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    error = ex.ToString();
+                }
+            });
+            if (!string.IsNullOrEmpty(error))
+                return ("error", error);
+            if (dbList.Count == 0)
+            {
+                return ("skip", "没有需要备份的数据库");
+            }
+
             selected = config.DBNames.Split(',').ToList();
             List<string> needBackup = dbList.Where(row => selected.Exists(r => r.Equals(row, StringComparison.OrdinalIgnoreCase))).ToList();
             if (needBackup.Count == 0)
             {
-                msgbox?.Invoke("没有需要备份的数据库");
-                return string.Empty;
+                return ("skip", $"需要备份的数据库{config.DBNames}在当前服务器{config.DBServer}中不存在");
             }
             StringBuilder sb = new StringBuilder();
             string time = DateTime.Now.ToString("yyyy_MM_dd_HHmmss_ff");
@@ -42,7 +65,7 @@ namespace QDBDog.Share
             var result = SQLServerHelper.Exec(sb.ToString(), config.DBServer);
             File.AppendAllText(Path.Combine(subPath, "备份说明.md"), $"\r\n\r\n-\r\n{result}", Encoding.UTF8);
             showResult?.Invoke(result);
-            return result;
+            return ("succ", result);
         }
 
         public (string flag, string err) ClearBackupFiles(Config config)
@@ -121,7 +144,39 @@ namespace QDBDog.Share
                 if (r.GetFiles().Length == 0 && r.GetDirectories().Length == 0)
                     try { r.Delete(); } catch { }
             });
-            return ("succ", $"清理结果:{c}/{t},失败{e}");
+            if (e > 0)
+                return ("succ", $"清理结果:{c}/{t},失败{e}");
+            else
+                return ("succ", $"清理结果:{c}/{t}");
+
+        }
+
+        public (string flag, string err) FtpFiles(Config config, string ftpExe, string ftpScript)
+        {
+            //运行脚本
+            if (System.Diagnostics.Process.GetProcessesByName("FreeFileSync").Length > 0)
+            {
+                //TODO:判断进程使用的时间
+                return ("skip", "已在运行中!!!");
+            }
+            if (!File.Exists(ftpScript))
+            {
+                return ("error", "脚本尚未生成");
+            }
+            //#if DEBUG
+            //            //临时显示界面 <ProgressDialog Minimized="true" AutoClose="true"/>
+            //            string testFile = ftpScript + "_test.ffs_batch";
+            //            System.IO.File.WriteAllText(testFile, System.IO.File.ReadAllText(ftpScript, Encoding.UTF8).Replace(@"<ProgressDialog Minimized=""true"" AutoClose=""true""/>", @"<ProgressDialog Minimized=""false"" AutoClose=""false""/>"), Encoding.UTF8);
+            //            var p = System.Diagnostics.Process.Start(ftpExe, testFile);
+            //#else
+            //            var p = System.Diagnostics.Process.Start(ftpExe, ftpScript);
+            //#endif
+            var p = System.Diagnostics.Process.Start(ftpExe, ftpScript);
+
+            logger.Info($"FTP脚本开始执行于{DateTime.Now.ToString("G")}");
+            p.WaitForExit();
+            p.Dispose();
+            return ("succ", "");
         }
 
     }

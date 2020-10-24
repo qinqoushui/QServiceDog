@@ -1,7 +1,6 @@
 ﻿using QCommon.Service.Jobs;
 using QDBDog.Properties;
 using QDBDog.Share;
-using Quartz;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -10,16 +9,17 @@ using System.Text;
 namespace QDBDog
 {
     /// <summary>
-    /// 备份数据库
+    /// 上传备份文件
     /// </summary>
-    public class BackupJob : ConfigJob<string>
+    public class FtpJob : ConfigJob<string>
     {
-        public BackupJob() : base(nameof(BackupJob))
+        public FtpJob() : base(nameof(FtpJob))
         {
 
         }
         protected override void doAfter(IList<string> data)
         {
+
         }
 
         /// <summary>
@@ -30,12 +30,9 @@ namespace QDBDog
         protected override (string result, string error) doJob(string data)
         {
             //做业务
-            switch (data)
-            {
-                case nameof(BackupHelper.Backupdb):
-                default:
-                    return BackupHelper.Instance.Backupdb(config, Resources.BackupDB, out string subPath, null);
-            }
+            string ftpScript = QCommon.Service.FileHelper.GetAbsolutePath("config\\dbBack.ffs_batch");
+            string ftpExe = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFiles), "FreeFileSync\\FreeFileSync.exe");
+            return BackupHelper.Instance.FtpFiles(config, ftpExe, ftpScript);
         }
 
         protected override bool doPre()
@@ -47,7 +44,7 @@ namespace QDBDog
         {
             //所有数据库进行一次备份
             max = 1; total = 1;
-            return new string[] { nameof(BackupHelper.Backupdb) };
+            return new string[] { "DBBackup" };
         }
 
         protected override string getSubJobName(string data)

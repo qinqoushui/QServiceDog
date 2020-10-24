@@ -147,22 +147,24 @@ namespace QDBDogUI.UI
         private void button9_Click(object sender, EventArgs e)
         {
             //生成备份脚本并执行
-            lockButton(30, sender as Button);
-            new SqlSugarHelper($"server={tbServer.Text};Initial Catalog=master;Integrated Security=True;Connection Timeout=5;").DoOne(client =>
-           {
-               try
-               {
-                   var dt = client.Ado.GetDataTable(" SELECT name FROM   sys.databases WHERE    state = 0 order by name");
-                   BackupHelper.Instance.Backupdb(loadConfig(false), Resources.BackupDB, dt.Select().Select(row => row[0].ToString()).ToList(), out var subPath,
-                       msg => MessageBox.Show(msg), result => showResult(result));
-                   if (!string.IsNullOrEmpty(subPath))
-                       System.Diagnostics.Process.Start("explorer.exe", subPath);
-               }
-               catch (Exception ex)
-               {
-                   MessageBox.Show(ex.Message);
-               }
-           });
+            try
+            {
+                lockButton(30, sender as Button);
+                var config = loadConfig(false);
+                var a = BackupHelper.Instance.Backupdb(config, Resources.BackupDB, out var subPath,
+                            result => showResult(result));
+                if (a.flag == "succ")
+                {
+                    logger.Info($"数据库{config.DBServer}备份完成{subPath}");
+                    System.Diagnostics.Process.Start("explorer.exe", subPath);
+                }
+                else
+                    MessageBox.Show(a.err);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
         }
 
 

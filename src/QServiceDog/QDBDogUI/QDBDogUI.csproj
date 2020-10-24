@@ -64,9 +64,6 @@
     <Reference Include="QCommon.IF, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\QCommon.IF.1.0.5\lib\net35\QCommon.IF.dll</HintPath>
     </Reference>
-    <Reference Include="QCommon.Service, Version=1.0.0.3, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\QCommon.Service.1.0.0.3\lib\net452\QCommon.Service.dll</HintPath>
-    </Reference>
     <Reference Include="QCommon.UI, Version=1.0.6.36782, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\QCommon.UI.1.0.6.36782\lib\net35\QCommon.UI.dll</HintPath>
     </Reference>
@@ -107,7 +104,6 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <Compile Include="SqlSugarHelper.cs" />
     <Compile Include="UI\UIBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -158,8 +154,6 @@
     </Content>
     <Content Include="content\Readme.txt" />
     <Content Include="database.ico" />
-    <Content Include="Doc\qservice_readme.txt" />
-    <Content Include="qservice_readme.txt" />
     <Content Include="sql\DropAutoBakCert.sql" />
     <Content Include="sql\AutoBakCert.cer">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

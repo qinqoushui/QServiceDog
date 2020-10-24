@@ -19,6 +19,7 @@ Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		QDBDog.Share\QDBDog.Share.projitems*{1a392d53-955c-4cc4-8679-3e9faeaa170b}*SharedItemsImports = 13
 		QDBDog.Share\QDBDog.Share.projitems*{215d87dc-8010-4070-b285-796fbac11c37}*SharedItemsImports = 4
+		QDBDog.Share\QDBDog.Share.projitems*{59d9bfc5-f375-44e5-a1a4-2126c7b28a9d}*SharedItemsImports = 4
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

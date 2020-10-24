@@ -12,5 +12,6 @@
     <Compile Include="$(MSBuildThisFileDirectory)BackupHelper.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Config.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Extension.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)SqlSugarHelper.cs" />
   </ItemGroup>
 </Project>
