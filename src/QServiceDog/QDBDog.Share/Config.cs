@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QDBDog.Share;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,7 +10,7 @@ namespace QDBDog
     /// <summary>
     /// 配置
     /// </summary>
-    public  class Config
+    public class Config
     {
         public string DBServer { get; set; } = @".\sql2017";// @"server=.\sql2017;Initial Catalog=master;Integrated Security=True";
 
@@ -29,6 +30,27 @@ namespace QDBDog
 
         public string ExpireType { get; set; } = "Day";
         public int ExpireValue { get; set; } = 3;
+
+
+        /// <summary>
+        /// 从配置文件中读取
+        /// </summary>
+        /// <param name="allowNew"></param>
+        /// <returns></returns>
+        public static Config LoadConfig(string jsonFile, bool allowNew = true)
+        {
+            Config config = new Config();
+            if (System.IO.File.Exists(jsonFile))
+            {
+                string s = System.IO.File.ReadAllText(jsonFile, Encoding.UTF8);
+                config = s.De<Config>();
+            }
+            else if (!allowNew)
+            {
+                throw new Exception($"未找到配置文件{jsonFile}");
+            }
+            return config;
+        }
 
     }
 }

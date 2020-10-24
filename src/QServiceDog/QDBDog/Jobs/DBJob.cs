@@ -1,14 +1,17 @@
-﻿using System;
+﻿using QCommon.Service.Jobs;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 
-namespace QCommon.Service.Jobs
+namespace QDBDog
 {
-    
-    public class SampleJob : QCommon.Service.Jobs.QuartzBase<string>
+    /// <summary>
+    /// 备份数据库
+    /// </summary>
+    public class DBJob : QuartzBase<string>
     {
-        public SampleJob() : base(nameof(SampleJob))
+        public DBJob() : base(nameof(DBJob))
         {
 
         }
@@ -25,6 +28,8 @@ namespace QCommon.Service.Jobs
         protected override (string result, string error) doJob(string data)
         {
             //做业务
+            var config = Share.Config.LoadConfig(QCommon.Service.FileHelper.GetAbsolutePath("config\\appsettings.json"), false);
+
             if (true)
             {
                 return ("succ", "");
@@ -40,8 +45,9 @@ namespace QCommon.Service.Jobs
 
         protected override IList<string> getJobs(out int max, out int total)
         {
+            //所有数据库进行一次备份
             max = 1; total = 1;
-            return new string[] { "DBJob" };
+            return new string[] { "DBBackup" };
         }
 
         protected override string getSubJobName(string data)

@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MSBuildAllProjects>$(MSBuildAllProjects);$(MSBuildThisFileFullPath)</MSBuildAllProjects>
+    <HasSharedItems>true</HasSharedItems>
+    <SharedGUID>1a392d53-955c-4cc4-8679-3e9faeaa170b</SharedGUID>
+  </PropertyGroup>
+  <PropertyGroup Label="Configuration">
+    <Import_RootNamespace>QDBDog.Share</Import_RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)BackupHelper.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Config.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Extension.cs" />
+  </ItemGroup>
+</Project>

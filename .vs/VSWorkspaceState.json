@@ -3,14 +3,14 @@
     "",
     "\\src",
     "\\src\\QServiceDog",
-    "\\src\\QServiceDog\\QServiceDog",
-    "\\src\\QServiceDog\\QServiceDog\\Helpers",
+    "\\src\\QServiceDog\\QDBDog",
+    "\\src\\QServiceDog\\QDBDogUI",
     "\\src\\QServiceDog\\QServiceDog\\Jobs",
     "\\src\\QServiceDog\\QServiceDog\\Views",
     "\\src\\QServiceDog\\QServiceDog\\Views\\ClientEventSubscriber",
     "\\src\\QServiceDog\\QServiceDog\\Views\\DogAction",
     "\\src\\QServiceDog\\QServiceDog\\Views\\EventSubscriber"
   ],
-  "SelectedNode": "\\src\\QServiceDog\\QServiceDog\\Helpers\\MsgHelper.cs",
+  "SelectedNode": "\\src\\QServiceDog\\QDBDog\\readme.md",
   "PreviewInSolutionExplorer": false
 }

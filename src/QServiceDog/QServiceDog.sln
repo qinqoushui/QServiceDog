@@ -13,7 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "DBDog", "DBDog", "{9F24040E
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "QDBDogUI", "QDBDogUI\QDBDogUI.csproj", "{215D87DC-8010-4070-B285-796FBAC11C37}"
 EndProject
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "QDBDog.Share", "QDBDog.Share\QDBDog.Share.shproj", "{1A392D53-955C-4CC4-8679-3E9FAEAA170B}"
+EndProject
 Global
+	GlobalSection(SharedMSBuildProjectFiles) = preSolution
+		QDBDog.Share\QDBDog.Share.projitems*{1a392d53-955c-4cc4-8679-3e9faeaa170b}*SharedItemsImports = 13
+		QDBDog.Share\QDBDog.Share.projitems*{215d87dc-8010-4070-b285-796fbac11c37}*SharedItemsImports = 4
+	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		IISRelease|Any CPU = IISRelease|Any CPU
@@ -51,6 +57,7 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{59D9BFC5-F375-44E5-A1A4-2126C7B28A9D} = {9F24040E-C7F2-4AC6-B3CB-27C9A8BF1268}
 		{215D87DC-8010-4070-B285-796FBAC11C37} = {9F24040E-C7F2-4AC6-B3CB-27C9A8BF1268}
+		{1A392D53-955C-4CC4-8679-3E9FAEAA170B} = {9F24040E-C7F2-4AC6-B3CB-27C9A8BF1268}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {01E3ED7A-0C32-42D5-909D-27F047BCE209}

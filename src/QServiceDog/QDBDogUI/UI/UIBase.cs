@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using DevComponents.DotNetBar;
 using QCommon.UI;
 using QDBDog;
+using QDBDog.Share;
 
 namespace QDBDogUI.UI
 {
@@ -25,17 +26,7 @@ namespace QDBDogUI.UI
         protected string defaultFileName = System.IO.Path.Combine(Application.StartupPath, "config\\appsettings.json");
         public QDBDog.Config loadConfig(bool allowNew = true)
         {
-            QDBDog.Config config = new QDBDog.Config();
-            if (System.IO.File.Exists(defaultFileName))
-            {
-                string s = System.IO.File.ReadAllText(defaultFileName, Encoding.UTF8);
-                config = s.De<QDBDog.Config>();
-            }
-            else if (!allowNew)
-            {
-                throw new Exception($"未找到配置文件{defaultFileName}");
-            }
-            return config;
+            return Config.LoadConfig(defaultFileName, allowNew);
         }
 
         public UIBase LoadConfig()
@@ -57,7 +48,7 @@ namespace QDBDogUI.UI
                 if (dlg.ShowDialog() == DialogResult.OK)
                 {
                     string s = System.IO.File.ReadAllText(dlg.FileName, Encoding.UTF8);
-                    var config = s.De<QDBDog.Config>();
+                    var config = s.De<Config>();
                     if (config == null)
                     {
                         MessageBox.Show("无效的配置文件");
@@ -123,7 +114,7 @@ namespace QDBDogUI.UI
             Dictionary<string, string> data = new Dictionary<string, string>();
             collect(theTableLayoutPanel.Controls, data);
             collectSub(data);
-            config = data.ToArray().CopyNameValuePairs<QDBDog.Config>(config);
+            config = data.ToArray().CopyNameValuePairs<Config>(config);
             //强制节点名为纯字母，取最后一个符合要求的
             if (reg.IsMatch(config.ServerPath))
             {
@@ -175,14 +166,7 @@ namespace QDBDogUI.UI
             frm.ShowDialog();
         }
 
-        protected string execSql(Config config, string script, string name, bool canShowResult = true)
-        {
-            var result = SqlSugarHelper.Exec(script, config.DBServer);
-            logger.Info(name + "\r\n" + result, null);
-            if (canShowResult)
-                showResult(result, name);
-            return result;
-        }
+        
 
         protected void lockButton(int second, Button btn)
         {

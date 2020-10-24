@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace QDBDogUI.Properties {
+namespace QDBDog.Properties {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace QDBDogUI.Properties {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("QDBDogUI.Properties.Resources", typeof(Resources).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("QDBDog.Properties.Resources", typeof(Resources).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -62,44 +62,6 @@ namespace QDBDogUI.Properties {
         
         /// <summary>
         ///   查找类似 USE master;
-        ///CREATE MASTER KEY ENCRYPTION BY PASSWORD = &apos;ZyDBBak20200408&apos;;
-        ///go
-        /// 
-        ///CREATE CERTIFICATE AutoBakCert FROM FILE = &apos;{0}\AutoBakCert.cer&apos;
-        ///WITH PRIVATE KEY (  FILE = &apos;{0}\AutoBakCert.pkey&apos;, DECRYPTION  BY PASSWORD =&apos;Cert123&apos;);
-        ///go
-        ///
-        ///print N&apos;启用证书和主控密钥完成&apos;;
-        ///go  的本地化字符串。
-        /// </summary>
-        internal static string AutoBakCert {
-            get {
-                return ResourceManager.GetString("AutoBakCert", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
-        /// </summary>
-        internal static byte[] AutoBakCert1 {
-            get {
-                object obj = ResourceManager.GetObject("AutoBakCert1", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找 System.Byte[] 类型的本地化资源。
-        /// </summary>
-        internal static byte[] AutoBakCert2 {
-            get {
-                object obj = ResourceManager.GetObject("AutoBakCert2", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 USE master;
         ///IF EXISTS(SELECT 1 FROM sys.certificates WHERE name=&apos;AutoBakCert&apos;)
         ///BEGIN
         ///	BACKUP DATABASE [@dbname@] TO  DISK = N&apos;@path@.dll&apos; WITH RETAINDAYS = 30, NOFORMAT, INIT,  NAME = N&apos;@dbname@自动完整备份&apos;, SKIP, NOREWIND, NOUNLOAD,COMPRESSION,   STATS = 10 ,ENCRYPTION (ALGORITHM = AES_256, SERVER CERTIFICATE = AutoBakCert);
@@ -113,39 +75,12 @@ namespace QDBDogUI.Properties {
         }
         
         /// <summary>
-        ///   查找类似于 (图标) 的 System.Drawing.Icon 类型的本地化资源。
-        /// </summary>
-        internal static System.Drawing.Icon database {
-            get {
-                object obj = ResourceManager.GetObject("database", resourceCulture);
-                return ((System.Drawing.Icon)(obj));
-            }
-        }
-        
-        /// <summary>
         ///   查找 System.Byte[] 类型的本地化资源。
         /// </summary>
         internal static byte[] dbBack {
             get {
                 object obj = ResourceManager.GetObject("dbBack", resourceCulture);
                 return ((byte[])(obj));
-            }
-        }
-        
-        /// <summary>
-        ///   查找类似 USE master;
-        ///DROP CERTIFICATE AutoBakCert ;
-        ///go
-        ///
-        ///drop MASTER KEY ;
-        ///go
-        ///
-        ///print N&apos;移除证书和主控密钥完成&apos;;
-        ///go  的本地化字符串。
-        /// </summary>
-        internal static string DropAutoBakCert {
-            get {
-                return ResourceManager.GetString("DropAutoBakCert", resourceCulture);
             }
         }
     }

@@ -80,6 +80,9 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Transactions" />
+    <Reference Include="System.ValueTuple, Version=4.0.3.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.ValueTuple.4.5.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -94,18 +97,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\QDBDog\Config.cs">
-      <Link>Config.cs</Link>
-    </Compile>
-    <Compile Include="..\QDBDog\SqlSugarHelper.cs">
-      <Link>SqlSugarHelper.cs</Link>
-    </Compile>
     <Compile Include="content\FormX.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Extension.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="SqlSugarHelper.cs" />
     <Compile Include="UI\UIBase.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -129,21 +131,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <EmbeddedResource Include="UI\UIDB.resx">
       <DependentUpon>UIDB.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="UI\UISystem.resx">
       <DependentUpon>UISystem.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="config\dbBack.ffs_batch" />
+    <None Include="..\QDBDog\config\dbBack.ffs_batch">
+      <Link>config\dbBack.ffs_batch</Link>
+    </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -154,11 +153,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <Content Include="..\QDBDog\sql\BackupDB.sql">
+      <Link>sql\BackupDB.sql</Link>
+    </Content>
     <Content Include="content\Readme.txt" />
     <Content Include="database.ico" />
     <Content Include="Doc\qservice_readme.txt" />
     <Content Include="qservice_readme.txt" />
-    <Content Include="sql\BackupDB.sql" />
     <Content Include="sql\DropAutoBakCert.sql" />
     <Content Include="sql\AutoBakCert.cer">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -176,5 +177,6 @@
   <ItemGroup>
     <Folder Include="Tools\" />
   </ItemGroup>
+  <Import Project="..\QDBDog.Share\QDBDog.Share.projitems" Label="Shared" />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
