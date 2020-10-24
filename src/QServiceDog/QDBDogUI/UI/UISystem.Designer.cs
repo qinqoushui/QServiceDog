@@ -407,8 +407,10 @@
             this.button9.Name = "button9";
             this.button9.Size = new System.Drawing.Size(100, 45);
             this.button9.TabIndex = 8;
+            this.button9.Tag = "Console";
             this.button9.Text = "控制台调试";
             this.button9.UseVisualStyleBackColor = true;
+            this.button9.Click += new System.EventHandler(this.button9_Click);
             // 
             // button15
             // 
@@ -417,8 +419,10 @@
             this.button15.Name = "button15";
             this.button15.Size = new System.Drawing.Size(80, 45);
             this.button15.TabIndex = 7;
+            this.button15.Tag = "Install";
             this.button15.Text = "安装服务";
             this.button15.UseVisualStyleBackColor = true;
+            this.button15.Click += new System.EventHandler(this.button9_Click);
             // 
             // button14
             // 
@@ -427,8 +431,10 @@
             this.button14.Name = "button14";
             this.button14.Size = new System.Drawing.Size(80, 45);
             this.button14.TabIndex = 6;
+            this.button14.Tag = "Start";
             this.button14.Text = "启动服务";
             this.button14.UseVisualStyleBackColor = true;
+            this.button14.Click += new System.EventHandler(this.button9_Click);
             // 
             // button13
             // 
@@ -437,8 +443,10 @@
             this.button13.Name = "button13";
             this.button13.Size = new System.Drawing.Size(80, 45);
             this.button13.TabIndex = 5;
+            this.button13.Tag = "Stop";
             this.button13.Text = "停止服务";
             this.button13.UseVisualStyleBackColor = true;
+            this.button13.Click += new System.EventHandler(this.button9_Click);
             // 
             // button12
             // 
@@ -447,8 +455,10 @@
             this.button12.Name = "button12";
             this.button12.Size = new System.Drawing.Size(80, 45);
             this.button12.TabIndex = 4;
+            this.button12.Tag = "Uninstall";
             this.button12.Text = "卸载服务";
             this.button12.UseVisualStyleBackColor = true;
+            this.button12.Click += new System.EventHandler(this.button9_Click);
             // 
             // label1
             // 

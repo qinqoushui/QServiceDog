@@ -6,6 +6,8 @@ using System.Windows.Forms;
 using QDBDog;
 using QDBDogUI.Properties;
 using QDBDog.Share;
+using System.Diagnostics;
+using QouShui.DLL.Forms;
 
 namespace QDBDogUI.UI
 {
@@ -80,6 +82,7 @@ namespace QDBDogUI.UI
         private void button2_Click(object sender, EventArgs e)
         {
             //运行freesync
+            lockButton(3, sender as Button);
             if (System.Diagnostics.Process.GetProcessesByName("FreeFileSync").Length > 0)
             {
                 MessageBox.Show("已在运行中!!!");
@@ -155,5 +158,98 @@ namespace QDBDogUI.UI
         }
 
         #endregion
+
+        #region 服务控制
+
+        protected string serviceExe = System.IO.Path.Combine(Application.StartupPath, "QDBDog.exe");
+        private void button9_Click(object sender, EventArgs e)
+        {
+            lockButton(3, sender as Button);
+            new FormWait().Start((sender as Button).Text, () =>
+            {
+                aa((sender as Button).Tag.ToString());
+            });
+
+        }
+        void aa(string action)
+        {
+            try
+            {
+                switch (action)
+                {
+                    case "Console":
+                        Process.Start(serviceExe);
+                        break;
+                    case "Install":
+                        showResult(execute($"/c \"{serviceExe}\" install"));
+                        break;
+                    case "Start":
+                        showResult(execute($"/c \"{serviceExe}\" start"));
+                        break;
+                    case "Stop":
+                        showResult(execute($"/c \"{serviceExe}\" stop"));
+                        break;
+                    case "Uninstall":
+                        showResult(execute($"/c \"{serviceExe}\" uninstall"));
+                        break;
+                    case "MGR":
+                        //textBox4.Text=  execute($"/c services.msc", 10);
+                        System.Diagnostics.Process.Start("services.msc");
+                        break;
+
+                    default:
+                        break;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+
+        string execute(string command, int seconds = 5)
+        {
+            string output = ""; //输出字符串
+            if (command != null && !command.Equals(""))
+            {
+                Process process = new Process();//创建进程对象
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "cmd.exe";//设定需要执行的命令
+                startInfo.Arguments = "  " + command;//“/C”表示执行完命令后马上退出
+                startInfo.UseShellExecute = false;//不使用系统外壳程序启动
+                startInfo.RedirectStandardInput = false;//不重定向输入
+                startInfo.RedirectStandardOutput = true; //重定向输出
+                startInfo.CreateNoWindow = true;//不创建窗口
+                process.StartInfo = startInfo;
+                try
+                {
+                    if (process.Start())//开始进程
+                    {
+                        if (seconds == 0)
+                        {
+                            process.WaitForExit();//这里无限等待进程结束
+                        }
+                        else
+                        {
+                            process.WaitForExit(seconds * 1000); //等待进程结束，等待时间为指定的毫秒
+                        }
+                        output = process.StandardOutput.ReadToEnd();//读取进程的输出
+                    }
+                }
+                catch (Exception ex)
+                {
+                    output = ex.ToString();
+                }
+                finally
+                {
+                    if (process != null)
+                        process.Close();
+                }
+            }
+            return output;
+        }
+        #endregion
+
+
     }
 }
