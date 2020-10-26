@@ -151,7 +151,7 @@ namespace QDBDogUI.UI
             {
                 lockButton(30, sender as Button);
                 var config = loadConfig(false);
-                var a = BackupHelper.Instance.Backupdb(config, Resources.BackupDB, out var subPath,
+                var a = BackupHelper.Instance.Backupdb(config, Resources.BackupDB, out var subPath, "Auto",
                             result => showResult(result));
                 if (a.flag == "succ")
                 {
@@ -183,5 +183,28 @@ namespace QDBDogUI.UI
             }
         }
 
+        private void button5_Click(object sender, EventArgs e)
+        {
+            //生成备份脚本并执行
+            try
+            {
+                lockButton(30, sender as Button);
+                var config = loadConfig(false);
+                var a = BackupHelper.Instance.Backupdb(config, Resources.BackupDB,  out var subPath, "持久",
+                            result => showResult(result));
+                if (a.flag == "succ")
+                {
+                    logger.Info($"数据库{config.DBServer}备份完成{subPath}");
+                    MessageBox.Show(this,"持久备份完成，即将打开文件夹，建议用记事本打开并修改文件夹中的\"持久备份说明.md\",记录本次持久备份的理由");
+                    System.Diagnostics.Process.Start("explorer.exe", subPath);
+                }
+                else
+                    MessageBox.Show(this, a.err);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(this, ex.Message);
+            }
+        }
     }
 }

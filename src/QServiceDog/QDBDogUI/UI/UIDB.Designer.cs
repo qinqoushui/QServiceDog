@@ -49,6 +49,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -141,6 +142,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.button5);
             this.panel4.Controls.Add(this.button11);
             this.panel4.Controls.Add(this.button10);
             this.panel4.Controls.Add(this.button9);
@@ -310,6 +312,17 @@
             this.panel3.Size = new System.Drawing.Size(492, 25);
             this.panel3.TabIndex = 45;
             // 
+            // button5
+            // 
+            this.button5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button5.Location = new System.Drawing.Point(240, 0);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(80, 42);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "持久备份";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
+            // 
             // UIDB
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -349,5 +362,6 @@
         private System.Windows.Forms.Button button10;
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Button button5;
     }
 }

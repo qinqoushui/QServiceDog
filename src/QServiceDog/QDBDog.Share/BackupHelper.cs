@@ -13,7 +13,7 @@ namespace QDBDog.Share
         static BackupHelper _ = new BackupHelper();
         public static BackupHelper Instance { get; } = _;
 
-        public (string flag, string err) Backupdb(Config config, string template, out string subPath, Action<string> showResult = null)
+        public (string flag, string err) Backupdb(  Config config, string template,out string subPath, string backupType = "Auto", Action<string> showResult = null)
         {
             subPath = string.Empty;
             List<string> selected = new List<string>();
@@ -53,17 +53,17 @@ namespace QDBDog.Share
             }
             StringBuilder sb = new StringBuilder();
             string time = DateTime.Now.ToString("yyyy_MM_dd_HHmmss_ff");
-            subPath = Path.Combine(config.LocalPath, time);
+            subPath = Path.Combine(config.LocalPath, $"{backupType}_{time}");
             if (!Directory.Exists(subPath))
                 Directory.CreateDirectory(subPath);
-            File.WriteAllText(Path.Combine(subPath, "备份说明.md"), $"1. 节点名称:{config.Name} \r\n1. 时间:{time} \r\n1. 期望备份的数据库:{config.DBNames} \r\n1. 实际备份的数据库:{string.Join(",", needBackup.ToArray())}");
+            File.WriteAllText(Path.Combine(subPath, $"{backupType}备份说明.md"), $"1. 节点名称:{config.Name} \r\n1. 时间:{time} \r\n1.备份理由:{backupType} \r\n1. 期望备份的数据库:{config.DBNames} \r\n1. 实际备份的数据库:{string.Join(",", needBackup.ToArray())}");
             foreach (var db in needBackup)
             {
                 sb.Append(template.Replace("@dbname@", db).Replace("@path@", Path.Combine(subPath, db)));
                 sb.AppendLine();
             }
             var result = SQLServerHelper.Exec(sb.ToString(), config.DBServer);
-            File.AppendAllText(Path.Combine(subPath, "备份说明.md"), $"\r\n\r\n-\r\n{result}", Encoding.UTF8);
+            File.AppendAllText(Path.Combine(subPath, $"{backupType}备份说明.md"), $"\r\n\r\n-\r\n{result}", Encoding.UTF8);
             showResult?.Invoke(result);
             return ("succ", result);
         }
@@ -80,7 +80,7 @@ namespace QDBDog.Share
                     List<FileInfo> tmpInfo = new List<FileInfo>();
                     foreach (var sub in new DirectoryInfo(config.LocalPath).GetDirectories())
                     {
-                        var aa = sub.GetFiles("备份说明.md");
+                        var aa = sub.GetFiles("Auto备份说明.md");
                         if (aa.Length == 0)
                             continue;
                         tmpInfo.Add(aa.First());
@@ -116,7 +116,7 @@ namespace QDBDog.Share
                     //一级子目录中必须有 备份说明.md
                     foreach (var sub in new DirectoryInfo(config.LocalPath).GetDirectories())
                     {
-                        if (sub.GetFiles("备份说明.md").Length == 0)
+                        if (sub.GetFiles("Auto备份说明.md").Length == 0)
                             continue;
                         var files = sub.GetFiles("*", SearchOption.AllDirectories);
                         t += files.Length;

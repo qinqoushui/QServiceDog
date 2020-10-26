@@ -34,7 +34,7 @@ namespace QDBDog
             {
                 case nameof(BackupHelper.Backupdb):
                 default:
-                    return BackupHelper.Instance.Backupdb(config, Resources.BackupDB, out string subPath, null);
+                    return BackupHelper.Instance.Backupdb(config, Resources.BackupDB, out string subPath);
             }
         }
 

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,12 +15,16 @@ namespace QDBDogUI
         [STAThread]
         static void Main()
         {
-            //互斥
-            bool runone;
-            System.Threading.Mutex run = new System.Threading.Mutex(true, $"{nameof(QDBDogUI)}", out runone);
-            if (runone)
+            FileStream stream = null;
+            try
             {
-                run.ReleaseMutex();
+                //互斥(fody与MUTEX冲突,改变锁定文件）
+                //bool runone;
+                //System.Threading.Mutex run = new System.Threading.Mutex(false, $"{nameof(QDBDogUI)}", out runone);
+                stream = System.IO.File.Open(System.IO.Path.Combine(Application.StartupPath, "mutex"), System.IO.FileMode.OpenOrCreate, System.IO.FileAccess.ReadWrite, System.IO.FileShare.None);
+                //if (runone)
+                //{
+                //    run.ReleaseMutex();
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 QCommon.UI.Common.Setting.Default();
@@ -27,10 +32,22 @@ namespace QDBDogUI
 
                 Properties.Settings.Default.Save();
                 Application.Run(new FormX());
+                //}
+                //else
             }
-            else
+            catch (Exception ex)
             {
                 MessageBox.Show("程序已启动，请不要重复启动");
+                //  MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                if (stream != null)
+                {
+                    stream.Close();
+                    stream.Dispose();
+                    stream = null;
+                }
             }
         }
     }
