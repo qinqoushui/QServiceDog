@@ -66,11 +66,13 @@ namespace QDBDogUI
 
         private DevComponents.DotNetBar.Controls.SideNavPanel sideNavPanelX2;
         private DevComponents.DotNetBar.Controls.SideNavPanel sideNavPanelX3;
+        private DevComponents.DotNetBar.Controls.SideNavPanel sideNavPanelX4;
         private DevComponents.DotNetBar.Controls.SideNavItem sideNavItem1;
         private Separator separatorX1;
         private DevComponents.DotNetBar.Controls.SideNavItem sideNavItem2;
         private DevComponents.DotNetBar.Controls.SideNavItem sideNavItem3;
         private DevComponents.DotNetBar.Controls.SideNavItem sideNavItem4;
+        private DevComponents.DotNetBar.Controls.SideNavItem sideNavItem5;
         
 
 
@@ -110,11 +112,13 @@ namespace QDBDogUI
             this.sideNavPanelX1 = new DevComponents.DotNetBar.Controls.SideNavPanel();
             this.sideNavPanelX3 = new DevComponents.DotNetBar.Controls.SideNavPanel();
             this.sideNavPanelX2 = new DevComponents.DotNetBar.Controls.SideNavPanel();
+            this.sideNavPanelX4 = new DevComponents.DotNetBar.Controls.SideNavPanel();
             this.sideNavItem1 = new DevComponents.DotNetBar.Controls.SideNavItem();
             this.separatorX1 = new DevComponents.DotNetBar.Separator();
             this.sideNavItem2 = new DevComponents.DotNetBar.Controls.SideNavItem();
             this.sideNavItem3 = new DevComponents.DotNetBar.Controls.SideNavItem();
             this.sideNavItem4 = new DevComponents.DotNetBar.Controls.SideNavItem();
+            this.sideNavItem5 = new DevComponents.DotNetBar.Controls.SideNavItem();
             this.sideNavItemExit = new DevComponents.DotNetBar.Controls.SideNavItem();
             this.panelTop.SuspendLayout();
             this.panelBottom.SuspendLayout();
@@ -182,6 +186,7 @@ namespace QDBDogUI
             this.mySideNav1.Controls.Add(this.sideNavPanelX1);
             this.mySideNav1.Controls.Add(this.sideNavPanelX3);
             this.mySideNav1.Controls.Add(this.sideNavPanelX2);
+            this.mySideNav1.Controls.Add(this.sideNavPanelX4);
             this.mySideNav1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.mySideNav1.EnableClose = false;
             this.mySideNav1.EnableMaximize = false;
@@ -192,6 +197,7 @@ namespace QDBDogUI
             this.separatorX1,
             this.sideNavItem2,
             this.sideNavItem3,
+            this.sideNavItem5,
             this.sideNavItem4,
             this.sideNavItemExit});
             this.mySideNav1.Location = new System.Drawing.Point(0, 0);
@@ -219,6 +225,13 @@ namespace QDBDogUI
             this.sideNavPanelX3.Size = new System.Drawing.Size(714, 432);
             this.sideNavPanelX3.TabIndex = 10;
             this.sideNavPanelX3.Visible = false;
+
+            this.sideNavPanelX4.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.sideNavPanelX4.Location = new System.Drawing.Point(128, 41);
+            this.sideNavPanelX4.Name = "sideNavPanelX4";
+            this.sideNavPanelX4.Size = new System.Drawing.Size(714, 432);
+            this.sideNavPanelX4.TabIndex = 10;
+            this.sideNavPanelX4.Visible = false;
             // 
             // sideNavPanelX2
             // 
@@ -261,7 +274,12 @@ namespace QDBDogUI
             this.sideNavItem3.Name = "sideNavItem3";
             this.sideNavItem3.Panel = this.sideNavPanelX2;
             this.sideNavItem3.Symbol = "";
-            this.sideNavItem3.Text = "数据库";
+            this.sideNavItem3.Text = "数据库备份";
+
+            this.sideNavItem5.Name = "sideNavItem5";
+            this.sideNavItem5.Panel = this.sideNavPanelX4;
+            this.sideNavItem5.Symbol = "";
+            this.sideNavItem5.Text = "数据库还原";
             // 
             // sideNavItem4
             // 
