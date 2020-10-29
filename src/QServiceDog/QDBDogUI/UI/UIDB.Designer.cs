@@ -35,6 +35,7 @@
             this.button1 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.panel4 = new System.Windows.Forms.Panel();
+            this.button5 = new System.Windows.Forms.Button();
             this.button11 = new System.Windows.Forms.Button();
             this.button10 = new System.Windows.Forms.Button();
             this.button9 = new System.Windows.Forms.Button();
@@ -49,7 +50,7 @@
             this.button3 = new System.Windows.Forms.Button();
             this.checkedListBox1 = new System.Windows.Forms.CheckedListBox();
             this.panel3 = new System.Windows.Forms.Panel();
-            this.button5 = new System.Windows.Forms.Button();
+            this.button6 = new System.Windows.Forms.Button();
             this.tableLayoutPanel1.SuspendLayout();
             this.panel4.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -142,6 +143,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.button6);
             this.panel4.Controls.Add(this.button5);
             this.panel4.Controls.Add(this.button11);
             this.panel4.Controls.Add(this.button10);
@@ -151,6 +153,17 @@
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(492, 42);
             this.panel4.TabIndex = 44;
+            // 
+            // button5
+            // 
+            this.button5.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button5.Location = new System.Drawing.Point(240, 0);
+            this.button5.Name = "button5";
+            this.button5.Size = new System.Drawing.Size(80, 42);
+            this.button5.TabIndex = 4;
+            this.button5.Text = "持久备份";
+            this.button5.UseVisualStyleBackColor = true;
+            this.button5.Click += new System.EventHandler(this.button5_Click);
             // 
             // button11
             // 
@@ -312,16 +325,17 @@
             this.panel3.Size = new System.Drawing.Size(492, 25);
             this.panel3.TabIndex = 45;
             // 
-            // button5
+            // button6
             // 
-            this.button5.Dock = System.Windows.Forms.DockStyle.Left;
-            this.button5.Location = new System.Drawing.Point(240, 0);
-            this.button5.Name = "button5";
-            this.button5.Size = new System.Drawing.Size(80, 42);
-            this.button5.TabIndex = 4;
-            this.button5.Text = "持久备份";
-            this.button5.UseVisualStyleBackColor = true;
-            this.button5.Click += new System.EventHandler(this.button5_Click);
+            this.button6.Dock = System.Windows.Forms.DockStyle.Left;
+            this.button6.ForeColor = System.Drawing.Color.Red;
+            this.button6.Location = new System.Drawing.Point(320, 0);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(80, 42);
+            this.button6.TabIndex = 5;
+            this.button6.Text = "提升系\r\n统权限";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
             // 
             // UIDB
             // 
@@ -363,5 +377,6 @@
         private System.Windows.Forms.Button button9;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }

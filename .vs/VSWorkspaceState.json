@@ -4,13 +4,10 @@
     "\\src",
     "\\src\\QServiceDog",
     "\\src\\QServiceDog\\QDBDog",
+    "\\src\\QServiceDog\\QDBDog.Share",
     "\\src\\QServiceDog\\QDBDogUI",
-    "\\src\\QServiceDog\\QServiceDog\\Jobs",
-    "\\src\\QServiceDog\\QServiceDog\\Views",
-    "\\src\\QServiceDog\\QServiceDog\\Views\\ClientEventSubscriber",
-    "\\src\\QServiceDog\\QServiceDog\\Views\\DogAction",
-    "\\src\\QServiceDog\\QServiceDog\\Views\\EventSubscriber"
+    "\\src\\QServiceDog\\QDBDog\\Jobs"
   ],
-  "SelectedNode": "\\src\\QServiceDog\\QDBDog\\readme.md",
+  "SelectedNode": "\\src\\QServiceDog\\QDBDog\\Jobs\\DBJob.cs",
   "PreviewInSolutionExplorer": false
 }

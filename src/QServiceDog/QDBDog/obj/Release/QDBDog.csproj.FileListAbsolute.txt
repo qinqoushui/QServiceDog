@@ -25,4 +25,3 @@ D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Release\QDBDog.
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Release\QDBDog.csproj.CopyComplete
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Release\QDBDog.exe
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Release\QDBDog.pdb
-D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Release\QDBDog.csprojAssemblyReference.cache

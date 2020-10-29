@@ -13,7 +13,7 @@ namespace QDBDog
 
     public abstract class ConfigJob<T> : QuartzBase<T>
     {
-        public ConfigJob(string name) : base(name)
+        public ConfigJob(string name) : base(name,true)
         {
 
         }

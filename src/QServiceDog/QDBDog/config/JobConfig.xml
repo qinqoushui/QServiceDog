@@ -66,7 +66,7 @@
         <job-group>Sync</job-group>
         <start-time>2019-01-01T00:00:00.0Z</start-time>
         <misfire-instruction>SmartPolicy</misfire-instruction>
-        <cron-expression>0 0/30 * * * ?</cron-expression>
+        <cron-expression>0 0/3 * * * ?</cron-expression>
       </cron>
     </trigger>
     

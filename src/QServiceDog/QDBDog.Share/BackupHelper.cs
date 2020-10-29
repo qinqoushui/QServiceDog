@@ -13,7 +13,7 @@ namespace QDBDog.Share
         static BackupHelper _ = new BackupHelper();
         public static BackupHelper Instance { get; } = _;
 
-        public (string flag, string err) Backupdb(  Config config, string template,out string subPath, string backupType = "Auto", Action<string> showResult = null)
+        public (string flag, string err) Backupdb(Config config, string template, out string subPath, string backupType = "Auto", Action<string> showResult = null)
         {
             subPath = string.Empty;
             List<string> selected = new List<string>();
@@ -56,7 +56,7 @@ namespace QDBDog.Share
             subPath = Path.Combine(config.LocalPath, $"{backupType}_{time}");
             if (!Directory.Exists(subPath))
                 Directory.CreateDirectory(subPath);
-            File.WriteAllText(Path.Combine(subPath, $"{backupType}备份说明.md"), $"1. 节点名称:{config.Name} \r\n1. 时间:{time} \r\n1.备份理由:{backupType} \r\n1. 期望备份的数据库:{config.DBNames} \r\n1. 实际备份的数据库:{string.Join(",", needBackup.ToArray())}");
+            File.WriteAllText(Path.Combine(subPath, $"{backupType}备份说明.md"), $"1. 节点名称:{config.Name} \r\n1. 时间:{time} \r\n1. 备份理由:{backupType} \r\n1. 期望备份的数据库:{config.DBNames} \r\n1. 实际备份的数据库:{string.Join(",", needBackup.ToArray())}");
             foreach (var db in needBackup)
             {
                 sb.Append(template.Replace("@dbname@", db).Replace("@path@", Path.Combine(subPath, db)));
@@ -188,16 +188,14 @@ namespace QDBDog.Share
         {
             logger.Info("执行脚本：" + script);
             string file = System.IO.Path.GetTempFileName();
-            System.IO.File.WriteAllText(file, script, Encoding.UTF8);
+            System.IO.File.WriteAllText(file, script, Encoding.Default);
             try
             {
                 var result = ExecFile(file, serverName, dbname);
-                logger.Info("执行结果：" + result);
                 return result;
             }
             catch (Exception ex)
             {
-                logger.Info("执行结果：" + ex.ToString());
                 return ex.ToString();
             }
             finally
@@ -241,20 +239,38 @@ namespace QDBDog.Share
             if (!System.IO.File.Exists(file))
                 return "";
             string sqlcmd = "";
+            string[] exeNames = new string[] { "sqlcmd.exe" , "osql.exe" };
             for (int i = 220; i > 80; i -= 10)
             {
                 Microsoft.Win32.RegistryKey reg = Microsoft.Win32.Registry.LocalMachine.OpenSubKey($"SOFTWARE\\Microsoft\\Microsoft SQL Server\\{i}\\Tools\\ClientSetup");
                 if (reg == null)
                     continue;
-                sqlcmd = System.IO.Path.Combine(reg.GetValue("Path", "").ToString(), "sqlcmd.exe");
-                if (System.IO.File.Exists(sqlcmd))
-                    break;//找到第一个可用的
+                if (reg.GetValue("Path", "").ToString() == "")
+                    continue;
+                //优先osql
+                foreach (string s in exeNames)
+                {
+                    sqlcmd = System.IO.Path.Combine(reg.GetValue("Path", "").ToString(), s);
+                    if (System.IO.File.Exists(sqlcmd))
+                        break;//找到第一个可用的
+                    else
+                        sqlcmd = "";
+                }
             }
             if (string.IsNullOrEmpty(sqlcmd))
             {
-                throw new Exception("本机没有安装SQLServer，无法执行脚本");
+                //尝试使用本地的文件
+#if UI
+                sqlcmd = System.IO.Path.Combine(System.Windows.Forms.Application.StartupPath, "Tools\\osql.exe");
+#else                
+                sqlcmd = QCommon.Service.FileHelper.GetAbsolutePath("Tools\\osql.exe");
+
+#endif
+                if (!System.IO.File.Exists(sqlcmd))
+                    throw new Exception("本机没有安装SQLServer，无法执行脚本");
             }
 
+            logger.Info($"{sqlcmd} -S{serverName} -d{dbname} -E -i\"{file}\"");
 
             System.Diagnostics.Process pro = new System.Diagnostics.Process();
             pro.StartInfo.FileName = sqlcmd;
