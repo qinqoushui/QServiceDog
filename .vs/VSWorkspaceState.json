@@ -6,8 +6,9 @@
     "\\src\\QServiceDog\\QDBDog",
     "\\src\\QServiceDog\\QDBDog.Share",
     "\\src\\QServiceDog\\QDBDogUI",
+    "\\src\\QServiceDog\\QDBDogUI\\Tools",
     "\\src\\QServiceDog\\QDBDog\\Jobs"
   ],
-  "SelectedNode": "\\src\\QServiceDog\\QDBDog\\Jobs\\DBJob.cs",
+  "SelectedNode": "\\src\\QServiceDog\\QDBDogUI\\Tools",
   "PreviewInSolutionExplorer": false
 }

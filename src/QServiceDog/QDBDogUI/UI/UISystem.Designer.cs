@@ -67,6 +67,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.panel5 = new System.Windows.Forms.Panel();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.button6 = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numExpire)).BeginInit();
             this.panel2.SuspendLayout();
@@ -389,6 +390,7 @@
             // 
             // panel4
             // 
+            this.panel4.Controls.Add(this.button6);
             this.panel4.Controls.Add(this.button9);
             this.panel4.Controls.Add(this.button15);
             this.panel4.Controls.Add(this.button14);
@@ -558,6 +560,18 @@
             this.panel6.Size = new System.Drawing.Size(788, 25);
             this.panel6.TabIndex = 44;
             // 
+            // button6
+            // 
+            this.button6.Dock = System.Windows.Forms.DockStyle.Right;
+            this.button6.Location = new System.Drawing.Point(268, 0);
+            this.button6.Name = "button6";
+            this.button6.Size = new System.Drawing.Size(100, 45);
+            this.button6.TabIndex = 9;
+            this.button6.Tag = "Console";
+            this.button6.Text = "创建守护计划";
+            this.button6.UseVisualStyleBackColor = true;
+            this.button6.Click += new System.EventHandler(this.button6_Click);
+            // 
             // UISystem
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
@@ -623,5 +637,6 @@
         private System.Windows.Forms.Panel panel5;
         private System.Windows.Forms.Panel panel6;
         private System.Windows.Forms.Button button5;
+        private System.Windows.Forms.Button button6;
     }
 }
