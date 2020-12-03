@@ -21,8 +21,8 @@ namespace QServiceDog.Jobs
         protected override bool doPre()
         {
 #if DEBUG
-            return true;
-#else
+            //  return true;
+#endif
             bool isCloud = GlobalConfig.Instance.Client.StartsWith("Cloud", StringComparison.OrdinalIgnoreCase);
             if (isCloud)
             {
@@ -48,21 +48,8 @@ namespace QServiceDog.Jobs
                         return true;
                 }
             }
-#endif
         }
-        protected int GetValueInRange(string key, int min, int max, int defaultValue)
-        {
-            if (jobDataMap.ContainsKey(key))
-            {
-                int v = jobDataMap.GetInt(key);
-                if (v < min || v > max)
-                    return defaultValue;
-                else
-                    return v;
-            }
-            else
-                return defaultValue;
-        }
+
     }
     /// <summary>
     /// 扫描各个服务或程序，判断是否需要启动

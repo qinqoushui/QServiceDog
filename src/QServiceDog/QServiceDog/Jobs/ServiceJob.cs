@@ -18,6 +18,7 @@ namespace QServiceDog.Jobs
 {
     /// <summary>
     /// 扫描各个服务或程序，判断是否需要启动
+    /// 云服务器不守护服务
     /// </summary>
     public class ServiceJob : QCommon.Service.Jobs.QuartzBase<ServiceInfo>
     {
@@ -46,16 +47,16 @@ namespace QServiceDog.Jobs
             if (check(data))
             {
                 data.LastAliveTime = DateTime.Now;
-                if (data.LastStopTime.Add(data.RestartTime) < DateTime.Now) //存活太久，肥了就杀
+                if (DateTime.Now.Hour < 6 && data.LastStopTime.Add(data.RestartTime) < DateTime.Now) //存活太久，肥了就杀,定期自动停止
                 {
                     stop(data);
                     EventBLL.Instance.AddEvent(new EventInfo()
                     {
                         Id = Guid.NewGuid(),
                         Time = DateTime.Now,
-                        Type = "Dog",
+                        Type = "Auto",
                         Msg = $"运维自检，主动停止{data.Desc}，上次停止于{data.LastStopTime}"
-                    },false);
+                    }, false);
                     data.LastStopTime = DateTime.Now;
                     return ("succ", $"stop at {DateTime.Now}");
                 }
@@ -64,7 +65,7 @@ namespace QServiceDog.Jobs
             }
             else
             {
-                if (DateTime.Now.Hour < 6 && data.LastAliveTime.Add(data.IdleTime) < DateTime.Now) //沉默太久，冒个泡,限6点前
+                if (data.LastAliveTime.Add(data.IdleTime) < DateTime.Now) //沉默太久，冒个泡,限6点前
                 {
                     stop(data);
                     System.Threading.Thread.Sleep(10000);
@@ -74,9 +75,9 @@ namespace QServiceDog.Jobs
                     {
                         Id = Guid.NewGuid(),
                         Time = DateTime.Now,
-                        Type = "Dog",
+                        Type = "Monitor",
                         Msg = $"启动{data.Desc}，上次运行于{data.LastAliveTime}。如果连续多次启动，则启动可能一直不成功"
-                    },false );
+                    }, false);
                     return ("succ", $"run at {DateTime.Now}");
                 }
                 else
@@ -207,7 +208,8 @@ namespace QServiceDog.Jobs
             List<ServiceInfo> result = new List<ServiceInfo>();
             using (var ef = new ServiceDBContext())
             {
-                result = ef.ServiceInfo.Where(r => r.IsEnable).ToList();
+                //仅守护本地服务
+                result = ef.ServiceInfo.Where(r => r.IsEnable && r.Client == GlobalConfig.Instance.Client).ToList();
             }
             max = result.Count;
             total = result.Count;

@@ -11,6 +11,13 @@
         "DemoType": "Web"
       },
       {
+        "Title": "服务模板",
+        "Name": "Index",
+        "DocUrl": "",
+        "Widget": "ServiceTpl",
+        "DemoType": "Web"
+      },
+      {
         "Title": "服务",
         "Name": "Index",
         "DocUrl": "",
@@ -23,7 +30,7 @@
         "DocUrl": "",
         "Widget": "DogAction",
         "DemoType": "Web"
-      } 
+      }
     ]
   },
   {

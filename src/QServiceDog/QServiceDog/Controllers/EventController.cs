@@ -55,11 +55,18 @@ namespace QServiceDog.Controllers
                 return new { Code = 0, Msg = "" };
         }
 
+        /// <summary>
+        /// 服务当前状态上报
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
         [HttpPost("Service")]
         public object RecvService([FromBody] List<ServiceInfo> data)
         {
             int c = ServiceBLL.Instance.Add4Cloud(data);
             return new { Code = 0, Msg = $"{c}/{data.Count}" };
         }
+
+        
     }
 }

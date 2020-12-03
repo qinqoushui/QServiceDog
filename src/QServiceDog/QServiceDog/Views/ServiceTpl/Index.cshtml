@@ -1,0 +1,48 @@
+@{
+    ViewData["Title"] = "服务模板";
+}
+
+@(Html.DevExtreme()
+       .DataGrid<QServiceDog.Models.ServiceTpl>().ID("gridContainer").Columns(columns =>
+       {
+           columns.AddFor(m => m.Id).Hide();
+           columns.AddFor(m => m.Client).Caption("项目位置").AllowEditing(false).FormItem(r=>r.Visible(false));
+           columns.AddFor(m => m.Name).Caption("名称/服务名") ;
+           columns.AddFor(m => m.Desc).MinWidth(120) ;
+           columns.AddFor(m => m.CheckName).Caption("检测方法").MinWidth(100).Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.DogAction)).LoadAction("GetByType").LoadParams(new { Type = "Check" }).Key("Id"))
+        .DisplayExpr("Name").ValueExpr("Name")
+            );
+           columns.AddFor(m => m.CheckData).Caption("检测数据").MinWidth(120);
+           columns.AddFor(m => m.RunName).Caption("启动方法").MinWidth(100).Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.DogAction)).LoadAction("GetByType").LoadParams(new { Type="Run" }).Key("Id"))
+    .DisplayExpr("Name").ValueExpr("Name")
+        );
+           columns.AddFor(m => m.RunData).Caption("启动数据").MinWidth(120);
+           columns.AddFor(m => m.StopName).Caption("停止方法").MinWidth(100).Lookup(lookup => lookup.DataSource(d => d.Mvc().Controller(nameof(QServiceDog.Models.DogAction)).LoadAction("GetByType").LoadParams(new { Type = "Stop" }).Key("Id"))
+    .DisplayExpr("Name").ValueExpr("Name")
+        );
+           columns.AddFor(m => m.StopData).Caption("停止数据").MinWidth(120);
+
+           columns.AddFor(m => m.LastAliveTime).Caption("上次存活时间").DataType( GridColumnDataType.DateTime).Format("yyyy-MM-dd HH:mm:ss").Width(180);
+           columns.AddFor(m => m.LastStopTime).Caption("上次重启时间").DataType( GridColumnDataType.DateTime).Format("yyyy-MM-dd HH:mm:ss").Width(180);
+           columns.AddFor(m => m.IdleTime).Caption("发呆时长") ;
+           columns.AddFor(m => m.RestartTime).Caption("重启间隔时长") ;
+           columns.AddFor(m => m.IsEnable).Caption("是否启用").TrueText("是").FalseText("否").ShowEditorAlways(false); 
+
+       }).StartDataGrid(nameof(QServiceDog.Models.ServiceTpl),"Id",true ).OnInitNewRow("inseredEvent")
+)
+<script>
+    $(function () {
+        setInterval(function () {
+            reQuery($("#gridContainer"));
+        }, 120000);
+    });
+    function inseredEvent(data) {
+        var day2 = new Date();
+        data.data.Client = "@QServiceDog.Helpers.GlobalConfig.Instance.Client";
+        data.data.LastAliveTime = day2.getFullYear() + "-" + (day2.getMonth() + 1) + "-" + day2.getDate() + " 00:00:01";
+        data.data.LastStopTime = day2.getFullYear() + "-" + (day2.getMonth() + 1) + "-" + day2.getDate() + " 00:00:01";
+        data.data.IdleTime = "00:05:00";
+        data.data.RestartTime = "1.00:00:01";
+    }
+     
+</script>

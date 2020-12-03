@@ -21,7 +21,7 @@ namespace QServiceDog.Jobs
     {
         public SyncEventJob() : base(nameof(SyncEventJob), true)
         {
-
+             
         }
         protected override void doAfter(IList<string> data)
         {
@@ -84,10 +84,7 @@ namespace QServiceDog.Jobs
 
 
 
-        protected override bool doPre()
-        {
-            return true;
-        }
+        
 
         protected override IList<string> getJobs(out int max, out int total)
         {

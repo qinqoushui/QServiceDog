@@ -21,6 +21,26 @@ namespace QServiceDog.Controllers
             return View();
         }
 
-       
+
+    }
+
+
+    public class ServiceTplController : EntityController<ServiceTpl, Guid>
+    {
+        public ServiceTplController(DbContext db) : base(db)
+        {
+
+        }
+
+        public IActionResult Index()
+        {
+            return View();
+        }
+        //[Authorize(Policy = "IsAdmin")]
+        //[HttpPost]
+        //public virtual IActionResult Post(string values);
+        //[Authorize(Policy = "IsAdmin")]
+        //[HttpPut]
+        //public virtual IActionResult Put(string key, string values);
     }
 }

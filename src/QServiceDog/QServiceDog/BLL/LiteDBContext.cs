@@ -32,7 +32,7 @@ namespace QServiceDog.BLL
                     return;
                 _created = true;
 #if DEBUG
-                // Database.EnsureDeleted();
+                Database.EnsureDeleted();
 #endif
 
                 if (!Database.EnsureCreated())
@@ -124,15 +124,14 @@ namespace QServiceDog.BLL
                     });
                     SaveChanges();
                 }
-
-
-                if (!ServiceInfo.Any())
+                #region 初始化模板
+                if (!ServiceTpl.Any())
                 {
-                    ServiceInfo.Add(new ServiceInfo()
+                    ServiceTpl.Add(new ServiceTpl()
                     {
                         Id = Guid.NewGuid(),
-                        Desc = "记事本测试",
-                        Name = "NotePad",
+                        Desc = "进程检测",
+                        Name = "Process",
                         CheckName = Enums.EnumAction.e查找进程.ToString().Substring(1),
                         CheckData = "Notepad",
                         RunName = Enums.EnumAction.e启动进程.ToString().Substring(1),
@@ -144,39 +143,39 @@ namespace QServiceDog.BLL
                         StopData = "notepad",
                         LastAliveTime = DateTime.Now,
                         LastStopTime = DateTime.Now,
-                        IdleTime = TimeSpan.FromMinutes(1),
-                        RestartTime = TimeSpan.FromDays(38),
-                        Client = "TEST",
+                        IdleTime = TimeSpan.FromMinutes(5),
+                        RestartTime = TimeSpan.FromDays(30),
+                        Client = "通用模板",
                         IsEnable = true
                     });
 
-                    ServiceInfo.Add(new ServiceInfo()
+                    ServiceTpl.Add(new ServiceTpl()
                     {
                         Id = Guid.NewGuid(),
-                        Desc = "Url测试",
-                        Name = "regedit",
+                        Desc = "Url检测",
+                        Name = "Url",
                         CheckName = Enums.EnumAction.e打开网页.ToString().Substring(1),
                         CheckData = "http://192.168.10.37:8080",
                         RunName = Enums.EnumAction.e启动进程.ToString().Substring(1),
                         RunData = new
                         {
-                            FileName = @"c:\windows\system32\regedit.exe"
+                            FileName = @"c:\windows\system32\notepad.exe"
                         }.SerializeObject(),
                         StopName = Enums.EnumAction.e终止进程.ToString().Substring(1),
-                        StopData = "regedit",
+                        StopData = "notepad",
                         LastAliveTime = DateTime.Now,
                         LastStopTime = DateTime.Now,
-                        IdleTime = TimeSpan.FromMinutes(1),
-                        RestartTime = TimeSpan.FromMinutes(3),
-                        Client = "TEST",
+                        IdleTime = TimeSpan.FromMinutes(5),
+                        RestartTime = TimeSpan.FromDays(30),
+                        Client = "通用模板",
                         IsEnable = true
                     });
 
-                    ServiceInfo.Add(new ServiceInfo()
+                    ServiceTpl.Add(new ServiceTpl()
                     {
                         Id = Guid.NewGuid(),
-                        Desc = "SQLServer数据库",
-                        Name = "SQLServer",
+                        Desc = "端口检测",
+                        Name = "Port",
                         CheckName = Enums.EnumAction.e检测端口.ToString().Substring(1),
                         CheckData = "127.0.0.1:1433",
                         RunName = Enums.EnumAction.e启动服务.ToString().Substring(1),
@@ -185,17 +184,17 @@ namespace QServiceDog.BLL
                         StopData = "MSSQL$SQL2014",
                         LastAliveTime = DateTime.Now,
                         LastStopTime = DateTime.Now,
-                        IdleTime = TimeSpan.FromMinutes(1),
-                        RestartTime = TimeSpan.FromMinutes(3),
-                        Client = "TEST",
+                        IdleTime = TimeSpan.FromMinutes(5),
+                        RestartTime = TimeSpan.FromDays(30),
+                        Client = "通用模板",
                         IsEnable = true
                     });
 
-                    ServiceInfo.Add(new ServiceInfo()
+                    ServiceTpl.Add(new ServiceTpl()
                     {
                         Id = Guid.NewGuid(),
-                        Desc = "Redis数据库",
-                        Name = "Redis",
+                        Desc = "服务检测",
+                        Name = "Service",
                         CheckName = Enums.EnumAction.e检测服务状态.ToString().Substring(1),
                         CheckData = "redis",
                         RunName = Enums.EnumAction.e启动服务.ToString().Substring(1),
@@ -206,15 +205,15 @@ namespace QServiceDog.BLL
                         LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),
                         RestartTime = TimeSpan.FromMinutes(3),
-                        Client = "TEST",
+                        Client = "通用模板",
                         IsEnable = true
                     });
 
-                    ServiceInfo.Add(new ServiceInfo()
+                    ServiceTpl.Add(new ServiceTpl()
                     {
                         Id = Guid.NewGuid(),
-                        Desc = "OpenVPN守护",
-                        Name = "OpenVPN",
+                        Desc = "IP检测",
+                        Name = "Ping",
                         CheckName = Enums.EnumAction.e检测IP.ToString().Substring(1),
                         CheckData = "192.168.255.1",
                         RunName = Enums.EnumAction.e启动进程.ToString().Substring(1),
@@ -230,19 +229,130 @@ namespace QServiceDog.BLL
                         LastStopTime = DateTime.Now,
                         IdleTime = TimeSpan.FromMinutes(1),
                         RestartTime = TimeSpan.FromMinutes(5),
-                        Client = "TEST",
+                        Client = "通用模板",
                         IsEnable = true
                     });
+
+                    #region 产品模板
+                    //常用产品：门禁、消费、考勤、数据备份、手环、IIS 等
+                    ServiceTpl.Add(new ServiceTpl()
+                    {
+                        Id = Guid.NewGuid(),
+                        Desc = "门禁服务",
+                        Name = "AC",
+                        CheckName = Enums.EnumAction.e检测端口.ToString().Substring(1),
+                        CheckData = "127.0.0.1:5000",
+                        RunName = Enums.EnumAction.e启动服务.ToString().Substring(1),
+                        RunData = "ZY.Cloud.Front.ACService.exe",
+                        StopName = Enums.EnumAction.e停止服务.ToString().Substring(1),
+                        StopData = "ZY.Cloud.Front.ACService.exe",
+                        LastAliveTime = DateTime.Now,
+                        LastStopTime = DateTime.Now,
+                        IdleTime = TimeSpan.FromMinutes(5),
+                        RestartTime = TimeSpan.FromDays(7),
+                        Client = "产品模板",
+                        IsEnable = true
+                    });
+
+                    ServiceTpl.Add(new ServiceTpl()
+                    {
+                        Id = Guid.NewGuid(),
+                        Desc = "微信服务",
+                        Name = "WeChat",
+                        CheckName = Enums.EnumAction.e检测端口.ToString().Substring(1),
+                        CheckData = "127.0.0.1:5005",
+                        RunName = Enums.EnumAction.e启动服务.ToString().Substring(1),
+                        RunData = "ZY.Wechat.Service.exe",
+                        StopName = Enums.EnumAction.e停止服务.ToString().Substring(1),
+                        StopData = "ZY.Wechat.Service.exe",
+                        LastAliveTime = DateTime.Now,
+                        LastStopTime = DateTime.Now,
+                        IdleTime = TimeSpan.FromMinutes(5),
+                        RestartTime = TimeSpan.FromDays(7),
+                        Client = "产品模板",
+                        IsEnable = true
+                    });
+
+                    ServiceTpl.Add(new ServiceTpl()
+                    {
+                        Id = Guid.NewGuid(),
+                        Desc = "消费服务",
+                        Name = "Pos",
+                        CheckName = Enums.EnumAction.e检测端口.ToString().Substring(1),
+                        CheckData = "127.0.0.1:8888",
+                        RunName = Enums.EnumAction.e启动服务.ToString().Substring(1),
+                        RunData = "PosService",
+                        StopName = Enums.EnumAction.e停止服务.ToString().Substring(1),
+                        StopData = "PosService",
+                        LastAliveTime = DateTime.Now,
+                        LastStopTime = DateTime.Now,
+                        IdleTime = TimeSpan.FromMinutes(5),
+                        RestartTime = TimeSpan.FromDays(7),
+                        Client = "产品模板",
+                        IsEnable = true
+                    });
+
+                    ServiceTpl.Add(new ServiceTpl()
+                    {
+                        Id = Guid.NewGuid(),
+                        Desc = "青果教务对接",
+                        Name = "QGAPI",
+                        CheckName = Enums.EnumAction.e检测服务状态.ToString().Substring(1),
+                        CheckData = "TAYCApiService",
+                        RunName = Enums.EnumAction.e启动服务.ToString().Substring(1),
+                        RunData = "TAYCApiService",
+                        StopName = Enums.EnumAction.e停止服务.ToString().Substring(1),
+                        StopData = "TAYCApiService",
+                        LastAliveTime = DateTime.Now,
+                        LastStopTime = DateTime.Now,
+                        IdleTime = TimeSpan.FromMinutes(5),
+                        RestartTime = TimeSpan.FromDays(7),
+                        Client = "产品模板",
+                        IsEnable = true
+                    });
+
+                    ServiceTpl.Add(new ServiceTpl()
+                    {
+                        Id = Guid.NewGuid(),
+                        Desc = "数据库备份上传服务",
+                        Name = "QBackup2",
+                        CheckName = Enums.EnumAction.e检测服务状态.ToString().Substring(1),
+                        CheckData = "QBackup2",
+                        RunName = Enums.EnumAction.e启动服务.ToString().Substring(1),
+                        RunData = "QBackup2",
+                        StopName = Enums.EnumAction.e停止服务.ToString().Substring(1),
+                        StopData = "QBackup2",
+                        LastAliveTime = DateTime.Now,
+                        LastStopTime = DateTime.Now,
+                        IdleTime = TimeSpan.FromMinutes(5),
+                        RestartTime = TimeSpan.FromDays(7),
+                        Client = "产品模板",
+                        IsEnable = true
+                    });
+
+                    ServiceTpl.Add(new ServiceTpl()
+                    {
+                        Id = Guid.NewGuid(),
+                        Desc = "手环服务",
+                        Name = "Band",
+                        CheckName = Enums.EnumAction.e打开网页.ToString().Substring(1),
+                        CheckData = "http://127.0.0.1:8080/band",
+                        RunName = Enums.EnumAction.e启动进程.ToString().Substring(1),
+                        RunData = "dotnet.exe",
+                        StopName = Enums.EnumAction.e终止进程.ToString().Substring(1),
+                        StopData = "dotnet.exe",
+                        LastAliveTime = DateTime.Now,
+                        LastStopTime = DateTime.Now,
+                        IdleTime = TimeSpan.FromMinutes(5),
+                        RestartTime = TimeSpan.FromDays(7),
+                        Client = "产品模板",
+                        IsEnable = true
+                    });
+                    #endregion
+
                     SaveChanges();
                 }
-                else
-                {
-                    if (!clientName.Equals("CLOUD", StringComparison.OrdinalIgnoreCase))
-                    {
-                        ServiceInfo.Where(r => r.Client != clientName).ToList().ForEach(r => r.Client = clientName);
-                        SaveChanges();
-                    }
-                }
+                #endregion
 
                 if (!EventSubscriber.Any())
                 {
@@ -301,7 +411,7 @@ namespace QServiceDog.BLL
                      }));
                     SaveChanges();
                 }
-                 
+
                 if (!Sender.Any())
                 {
                     Sender.Add(new Sender()
@@ -352,6 +462,7 @@ namespace QServiceDog.BLL
             }
 
             aa<User>();
+            aa<ServiceTpl>();
             aa<ServiceInfo>();
             aa<EventInfo>();
             aa<EventSubscriber>();
@@ -370,6 +481,7 @@ namespace QServiceDog.BLL
 
         }
         public DbSet<User> User { get; set; }
+        public DbSet<ServiceTpl> ServiceTpl { get; set; }
         public DbSet<ServiceInfo> ServiceInfo { get; set; }
         public DbSet<EventInfo> EventInfo { get; set; }
         public DbSet<DogAction> DogAction { get; set; }

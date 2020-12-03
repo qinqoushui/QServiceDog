@@ -35,8 +35,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="3.1.5" />
     <PackageReference Include="MimeKit" Version="2.8.0" />
     <PackageReference Include="Q.DevExtreme.Tpl" Version="1.0.30" />
-    <PackageReference Include="QCommon.Quartz" Version="1.0.7" />
-    <PackageReference Include="QCommon.Standard" Version="1.0.53" />
+    <PackageReference Include="QCommon.Quartz" Version="1.0.8" />
+    <PackageReference Include="QCommon.Standard" Version="1.0.56" />
   </ItemGroup>
 
 </Project>

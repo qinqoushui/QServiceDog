@@ -26,7 +26,18 @@ namespace QServiceDog
         public override void ConfigureOther(IApplicationBuilder app, IWebHostEnvironment env)
         {
             new BLL.ServiceDBContext().CreateAndInitData(GlobalConfig.Instance.Client);
-            Task.Delay(60000).ContinueWith(t => new QCommon.Service.Jobs.QuartzJobScheduler().RunAsync());
+            var quartz = app.ApplicationServices.GetRequiredService<QCommon.Service.Jobs.QuartzJobScheduler>();
+            var appLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+            appLifetime.ApplicationStarted.Register(() =>
+            {
+                quartz.RunAsync().Wait(); //网站启动完成执行
+            });
+            appLifetime.ApplicationStopped.Register(() =>
+            {
+                quartz.StopAsync();  //网站停止完成执行
+
+            });
+
         }
 
         public override void ConfigureServicesOther(IServiceCollection services)
@@ -43,8 +54,8 @@ namespace QServiceDog
             //services.AddDbContext<Helpers.LogDBContext>(option => option.UseSqlServer(Configuration.GetConnectionString("SqlServerConnection"), opt => opt.MaxBatchSize(1000)));
 
 #if DEBUG
-           
-            BLL.ServiceDBContext.ConnectionString =$"Data Source={System.IO.Path.Combine(  "data" , "app.db")};";
+
+            BLL.ServiceDBContext.ConnectionString = $"Data Source={System.IO.Path.Combine("data", "app.db")};";
 #else
             if (!System.IO.Directory.Exists(System.IO.Path.Combine(AppContext.BaseDirectory, "data")))
                 System.IO.Directory.CreateDirectory(System.IO.Path.Combine(AppContext.BaseDirectory, "data"));
@@ -72,6 +83,12 @@ namespace QServiceDog
             }));
             GlobalConfig.Instance.Client = this.Configuration.GetSection("Client").Value;
 
+            #region QuartzJob
+            services.AddSingleton<QCommon.Service.Jobs.QuartzJobScheduler>();
+            //services.AddTransient<UserInfoSyncjob>();      // 注入某个JOB
+            services.AddSingleton<Quartz.ISchedulerFactory, Quartz.Impl.StdSchedulerFactory>();
+            services.AddSingleton<Quartz.Spi.IJobFactory, QCommon.Service.Jobs.IOCJobFactory>(); //IOCJob工厂会从IOC中取JOB
+            #endregion
         }
 
 
