@@ -26,9 +26,9 @@
            columns.AddFor(m => m.LastStopTime).Caption("上次重启时间").DataType( GridColumnDataType.DateTime).Format("yyyy-MM-dd HH:mm:ss").Width(180);
            columns.AddFor(m => m.IdleTime).Caption("发呆时长") ;
            columns.AddFor(m => m.RestartTime).Caption("重启间隔时长") ;
-           columns.AddFor(m => m.IsEnable).Caption("是否启用").TrueText("是").FalseText("否").ShowEditorAlways(false); 
+           columns.AddFor(m => m.IsEnable).Caption("是否启用").TrueText("是").FalseText("否").ShowEditorAlways(false);
 
-       }).StartDataGrid(nameof(QServiceDog.Models.ServiceTpl),"Id",true ).OnInitNewRow("inseredEvent")
+       }).StartDataGrid(nameof(QServiceDog.Models.ServiceTpl),"Id", Convert.ToBoolean(ViewData["IsAdmin"])).OnInitNewRow("inseredEvent")
 )
 <script>
     $(function () {

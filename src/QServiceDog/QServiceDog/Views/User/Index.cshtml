@@ -1,12 +1,12 @@
-@(Html.DevExtreme()
+﻿@(Html.DevExtreme()
        .DataGrid<User>().Columns(columns =>
        {
            columns.AddFor(m => m.UserNo).Width(140);
            columns.AddFor(m => m.UserName).Width(140);
            columns.AddFor(m => m.Password).Width(140);
-           columns.AddFor(m => m.Role);
+           columns.AddFor(m => m.Role).Lookup(lk => lk.DataSource(r => r.Array().Data(new string[] { "管理员", "操作员" })));
 
-       }).StartDataGrid(nameof(User),"Id", true, GridEditMode.Row)
+       }).StartDataGrid(nameof(User),"Id", Convert.ToBoolean(ViewData["IsAdmin"]), GridEditMode.Row)
 )
 <script>
 

@@ -1,28 +1,15 @@
 ﻿[
   {
-    "Name": "服务守护",
+    "Name": "基础数据",
     "Equivalents": "dxDataGrid, dx-data-grid",
+    "Mode": "CLOUD",
     "Menus": [
-      {
-        "Title": "事件",
-        "Name": "Index",
-        "DocUrl": "",
-        "Widget": "EventInfo",
-        "DemoType": "Web"
-      },
       {
         "Title": "服务模板",
         "Name": "Index",
         "DocUrl": "",
         "Widget": "ServiceTpl",
-        "DemoType": "Web"
-      },
-      {
-        "Title": "服务",
-        "Name": "Index",
-        "DocUrl": "",
-        "Widget": "ServiceInfo",
-        "DemoType": "Web"
+        "DemoType": "CLOUD"
       },
       {
         "Title": "行为",
@@ -34,7 +21,30 @@
     ]
   },
   {
+    "Name": "服务守护",
+    "Equivalents": "dxDataGrid, dx-data-grid",
+    "Menus": [
+      {
+        "Title": "事件",
+        "Name": "Index",
+        "DocUrl": "",
+        "Widget": "EventInfo",
+        "DemoType": "Web"
+      },
+
+      {
+        "Title": "服务",
+        "Name": "Index",
+        "DocUrl": "",
+        "Widget": "ServiceInfo",
+        "DemoType": "Web"
+      }
+    ]
+  },
+
+  {
     "Name": "事件订阅",
+    "Mode": "CLOUD",
     "Equivalents": "dxDataGrid, dx-data-grid",
     "Menus": [
 
@@ -71,19 +81,13 @@
   {
     "Name": "System",
     "Equivalents": "dxDataGrid, dx-data-grid",
-    "Groups": [
+    "Menus": [
       {
-        "Name": "系统",
-        "Equivalents": "",
-        "Menus": [
-          {
-            "Title": "用户",
-            "Name": "Index",
-            "DocUrl": "",
-            "Widget": "User",
-            "DemoType": "Web"
-          }
-        ]
+        "Title": "用户",
+        "Name": "Index",
+        "DocUrl": "",
+        "Widget": "User",
+        "DemoType": "Web"
       }
     ]
   }

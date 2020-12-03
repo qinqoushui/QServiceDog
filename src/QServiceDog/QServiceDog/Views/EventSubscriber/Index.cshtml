@@ -12,7 +12,7 @@
            columns.AddFor(m => m.WXName).Caption("企业微信名称") ;
            columns.AddFor(m => m.IsEnable).Caption("是否启用") .TrueText("是").FalseText("否").ShowEditorAlways(false);
 
-       }).StartDataGrid(nameof(QServiceDog.Models.EventSubscriber),"Id",true)
+       }).StartDataGrid(nameof(QServiceDog.Models.EventSubscriber),"Id", Convert.ToBoolean(ViewData["IsAdmin"]))
 )
 <script>
     $(function () {

@@ -11,7 +11,8 @@ namespace QServiceDog.Controllers
 {
     public class ServiceInfoController : EntityController<ServiceInfo, Guid>
     {
-        public ServiceInfoController(DbContext db) : base(db)
+
+        public ServiceInfoController(Microsoft.AspNetCore.Authorization.IAuthorizationService authorizationService, Microsoft.EntityFrameworkCore.DbContext _db) : base(authorizationService, _db)
         {
 
         }
@@ -27,13 +28,14 @@ namespace QServiceDog.Controllers
 
     public class ServiceTplController : EntityController<ServiceTpl, Guid>
     {
-        public ServiceTplController(DbContext db) : base(db)
+        public ServiceTplController(Microsoft.AspNetCore.Authorization.IAuthorizationService authorizationService, Microsoft.EntityFrameworkCore.DbContext _db)
+            : base(authorizationService, _db)
         {
 
         }
-
         public IActionResult Index()
         {
+            ViewData["IsAdmin"] = User != null && User.Claims != null && User.Claims.FirstOrDefault(r => r.Type == "Admin")?.Value == "true";
             return View();
         }
         //[Authorize(Policy = "IsAdmin")]

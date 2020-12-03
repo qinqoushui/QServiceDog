@@ -1,5 +1,5 @@
 @{
-    ViewData["Title"] = "事件订阅地点";
+    ViewData["Title"] = "事件订阅规则";
 }
 
 @(Html.DevExtreme()
@@ -11,7 +11,7 @@
     .DisplayExpr("Name").ValueExpr("Id")
         );
 
-       }).StartDataGrid(nameof(QServiceDog.Models.ClientEventSubscriber),"Id",true, GridEditMode.Form).OnInitNewRow("inseredEvent")
+       }).StartDataGrid(nameof(QServiceDog.Models.ClientEventSubscriber),"Id", Convert.ToBoolean(ViewData["IsAdmin"]), GridEditMode.Form).OnInitNewRow("inseredEvent")
 )
 <script>
     $(function () {

@@ -12,7 +12,7 @@ namespace QServiceDog.Controllers
 {
     public class EventInfoController : EntityController<EventInfo, Guid>
     {
-        public EventInfoController(DbContext db) : base(db)
+        public EventInfoController(Microsoft.AspNetCore.Authorization.IAuthorizationService authorizationService, Microsoft.EntityFrameworkCore.DbContext _db) : base(authorizationService, _db)
         {
 
         }

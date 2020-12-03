@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "aOj0SVPS7BrkiTxKfNGbYNXB1ZMNa4OuPegdHm8YlYJsjg5+Q01e6DSVLMjm0hSZ9mWruA01gNf21GQvJik+XQ==",
+  "dgSpecHash": "nTz8bVG+5aEDqAnVLUUhCCIfOK+ZFVz1a+SGIkK4ezOWev6t8FI7Sjko2Vwv0ZnUgFGAU9jDwX7cC5D3OghbQg==",
   "success": true,
   "projectFilePath": "D:\\Code\\github\\qinqoushui\\QServiceDog\\src\\QServiceDog\\QServiceDog\\QServiceDog.csproj",
   "expectedPackageFiles": [
@@ -111,7 +111,7 @@
     "e:\\.nuget\\nlog\\4.6.5\\nlog.4.6.5.nupkg.sha512",
     "e:\\.nuget\\nuget.frameworks\\4.7.0\\nuget.frameworks.4.7.0.nupkg.sha512",
     "e:\\.nuget\\portable.bouncycastle\\1.8.5\\portable.bouncycastle.1.8.5.nupkg.sha512",
-    "e:\\.nuget\\q.devextreme.tpl\\1.0.30\\q.devextreme.tpl.1.0.30.nupkg.sha512",
+    "e:\\.nuget\\q.devextreme.tpl\\1.0.33\\q.devextreme.tpl.1.0.33.nupkg.sha512",
     "e:\\.nuget\\qcommon.if.standard\\1.0.2\\qcommon.if.standard.1.0.2.nupkg.sha512",
     "e:\\.nuget\\qcommon.quartz\\1.0.8\\qcommon.quartz.1.0.8.nupkg.sha512",
     "e:\\.nuget\\qcommon.standard\\1.0.56\\qcommon.standard.1.0.56.nupkg.sha512",

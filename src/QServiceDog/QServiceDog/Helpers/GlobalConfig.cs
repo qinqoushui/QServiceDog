@@ -9,6 +9,7 @@ namespace QServiceDog.Helpers
         public IMapper Mapper { get; set; }
  
         public string Client { get; set; }
- 
+
+        public static readonly string Cloud = "CLOUD";
     }
 }

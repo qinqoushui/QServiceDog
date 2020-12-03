@@ -58,7 +58,7 @@
             },
             "Q.DevExtreme.Tpl": {
               "target": "Package",
-              "version": "[1.0.30, )"
+              "version": "[1.0.33, )"
             },
             "QCommon.Quartz": {
               "target": "Package",

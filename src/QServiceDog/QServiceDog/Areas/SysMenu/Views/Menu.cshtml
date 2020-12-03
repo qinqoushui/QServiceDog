@@ -6,7 +6,17 @@
 
 @{
     var routeValues = ViewContext.RouteData.Values;
-    var nodes = meta.ToHierarchicalDataSource(Url, (string)routeValues["controller"], (string)routeValues["action"]);
+    var nodes = meta.ToHierarchicalDataSource(Url, (string)routeValues["controller"], (string)routeValues["action"],_=>{
+        if (QServiceDog.Helpers.GlobalConfig.Instance.Client == QServiceDog.Helpers.GlobalConfig.Cloud)
+        {
+            return _;//云模式下返回所有
+        }
+        else
+        {
+            //其它模式下返回非云模式的组
+            return _.Where(r => r.Mode == null || r.Mode != QServiceDog.Helpers.GlobalConfig.Cloud);
+        }
+    });
 }
 
 <div class="demo-menu" id="demo-menu">
@@ -16,8 +26,10 @@
             $("#demo-menu-tree").dxTreeView({
                 dataSource: @Json.Serialize(nodes),
                 dataStructure: "tree",
-                itemTemplate: function(data) {
-                    return $(document.createElement("a")).attr("href", data.Url).text(data.Text);
+                itemTemplate: function (data) {
+                     
+                        return $(document.createElement("a")).attr("href", data.Url).text(data.Text);
+                     
                 },
                 itemsExpr: "@nameof(TreeNode.Items)",
                 expandedExpr: "@nameof(TreeNode.Active)",

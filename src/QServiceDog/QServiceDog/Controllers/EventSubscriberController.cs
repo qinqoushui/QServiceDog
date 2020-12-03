@@ -12,11 +12,10 @@ namespace QServiceDog.Controllers
 {
     public class EventSubscriberController : EntityController<EventSubscriber, Guid>
     {
-        public EventSubscriberController(DbContext db) : base(db)
+        public EventSubscriberController(Microsoft.AspNetCore.Authorization.IAuthorizationService authorizationService, Microsoft.EntityFrameworkCore.DbContext _db) : base(authorizationService, _db)
         {
 
         }
-
         public IActionResult Index()
         {
             return View();
@@ -47,7 +46,8 @@ namespace QServiceDog.Controllers
 
     public class EventPushRecordController : EntityController<EventPushRecord, Guid>
     {
-        public EventPushRecordController(DbContext db) : base(db)
+
+        public EventPushRecordController(Microsoft.AspNetCore.Authorization.IAuthorizationService authorizationService, Microsoft.EntityFrameworkCore.DbContext _db) : base(authorizationService, _db)
         {
 
         }
@@ -65,7 +65,8 @@ namespace QServiceDog.Controllers
     }
     public class ClientEventSubscriberController : EntityController<ClientEventSubscriber, Guid>
     {
-        public ClientEventSubscriberController(DbContext db) : base(db)
+
+        public ClientEventSubscriberController(Microsoft.AspNetCore.Authorization.IAuthorizationService authorizationService, Microsoft.EntityFrameworkCore.DbContext _db) : base(authorizationService, _db)
         {
 
         }
@@ -97,7 +98,8 @@ namespace QServiceDog.Controllers
     }
     public class SenderController : EntityController<Sender, Guid>
     {
-        public SenderController(DbContext db) : base(db)
+
+        public SenderController(Microsoft.AspNetCore.Authorization.IAuthorizationService authorizationService, Microsoft.EntityFrameworkCore.DbContext _db) : base(authorizationService, _db)
         {
 
         }

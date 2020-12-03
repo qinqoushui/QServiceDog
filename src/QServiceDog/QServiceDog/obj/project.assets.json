@@ -1615,7 +1615,7 @@
           "lib/netstandard2.0/BouncyCastle.Crypto.dll": {}
         }
       },
-      "Q.DevExtreme.Tpl/1.0.30": {
+      "Q.DevExtreme.Tpl/1.0.33": {
         "type": "package",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "7.0.0",
@@ -6009,10 +6009,10 @@
         "portable.bouncycastle.nuspec"
       ]
     },
-    "Q.DevExtreme.Tpl/1.0.30": {
-      "sha512": "dU84CsY20G5d7gA+lb1AjEOTWGG4eWwcHpogxzeBzYNnqAk9T40bOiFk9mpuzq+eHDK8yfaIpGe5mVO4TShdkQ==",
+    "Q.DevExtreme.Tpl/1.0.33": {
+      "sha512": "R56UU9OQcE+mfCAdmphPJezzzNajYj7aeysxzlSgF6pDiPIvEdeApoi5wFwzz+iwfQOppQ8duXwFYIVBikSd7g==",
       "type": "package",
-      "path": "q.devextreme.tpl/1.0.30",
+      "path": "q.devextreme.tpl/1.0.33",
       "hasTools": true,
       "files": [
         ".nupkg.metadata",
@@ -6023,7 +6023,6 @@
         "content/Areas/SysMenu/Views/_LayoutNavigation.cshtml",
         "content/Areas/SysMenu/Views/_Resources.cshtml",
         "content/Areas/SysMenu/Views/_ViewImports.cshtml",
-        "content/Properties/launchSettings.json",
         "content/Views/Home/Index.cshtml",
         "content/Views/Home/Login.cshtml",
         "content/Views/User/Index.cshtml",
@@ -6068,7 +6067,7 @@
         "content/wwwroot/css/images/Menu/treeview_expanded_icon.png",
         "content/wwwroot/favicon.ico",
         "lib/netcoreapp3.1/Q.DevExtreme.Tpl.dll",
-        "q.devextreme.tpl.1.0.30.nupkg.sha512",
+        "q.devextreme.tpl.1.0.33.nupkg.sha512",
         "q.devextreme.tpl.nuspec",
         "readme.txt",
         "tools/init.ps1"
@@ -11344,7 +11343,7 @@
       "MailKit >= 2.7.0",
       "Microsoft.EntityFrameworkCore.Sqlite >= 3.1.5",
       "MimeKit >= 2.8.0",
-      "Q.DevExtreme.Tpl >= 1.0.30",
+      "Q.DevExtreme.Tpl >= 1.0.33",
       "QCommon.Quartz >= 1.0.8",
       "QCommon.Standard >= 1.0.56"
     ]
@@ -11407,7 +11406,7 @@
           },
           "Q.DevExtreme.Tpl": {
             "target": "Package",
-            "version": "[1.0.30, )"
+            "version": "[1.0.33, )"
           },
           "QCommon.Quartz": {
             "target": "Package",

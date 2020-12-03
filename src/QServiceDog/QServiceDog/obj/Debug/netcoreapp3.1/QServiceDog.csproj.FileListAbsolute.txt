@@ -438,7 +438,6 @@ D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netc
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.genruntimeconfig.cache
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netcoreapp3.1\appsettings.json
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netcoreapp3.1\bundleconfig.json
-D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.csprojAssemblyReference.cache
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netcoreapp3.1\refs\Microsoft.Win32.Registry.dll
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netcoreapp3.1\refs\System.Diagnostics.EventLog.dll
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netcoreapp3.1\refs\System.IO.Pipelines.dll
@@ -449,3 +448,4 @@ D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netc
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netcoreapp3.1\refs\System.Security.Principal.Windows.dll
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\bin\Debug\netcoreapp3.1\refs\System.Windows.Extensions.dll
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\scopedcss\bundle\QServiceDog.styles.css
+D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.csprojAssemblyReference.cache
