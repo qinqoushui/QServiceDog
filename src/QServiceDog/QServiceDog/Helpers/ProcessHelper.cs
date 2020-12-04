@@ -74,6 +74,54 @@ namespace QServiceDog.Helpers
                 return false;
             }
         }
+
+       public static bool StartUseCmd(string data, Action<string, Exception> logger)
+        {
+            var ss = data.DeserializeAnonymousType(new { FileName = "", Para = "", WorkingPath = "" });
+            string[] command = new string[]{
+                $" start  \"{Path.GetFileName(ss.FileName)}\" /D \"{ss.WorkingPath}\" \"{ss.FileName}\"","exit"
+            };
+            logger.Invoke($" start \"{Path.GetFileName(ss.FileName)}\"  /D \"{ss.WorkingPath}\" \"{ss.FileName}\"", null);
+            //string[] command = new string[]{
+            //    $"/c \"{ss.FileName}\"" 
+            //};
+            //通过任务计划执行程序
+
+            string output = ""; //输出字符串
+            if (command != null && !command.Equals(""))
+            {
+                Process process = new Process();//创建进程对象
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "cmd.exe";//设定需要执行的命令
+                startInfo.UseShellExecute = false;//不使用系统外壳程序启动
+                startInfo.RedirectStandardInput = true;//不重定向输入
+                startInfo.RedirectStandardOutput = true; //重定向输出
+                startInfo.CreateNoWindow = true;//不创建窗口
+                process.StartInfo = startInfo;
+                try
+                {
+                    if (process.Start())//开始进程
+                    {
+                        foreach (var line in command)
+                        {
+                            process.StandardInput.WriteLine(line);
+                        }
+                        //output = process.StandardOutput.ReadToEnd();//读取进程的输出
+                    }
+                }
+                catch (Exception ex)
+                {
+                    output = ex.ToString();
+                }
+                finally
+                {
+                    if (process != null)
+                        process.Close();
+                }
+            }
+            //logger?.Invoke(output,null);
+            return true;
+        }
     }
 
     public class CommandHelper

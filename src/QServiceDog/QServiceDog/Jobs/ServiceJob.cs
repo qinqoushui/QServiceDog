@@ -8,6 +8,7 @@ using QServiceDog.Models;
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.Diagnostics;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -22,7 +23,7 @@ namespace QServiceDog.Jobs
     /// </summary>
     public class ServiceJob : QCommon.Service.Jobs.QuartzBase<ServiceInfo>
     {
-        public ServiceJob() : base(nameof(ServiceJob), true)
+        public ServiceJob() : base(nameof(ServiceJob), false)
         {
 
         }
@@ -171,7 +172,8 @@ namespace QServiceDog.Jobs
                 switch (enumAction)
                 {
                     case EnumAction.e启动进程:
-                        new Thread(new ThreadStart(() => ProcessHelper.Start(data.RunData, (s, ex) => logger.Info(s, ex)))).Start();
+                        //改用命令行呼起
+                        new Thread(new ThreadStart(() => ProcessHelper.StartUseCmd(data.RunData, (s, ex) => logger.Info(s, ex)))).Start();
                         break;
                     case EnumAction.e启动服务:
                         new QCommon.Service.ServiceHelper(data.RunData).Start();
@@ -221,7 +223,42 @@ namespace QServiceDog.Jobs
             return data.Name;
         }
 
-
+        string execute(params string[] command)
+        {
+            string output = ""; //输出字符串
+            if (command != null && !command.Equals(""))
+            {
+                Process process = new Process();//创建进程对象
+                ProcessStartInfo startInfo = new ProcessStartInfo();
+                startInfo.FileName = "cmd.exe";//设定需要执行的命令
+                startInfo.UseShellExecute = false;//不使用系统外壳程序启动
+                startInfo.RedirectStandardInput = true;//不重定向输入
+                startInfo.RedirectStandardOutput = true; //重定向输出
+                startInfo.CreateNoWindow = true;//不创建窗口
+                process.StartInfo = startInfo;
+                try
+                {
+                    if (process.Start())//开始进程
+                    {
+                        foreach (var line in command)
+                        {
+                            process.StandardInput.WriteLine(line);
+                        }
+                        output = process.StandardOutput.ReadToEnd();//读取进程的输出
+                    }
+                }
+                catch (Exception ex)
+                {
+                    output = ex.ToString();
+                }
+                finally
+                {
+                    if (process != null)
+                        process.Close();
+                }
+            }
+            return output;
+        }
 
     }
 }
