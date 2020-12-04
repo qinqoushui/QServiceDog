@@ -28,15 +28,17 @@ namespace QServiceDog.BLL
         {
             lock (lck)
             {
+                Console.WriteLine("CreateAndInitData");
                 if (_created)
                     return;
                 _created = true;
 #if DEBUG
-              //  Database.EnsureDeleted();
+                //Database.EnsureDeleted();
+                //if (!Database.EnsureCreated())
+                //    return;
+#else
+                Database.EnsureCreated();
 #endif
-
-                if (!Database.EnsureCreated())
-                    return;
                 if (!User.Any())
                 {
                     User.Add(new Q.DevExtreme.Tpl.Models.User()
@@ -455,6 +457,7 @@ namespace QServiceDog.BLL
         }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            Console.WriteLine("OnModelCreating");
             base.OnModelCreating(modelBuilder);
             void aa<T>() where T : class
             {

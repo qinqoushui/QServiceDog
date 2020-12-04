@@ -25,3 +25,4 @@ D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Debug\QDBDog.cs
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Debug\QDBDog.csproj.Fody.CopyLocal.cache
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Debug\QDBDog.csproj.CopyComplete
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Debug\QDBDog.pdb
+D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QDBDog\obj\Debug\QDBDog.csprojAssemblyReference.cache

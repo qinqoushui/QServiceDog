@@ -30,6 +30,51 @@
            columns.AddFor(m => m.IsAlive).Caption("是否存活") .TrueText("是").FalseText("否").ShowEditorAlways(false).AllowEditing(false) ;
 
        }).StartDataGrid(nameof(QServiceDog.Models.ServiceInfo),"Id", Convert.ToBoolean(ViewData["IsAdmin"]))
+       .Editing(e =>
+       {
+           e.AllowAdding(true);
+           e.AllowUpdating(true);
+           e.AllowDeleting(true);
+           e.Mode(GridEditMode.Popup);
+           e.Popup(
+                p => p
+                .Title("ServiceInfo")
+                .ShowTitle(true)
+            );
+           e.Form(f =>
+           {
+               f.Items(items=>
+               {
+                   items.AddGroup().ColCount(2).ColSpan(2).Items(its => {
+                       its.AddSimpleFor(m=>m.Name);
+                       its.AddSimpleFor(m=>m.Desc);
+                       its.AddSimpleFor(m=>m.CheckName);
+                       its.AddSimpleFor(m=>m.CheckData);
+                       its.AddSimpleFor(m=>m.RunName);
+                       its.AddSimpleFor(m=>m.RunData).Editor(ed=>ed.TextBox().Name("taProcess"));
+                       its.AddSimpleFor(m=>m.StopName);
+                       its.AddSimpleFor(m=>m.StopData);
+                       its.AddSimpleFor(m=>m.LastAliveTime);
+                       its.AddSimpleFor(m => m.LastStopTime);
+                       its.AddSimpleFor(m => m.IdleTime);
+                       its.AddSimpleFor(m => m.RestartTime);
+                       its.AddSimpleFor(m => m.IsEnable);
+                       //its.AddSimpleFor(m => m.IsAlive);
+
+                   });
+                  
+                   items.AddGroup().Caption("辅助工具").ColCount(2).ColSpan(2).Items(its =>
+                   {
+                       its.AddSimple().Editor(ed =>  ed.SelectBox().DataSource(d=>d.Mvc().Controller(nameof(QServiceDog.Models.ServiceInfo)).LoadAction("GetProcess")) ).Label(l => l.Text("进程列表"));
+                       its.AddSimple().Label(l => l.Text("文件所在目录")).Editor(ed => ed.TextBox().Name("tbProcess"));
+                       its.AddEmpty();
+                       its.AddButton().ButtonOptions(op => op.OnClick("chooseFile").Text("生成启动数据"));
+                   });
+               });
+           }).Option("id","frm");
+       }
+
+       )
        .OnRowPrepared("onRowPrepared"). OnInitNewRow("inseredEvent").OnToolbarPreparing("onToolbarPreparing")
 
 )
@@ -65,6 +110,7 @@
     )
 }
 
+<input type="file" id="afile" name="afile" style="display:none" onchange="getFullPath(this)" />
 
 <script>
     $(function () {
@@ -75,13 +121,13 @@
             onValueChanged: gridBox_valueChanged,
             contentTemplate: EmbeddedDataGridSingle,
             showDropDownButton: true,
-            showClearButton:true,
+            showClearButton: true,
             dataSource: DevExpress.data.AspNet.createStore({
-               // key: "Id", //会影响valuechanged
+                // key: "Id", //会影响valuechanged
                 loadUrl: "../ServiceTpl/Get",
-                loadMode:'raw'
+                loadMode: 'raw'
             })
-        })
+        });
 
         setInterval(function () {
             reQuery($("#gridContainer"));
@@ -161,6 +207,43 @@
             );
         }
     }
+    function chooseFile(e) {
+        $("#afile").click();
 
+    }
+
+
+
+    function getFullPath(obj) {
+        //debugger;
+        //var path;
+        ////window.URL.createObjectURL(obj.files.item(0));
+        //var oFReader = new FileReader();
+        //oFReader.readAsDataURL(obj.files.item(0));
+        //oFReader.onloadend = function (oFRevent) {
+        //    var src = oFRevent.target.result;
+        //    debugger;
+        //}
+        ////if (obj) {
+        ////    path= obj.value;
+        ////    // ie
+        ////    if (window.navigator.userAgent.indexOf("MSIE") >= 1) {
+        ////        obj.select();
+        ////        path = document.selection.createRange().text;
+        ////    }
+        ////    // firefox
+        ////    else
+        ////        if (window.navigator.userAgent.indexOf("Firefox") >= 1) {
+        ////        if (obj.files) {
+        ////            path = obj.files.item(0).getAsDataURL();
+        ////        }
+        ////    }
+        ////}
+
+        var json = { FileName: $("[name='tbProcess']").val()+"\\"+obj.files.item(0).name, WorkingPath: $("[name='tbProcess']").val(), Para: "" };
+        var x = $("[name='taProcess']");
+        x.val(JSON.stringify(json)).change();
+        x.blur();
+    }
 
 </script>

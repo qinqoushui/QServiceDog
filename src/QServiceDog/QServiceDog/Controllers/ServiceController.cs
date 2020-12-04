@@ -22,7 +22,10 @@ namespace QServiceDog.Controllers
             return View();
         }
 
-
+        public IList<string> GetProcess()
+        {
+            return System.Diagnostics.Process.GetProcesses().Select(r => r.ProcessName).Distinct().OrderBy(r=>r).ToList();
+        }
     }
 
 
@@ -38,6 +41,9 @@ namespace QServiceDog.Controllers
             ViewData["IsAdmin"] = User != null && User.Claims != null && User.Claims.FirstOrDefault(r => r.Type == "Admin")?.Value == "true";
             return View();
         }
+
+       
+
         //[Authorize(Policy = "IsAdmin")]
         //[HttpPost]
         //public virtual IActionResult Post(string values);

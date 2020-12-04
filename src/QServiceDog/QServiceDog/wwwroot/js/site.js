@@ -60,3 +60,14 @@ Date.prototype.format = function (fmt) {
         if (new RegExp("(" + k + ")").test(fmt)) fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
     return fmt;
 }
+
+
+function getDirectoryName(path) {
+    var pos1 = path.lastIndexOf('/');
+    var pos2 = path.lastIndexOf('\\');
+    var pos = Math.max(pos1, pos2)
+    if (pos < 0)
+        return path;
+    else
+        return path.substring(0,pos );
+}

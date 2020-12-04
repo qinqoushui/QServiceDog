@@ -27,7 +27,7 @@ namespace QServiceDog.Controllers
             DateTime time = DateTime.Now.AddDays(-10);
             return db.Set<EventInfo>().Where(r => r.Time > time).ToList();
         }
-        [HttpGet("GetClients")]
+
         public IList<string> GetClients()
         {
             return db.Set<EventInfo>().Select(r=>r.Client).Distinct().ToList();

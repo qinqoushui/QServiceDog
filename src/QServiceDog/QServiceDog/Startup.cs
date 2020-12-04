@@ -25,6 +25,7 @@ namespace QServiceDog
 
         public override void ConfigureOther(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            Console.WriteLine("start init db");
             new BLL.ServiceDBContext().CreateAndInitData(GlobalConfig.Instance.Client);
             var quartz = app.ApplicationServices.GetRequiredService<QCommon.Service.Jobs.QuartzJobScheduler>();
             var appLifetime = app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
@@ -42,6 +43,7 @@ namespace QServiceDog
 
         public override void ConfigureServicesOther(IServiceCollection services)
         {
+            Console.WriteLine("init logger");
             Logging.Init(Configuration.GetSection("Logging").Get<Logging>());
             string client = this.Configuration.GetSection("Client").Value;
             if (string.IsNullOrEmpty(client))

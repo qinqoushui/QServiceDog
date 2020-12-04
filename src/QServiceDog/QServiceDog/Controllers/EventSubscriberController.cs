@@ -37,7 +37,6 @@ namespace QServiceDog.Controllers
             }
         }
 
-        [HttpGet("Get2")]
         public IList<EventSubscriber> Get2()
         {
             return db.Set<EventSubscriber>().Where(r => r.IsEnable).ToList();
