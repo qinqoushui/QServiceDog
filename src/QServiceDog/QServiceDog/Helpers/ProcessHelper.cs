@@ -75,7 +75,7 @@ namespace QServiceDog.Helpers
             }
         }
 
-       public static bool StartUseCmd(string data, Action<string, Exception> logger)
+       public static bool StartUseCmd(string serviceName, string data, Action<string, Exception> logger)
         {
             var ss = data.DeserializeAnonymousType(new { FileName = "", Para = "", WorkingPath = "" });
             string[] command = new string[]{
@@ -85,8 +85,17 @@ namespace QServiceDog.Helpers
             //string[] command = new string[]{
             //    $"/c \"{ss.FileName}\"" 
             //};
-            //通过任务计划执行程序
 
+            //通过任务计划执行程序:服务运行于System，无法创建登录用户的计划任务
+            //command = new string[]{
+            //$"schtasks /delete /tn Run{serviceName} /F " ,
+            //$@"schtasks /create /sc ONCE /st {DateTime.Now.AddSeconds(70).ToString("HH:mm")}   /tn Run{serviceName} /tr ""cmd /c start \""{Path.GetFileName(ss.FileName)}\"" /D \""{ss.WorkingPath}\"" \""{ss.FileName}\"" ""  ",
+            //"exit"
+            //};
+
+            //logger.Invoke($@"schtasks /create /sc ONCE  /st {DateTime.Now.AddSeconds(70).ToString("HH:mm")} /tn Run{serviceName} /tr ""cmd /c start \""{Path.GetFileName(ss.FileName)}\"" /D \""{ss.WorkingPath}\"" \""{ss.FileName}\"" ""   ", null);
+           
+            
             string output = ""; //输出字符串
             if (command != null && !command.Equals(""))
             {
@@ -106,7 +115,7 @@ namespace QServiceDog.Helpers
                         {
                             process.StandardInput.WriteLine(line);
                         }
-                        //output = process.StandardOutput.ReadToEnd();//读取进程的输出
+                        output = process.StandardOutput.ReadToEnd();//读取进程的输出
                     }
                 }
                 catch (Exception ex)
@@ -119,7 +128,7 @@ namespace QServiceDog.Helpers
                         process.Close();
                 }
             }
-            //logger?.Invoke(output,null);
+            logger?.Invoke(output,null);
             return true;
         }
     }

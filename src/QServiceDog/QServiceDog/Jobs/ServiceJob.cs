@@ -173,7 +173,7 @@ namespace QServiceDog.Jobs
                 {
                     case EnumAction.e启动进程:
                         //改用命令行呼起
-                        new Thread(new ThreadStart(() => ProcessHelper.StartUseCmd(data.RunData, (s, ex) => logger.Info(s, ex)))).Start();
+                        new Thread(new ThreadStart(() => ProcessHelper.StartUseCmd(data.Name, data.RunData, (s, ex) => logger.Info(s, ex)))).Start();
                         break;
                     case EnumAction.e启动服务:
                         new QCommon.Service.ServiceHelper(data.RunData).Start();
