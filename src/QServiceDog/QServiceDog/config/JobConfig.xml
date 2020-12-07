@@ -72,6 +72,10 @@
           <key>checkPowerOff</key>
           <value>10</value>
         </entry>
+        <entry>
+          <key>serviceAgent</key>
+          <value>http://127.0.0.1:4777/</value>
+        </entry>
       </job-data-map>
     </job>
 

@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
@@ -75,7 +76,7 @@ namespace QServiceDog.Helpers
             }
         }
 
-       public static bool StartUseCmd(string serviceName, string data, Action<string, Exception> logger)
+        public static bool StartUseCmd(string serviceName, string data, Action<string, Exception> logger)
         {
             var ss = data.DeserializeAnonymousType(new { FileName = "", Para = "", WorkingPath = "" });
             string[] command = new string[]{
@@ -94,8 +95,8 @@ namespace QServiceDog.Helpers
             //};
 
             //logger.Invoke($@"schtasks /create /sc ONCE  /st {DateTime.Now.AddSeconds(70).ToString("HH:mm")} /tn Run{serviceName} /tr ""cmd /c start \""{Path.GetFileName(ss.FileName)}\"" /D \""{ss.WorkingPath}\"" \""{ss.FileName}\"" ""   ", null);
-           
-            
+
+
             string output = ""; //输出字符串
             if (command != null && !command.Equals(""))
             {
@@ -128,9 +129,30 @@ namespace QServiceDog.Helpers
                         process.Close();
                 }
             }
-            logger?.Invoke(output,null);
+            logger?.Invoke(output, null);
             return true;
         }
+
+        public static async Task StartByAgent(string url, string serviceName, string data, Action<string, Exception> logger)
+        {
+            var ss = data.DeserializeAnonymousType(new { FileName = "", Para = "", WorkingPath = "" });
+            using (var client = new HttpClient())
+            {
+                client.Timeout = new TimeSpan(0, 1, 0);
+                client.DefaultRequestHeaders.Accept.Clear();
+                client.DefaultRequestHeaders.Accept.Add(new System.Net.Http.Headers.MediaTypeWithQualityHeaderValue("application/json"));
+                var result = client.PostAsync(url, new StringContent(new { ActionType = "StartProcess", ActionData = ss }.SerializeObject(), Encoding.UTF8, "application/json")).GetAwaiter().GetResult();
+                if (result.IsSuccessStatusCode)
+                {
+                    logger($"Start succ {ss.FileName},{ await result.Content.ReadAsStringAsync()}", null);
+                }
+                else
+                {
+                    logger($"Start fail {ss.FileName},{ result.StatusCode.ToString()}", null);
+                }
+            }
+        }
+
     }
 
     public class CommandHelper
