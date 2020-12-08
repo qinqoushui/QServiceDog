@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace QServiceAgent
 {
@@ -15,73 +16,92 @@ namespace QServiceAgent
             httpListener.Start();
             while (true)
             {
+                HttpListenerContext ctx = null;
                 try
                 {
-                    aa(httpListener.GetContext());
+                    ctx = httpListener.GetContext();
+                    aa(ctx);
                 }
                 catch (Exception ex)
                 {
-
+                    if (ctx != null)
+                    {
+                        try
+                        {
+                            byte[] buff = Encoding.UTF8.GetBytes(ex.ToString());
+                            ctx.Response.OutputStream.Write(buff, 0, buff.Length);
+                            ctx.Response.Close();
+                        }
+                        catch { }
+                    }
                 }
             }
         }
-        async void aa(HttpListenerContext context)
+        void aa(HttpListenerContext context)
         {
             //取得请求的对象
             HttpListenerRequest request = context.Request;
-            Console.WriteLine("{0} {1} HTTP/1.1", request.HttpMethod, request.RawUrl);
-            var reader = new StreamReader(request.InputStream);
-            var msg = reader.ReadToEnd();
+            Resp resp = new Resp();
             HttpListenerResponse response = context.Response;
             response.ContentEncoding = Encoding.UTF8;
             response.ContentType = "application/json; charset=utf-8";
-            Resp resp = new Resp();
-            if (request.HttpMethod.ToUpper() == "GET")
+            if (request.LocalEndPoint.Address.Equals(IPAddress.Loopback))
             {
-                resp.Code = 0;
-                resp.Msg = DateTime.Now.ToString("F");
+                var reader = new StreamReader(request.InputStream);
+                var msg = reader.ReadToEnd();
+                if (request.HttpMethod.ToUpper() == "GET")
+                {
+                    resp.Code = 0;
+                    resp.Msg = DateTime.Now.ToString("F");
+                }
+                else
+                if (request.HttpMethod.ToUpper() == "POST")
+                {
+                    var req = De(msg, new { ActionType = "" });
+                    switch (req.ActionType)
+                    {
+                        case "StartProcess":
+                            var yy = Serialize(new
+                            {
+                                ActionType = "StartProcess",
+                                ActionData = new
+                                {
+                                    FileName = @"c:\windows\system32\notepad.exe",
+                                    WorkingPath = @"d:\temp",
+                                    Para = @"test.txt"
+                                }
+                            }
+                            );
+                            var ss = De(msg, new { ActionData = new { FileName = "", WorkingPath = "", Para = "" } }).ActionData;
+                            if (ss != null)
+                            {
+                                //    string[] command = new string[]{
+                                //        $" cmd /c  \"{Path.GetFileName(ss.FileName)}\" /D \"{ss.WorkingPath}\" \"{ss.FileName}\" \"{ss.WorkingPath}\" ",
+                                //        //$" start  \"{Path.GetFileName(ss.FileName)}\" /D \"{ss.WorkingPath}\" \"{ss.FileName}\" \"{ss.WorkingPath}\" ",
+                                //        "exit"
+                                //    };
+                                string outputResult;
+                                resp.Code = exec(ss.FileName, ss.WorkingPath, ss.Para, out outputResult) ? 0 : 1;
+                                //resp.Code = exec(command, out outputResult) ? 1 : 0;
+                                resp.Msg = outputResult;
+                                resp.Data = msg;
+                            }
+                            else
+                            {
+                                resp.Code = 1;
+                                resp.Msg = "参数无效";
+                            }
+                            break;
+                        default:
+                            break;
+                    }
+                }
             }
             else
-            if (request.HttpMethod.ToUpper() == "POST")
             {
-                var req = De(msg, new { ActionType = "" });
-                switch (req.ActionType)
-                {
-                    case "StartProcess":
-                        var yy = Serialize(new
-                        {
-                            ActionType = "StartProcess",
-                            ActionData = new
-                            {
-                                FileName = @"c:\windows\system32\notepad.exe",
-                                WorkingPath = @"d:\temp",
-                                Para = @"test.txt"
-                            }
-                        }
-                        );
-                        var ss = De(msg, new { ActionData = new { FileName = "", WorkingPath = "", Para = "" } }).ActionData;
-                        if (ss != null)
-                        {
-                            //    string[] command = new string[]{
-                            //        $" cmd /c  \"{Path.GetFileName(ss.FileName)}\" /D \"{ss.WorkingPath}\" \"{ss.FileName}\" \"{ss.WorkingPath}\" ",
-                            //        //$" start  \"{Path.GetFileName(ss.FileName)}\" /D \"{ss.WorkingPath}\" \"{ss.FileName}\" \"{ss.WorkingPath}\" ",
-                            //        "exit"
-                            //    };
-                            string outputResult;
-                            resp.Code = exec(ss.FileName, ss.WorkingPath, ss.Para, out outputResult) ?0 : 1;
-                            //resp.Code = exec(command, out outputResult) ? 1 : 0;
-                            resp.Msg = outputResult;
-                            resp.Data = msg;
-                        }
-                        else
-                        {
-                            resp.Code = 1;
-                            resp.Msg = "参数无效";
-                        }
-                        break;
-                    default:
-                        break;
-                }
+                //安全性，不支持从外部访问连接，但暂时无法禁止低权限用户使用该接口获得高权限程序运行能力，后续应该增加可使用的程序清单
+                resp.Code = 1;
+                resp.Msg = $"仅限本机访问{request.LocalEndPoint},{request.RemoteEndPoint}";
             }
             byte[] buff = Encoding.UTF8.GetBytes(Serialize(resp));
             Stream output = response.OutputStream;

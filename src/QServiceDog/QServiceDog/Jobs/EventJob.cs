@@ -23,7 +23,7 @@ namespace QServiceDog.Jobs
 #if DEBUG
             //  return true;
 #endif
-            bool isCloud = GlobalConfig.Instance.Client.StartsWith("Cloud", StringComparison.OrdinalIgnoreCase);
+            bool isCloud = GlobalConfig.Instance.Client == GlobalConfig.Cloud;
             if (isCloud)
             {
                 //禁用本地检测服务

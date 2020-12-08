@@ -30,7 +30,7 @@ namespace QServiceDog.Controllers
 
         public IList<string> GetClients()
         {
-            return db.Set<EventInfo>().Select(r=>r.Client).Distinct().ToList();
+            return db.Set<EventInfo>().Select(r => r.Client).Distinct().ToList();
         }
 
     }
@@ -67,6 +67,16 @@ namespace QServiceDog.Controllers
             return new { Code = 0, Msg = $"{c}/{data.Count}" };
         }
 
-        
+
+        [HttpPost("SyncTime")]
+        public object SyncTime()
+        {
+#if DEBUG
+            //return new { Code = 0, Msg = $"{DateTime.Now.AddMinutes(15).ToString("yyyy-MM-dd HH:mm:ss")}" };
+#else
+#endif
+            return new { Code = 0, Msg = $"{DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss")}" };
+        }
+
     }
 }

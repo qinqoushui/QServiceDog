@@ -15,7 +15,7 @@ namespace QServiceDog.Helpers
     {
         public static bool Exists(string processName)
         {
-            return System.Diagnostics.Process.GetProcessesByName(processName).Length > 0;
+            return  Process.GetProcessesByName(processName).Length > 0;
         }
         public static bool Kill(string processName)
         {

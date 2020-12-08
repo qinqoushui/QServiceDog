@@ -27,6 +27,10 @@
           <!--<value>http://m.icloudcard.net:5885/Sync/Event</value>-->
           <value>http://localhost:5000/Sync/</value>
         </entry>
+        <entry>
+          <key>syncTime</key>
+          <value>10</value>
+        </entry>
       </job-data-map>
     </job>
     <job>
@@ -132,7 +136,7 @@
         <end-time>2050-12-31T23:59:59.0Z</end-time>
         <misfire-instruction>SmartPolicy</misfire-instruction>
         <repeat-count>-1</repeat-count>
-        <repeat-interval>20000</repeat-interval>
+        <repeat-interval>60000</repeat-interval>
       </simple>
     </trigger>
 
