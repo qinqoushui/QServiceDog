@@ -25,7 +25,7 @@
         <entry>
           <key>url</key>
           <!--<value>http://m.icloudcard.net:5885/Sync/Event</value>-->
-          <value>http://localhost:5000/Sync/</value>
+          <value>http://m.icloudcard.net/Dog/Sync/</value>
         </entry>
         <entry>
           <key>syncTime</key>

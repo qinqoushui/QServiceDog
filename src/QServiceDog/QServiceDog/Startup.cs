@@ -45,6 +45,7 @@ namespace QServiceDog
         {
             Console.WriteLine("init logger");
             Logging.Init(Configuration.GetSection("Logging").Get<Logging>());
+            LogHelper.StartClearLogJob(-30);
             string client = this.Configuration.GetSection("Client").Value;
             if (string.IsNullOrEmpty(client))
                 client = nameof(QServiceDog);
@@ -70,8 +71,8 @@ namespace QServiceDog
             {
                 options.UseSqlite(BLL.ServiceDBContext.ConnectionString, o => o.MinBatchSize(100));
             });
-
-            services.AddScoped<DbContext, BLL.ServiceDBContext>();
+            //SQLITE最好用单进程
+            services.AddSingleton<DbContext, BLL.ServiceDBContext>();
             services.AddSingleton<Q.DevExtreme.Tpl.Models.IUserBLL, BLL.UserBLL>();
 
             Q.DevExtreme.Tpl.Utils.Copyright = this.Configuration.GetSection("AppConfig:Copyright").Value;
@@ -88,6 +89,7 @@ namespace QServiceDog
             #region QuartzJob
             services.AddSingleton<QCommon.Service.Jobs.QuartzJobScheduler>();
             //services.AddTransient<UserInfoSyncjob>();      // 注入某个JOB
+            
             services.AddSingleton<Quartz.ISchedulerFactory, Quartz.Impl.StdSchedulerFactory>();
             services.AddSingleton<Quartz.Spi.IJobFactory, QCommon.Service.Jobs.IOCJobFactory>(); //IOCJob工厂会从IOC中取JOB
             #endregion
