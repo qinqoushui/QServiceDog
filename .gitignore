@@ -19,3 +19,13 @@
 /src/QServiceDog/QDBDogUI/bin/QDBDog_V1.0.rar
 /src/QServiceDog/QServiceAgent/bin
 /src/QServiceDog/QServiceAgent/obj
+/src/packages
+/src/QDBDog/QDBDog/bin
+/src/.vs/QServiceDog
+/src/QDBDog/QDBDogUI/bin
+/src/QDBDog/QDBDogUI/obj
+/src/QDBDog/QDBDog/obj
+/src/QDBDogUI/bin/Debug
+/src/QDBDogUI/bin/Release
+/src/QTask/QTask/bin
+/src/QTask/QTask/obj

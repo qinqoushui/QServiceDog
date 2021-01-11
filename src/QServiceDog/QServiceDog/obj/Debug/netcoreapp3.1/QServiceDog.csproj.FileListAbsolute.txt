@@ -448,3 +448,4 @@ D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netc
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.dll
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.pdb
 D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.genruntimeconfig.cache
+D:\Code\github\qinqoushui\QServiceDog\src\QServiceDog\QServiceDog\obj\Debug\netcoreapp3.1\QServiceDog.csprojAssemblyReference.cache
