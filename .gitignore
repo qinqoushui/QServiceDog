@@ -29,3 +29,5 @@
 /src/QDBDogUI/bin/Release
 /src/QTask/QTask/bin
 /src/QTask/QTask/obj
+/src/DDNS/QDDNS/bin/Release/netcoreapp3.1
+/src/DDNS/QDDNS/obj

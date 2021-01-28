@@ -1,7 +1,14 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\doc",
+    "\\src",
+    "\\src\\QDBDog",
+    "\\src\\QDBDog\\QDBDog",
+    "\\src\\QDBDog\\QDBDog\\config",
+    "\\src\\QDBDog\\QDBDog\\Jobs",
+    "\\src\\QDBDog\\QDBDog\\sql"
   ],
-  "SelectedNode": "\\QServiceDog.sln",
+  "SelectedNode": "\\src\\QServiceDog.sln",
   "PreviewInSolutionExplorer": false
 }

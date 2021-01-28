@@ -41,7 +41,7 @@
         </Pair>
 		 <Pair>
             <Left>@localPath@</Left>
-            <Right>ftp://DBBAKSZ@qoushui.oicp.net:8102/@serverPath@|ssl|pass64=U3pCYWsyMDIwMDQwOA==</Right>
+            <Right>ftp://DBBAKSZ@data.syzcxx.net:8102/@serverPath@|ssl|pass64=U3pCYWsyMDIwMDQwOA==</Right>
         </Pair>
     </FolderPairs>
     <Errors Ignore="true" Retry="0" Delay="5"/>
