@@ -9,6 +9,6 @@
     "\\src\\QDBDog\\QDBDog\\Jobs",
     "\\src\\QDBDog\\QDBDog\\sql"
   ],
-  "SelectedNode": "\\src\\QServiceDog.sln",
+  "SelectedNode": "\\src\\QDBDog\\QDBDog\\config\\dbBack.ffs_batch",
   "PreviewInSolutionExplorer": false
 }
