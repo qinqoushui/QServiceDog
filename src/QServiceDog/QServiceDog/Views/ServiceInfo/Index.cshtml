@@ -91,10 +91,11 @@
             columns.Add().DataField("Desc").Caption("描述");
         })
         .HoverStateEnabled(true)
-        .Paging(p => p.PageSize(10))
+        .Paging(p => p.PageSize(10).Enabled(true))
+        .Pager(p=>p.ShowPageSizeSelector(false))
         .FilterRow(f => f.Visible(true))
-        .Scrolling(s => s.Mode(GridScrollingMode.Infinite))
-        .Height(345)
+        .Scrolling(s => s.Mode(GridScrollingMode.Standard))
+        //.Height(345)
         .Selection(s => s.Mode(SelectionMode.Single))
         .SelectedRowKeys(new JS(@"[component.option(""value"")]"))
         .OnSelectionChanged(@<text>
@@ -131,7 +132,7 @@
 
         setInterval(function () {
             reQuery($("#gridContainer"));
-        }, 120000);
+        }, 600000);
     });
     var tplData;
     function inseredEvent(data) {

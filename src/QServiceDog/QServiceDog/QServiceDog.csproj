@@ -19,15 +19,11 @@
 
   <ItemGroup>
     <None Remove="config\JobConfig.xml" />
-    <None Remove="data\app.db" />
   </ItemGroup>
 
   <ItemGroup>
     <Content Include="config\JobConfig.xml">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="data\app.db">
-      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
 

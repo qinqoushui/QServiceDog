@@ -10,21 +10,20 @@
         "projectUniqueName": "D:\\Code\\github\\qinqoushui\\QServiceDog\\src\\QServiceDog\\QServiceDog\\QServiceDog.csproj",
         "projectName": "QServiceDog",
         "projectPath": "D:\\Code\\github\\qinqoushui\\QServiceDog\\src\\QServiceDog\\QServiceDog\\QServiceDog.csproj",
-        "packagesPath": "e:\\.nuget",
+        "packagesPath": "E:\\.nuget",
         "outputPath": "D:\\Code\\github\\qinqoushui\\QServiceDog\\src\\QServiceDog\\QServiceDog\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\zwx\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.1.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\zhangwx\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\DevExpress 19.2.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\NuGet.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\DevExpress 19.2\\Components\\System\\Components\\Packages": {},
           "http://tfs.zy.com:28080/nuget/nuget": {},
           "https://api.nuget.org/v3/index.json": {}
         },
@@ -87,7 +86,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.102\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.201\\RuntimeIdentifierGraph.json"
         }
       }
     }

@@ -45,7 +45,7 @@ namespace QServiceDog
         {
             Console.WriteLine("init logger");
             Logging.Init(Configuration.GetSection("Logging").Get<Logging>());
-            LogHelper.StartClearLogJob(-30);
+            LogHelper.StartClearLogJob(30);
             string client = this.Configuration.GetSection("Client").Value;
             if (string.IsNullOrEmpty(client))
                 client = nameof(QServiceDog);
@@ -71,8 +71,7 @@ namespace QServiceDog
             {
                 options.UseSqlite(BLL.ServiceDBContext.ConnectionString, o => o.MinBatchSize(100));
             });
-            //SQLITE最好用单进程
-            services.AddSingleton<DbContext, BLL.ServiceDBContext>();
+            services.AddScoped<DbContext, BLL.ServiceDBContext>();
             services.AddSingleton<Q.DevExtreme.Tpl.Models.IUserBLL, BLL.UserBLL>();
 
             Q.DevExtreme.Tpl.Utils.Copyright = this.Configuration.GetSection("AppConfig:Copyright").Value;
