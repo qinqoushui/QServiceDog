@@ -1,14 +1,16 @@
 {
   "ExpandedNodes": [
     "",
-    "\\doc",
     "\\src",
     "\\src\\QDBDog",
     "\\src\\QDBDog\\QDBDog",
-    "\\src\\QDBDog\\QDBDog\\config",
     "\\src\\QDBDog\\QDBDog\\Jobs",
-    "\\src\\QDBDog\\QDBDog\\sql"
+    "\\src\\QDBDog\\QDBDog\\sql",
+    "\\src\\QServiceDog",
+    "\\src\\QServiceDog\\QServiceDog",
+    "\\src\\QServiceDog\\QServiceDog\\Controllers",
+    "\\src\\QServiceDog\\QServiceDog\\Jobs"
   ],
-  "SelectedNode": "\\src\\QDBDog\\QDBDog\\config\\dbBack.ffs_batch",
+  "SelectedNode": "\\src\\QServiceDog.sln",
   "PreviewInSolutionExplorer": false
 }
